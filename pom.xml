@@ -4,7 +4,6 @@
    <artifactId>job4j_CoursesJunior</artifactId>
    <packaging>pom</packaging>
    <version>1.0.0</version>
-   
    <modules>
    <module>chapter001</module>
    </modules>
