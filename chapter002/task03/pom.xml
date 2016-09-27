@@ -1,0 +1,12 @@
+<project>
+   <modelVersion>4.0.0</modelVersion>
+   <groupId>ru.spoddubnyak.chapter002.task03</groupId>
+   <artifactId>job4j_CoursesJunior.chapter002.task03</artifactId>
+   <version>1.0.0</version>
+   <properties>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <maven.compiler.source>1.8</maven.compiler.source>
+      <maven.compiler.target>1.8</maven.compiler.target>
+   </properties>
+
+</project>
