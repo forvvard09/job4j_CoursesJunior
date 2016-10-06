@@ -7,5 +7,6 @@
    <modules>
    <module>chapter001</module>
    <module>chapter002</module>
+   <module>chapter003</module>
    </modules>
 </project>
