@@ -1,7 +1,6 @@
 package ru.spoddubnyak;
 
 import org.junit.Test;
-import org.junit.Rule;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.Matchers.closeTo;
 import static org.junit.Assert.*;
