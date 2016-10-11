@@ -10,18 +10,18 @@ public class ArrayRotationTest {
                                                      		        {1,1,1,1,1},
 	                                                                {2,2,2,2,2},
                		                                                {3,3,3,3,3},
-																	{4,4,4,4,4},
-																	{5,5,5,5,5},
+									{4,4,4,4,4},
+									{5,5,5,5,5},
 	                                                                });
   
   @Test
     public void whenTurnArrayRight() {															   
 		int[][] checkedArray = { 
 			                    {5,4,3,2,1},
-							    {5,4,3,2,1},
-								{5,4,3,2,1},
-								{5,4,3,2,1},
-								{5,4,3,2,1}					
+					    {5,4,3,2,1},
+					    {5,4,3,2,1},
+					    {5,4,3,2,1},
+					    {5,4,3,2,1}					
 							   };
 		
        assertThat(sourceArray.turnArrayRight(), is(checkedArray));
@@ -31,10 +31,10 @@ public class ArrayRotationTest {
     public void whenTurnArrayLeft() {															   
 		int[][] checkedArray = { 
 			                    {1,2,3,4,5},
-							    {1,2,3,4,5},
-								{1,2,3,4,5},
-								{1,2,3,4,5},
-								{1,2,3,4,5},
+					    {1,2,3,4,5},
+					    {1,2,3,4,5},
+					    {1,2,3,4,5},
+					    {1,2,3,4,5},
 							   };
        assertThat(sourceArray.turnArrayLeft(), is(checkedArray));
     }  	
