@@ -1,7 +1,7 @@
 <project>
    <modelVersion>4.0.0</modelVersion>
-   <groupId>ru.spoddubnyak.lesson001.chapter004.task02</groupId>
-   <artifactId>job4j_CoursesJunior.lesson001.chapter004.task02</artifactId>
+   <groupId>ru.spoddubnyak.lesson001.chapter005.task02</groupId>
+   <artifactId>job4j_CoursesJunior.lesson001.chapter005.task02</artifactId>
    <version>1.0.0</version>
    
    <properties>
