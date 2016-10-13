@@ -12,7 +12,7 @@ package ru.spoddubnyak;
            for (int i = 0; i < this.sourceArray.length - 1; i++) {  
 	      if (null != this.sourceArray[i]) {
                 for (int j = 1 + i; j < this.sourceArray.length; j++) {
-	           if (this.sourceArray[i] == this.sourceArray[j]) {
+	           if (this.sourceArray[i].equals(this.sourceArray[j])) {
                       this.sourceArray[j] = null;
                       countDuplication++;
                    }
