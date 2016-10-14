@@ -13,7 +13,8 @@ public class CheckString {
     char[] subArray = this.sub.toCharArray();
     char[] originArray = this.origin.toCharArray();
     int count = 0;
-    for  (int i = 0; i < originArray.length - subArray.length + 1; i++ ) {
+	int i = 0;
+    while ((i < originArray.length - subArray.length + 1) && (count != subArray.length)) {
         if ((originArray[i] == subArray[0]) && (subArray.length + i <= originArray.length)) {
             count = 1;
             for (int j = 1; j < subArray.length; j++) {
@@ -22,11 +23,9 @@ public class CheckString {
                 }
                 count++;
             }
-         if (count == subArray.length) {
-           return true;
-         }  
-		}
+        }
+      i++;
     }
-   return false;
+   return (count == subArray.length) ? true : false;
   }
 }
