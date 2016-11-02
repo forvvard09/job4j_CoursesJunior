@@ -6,5 +6,6 @@
    <version>1.0.0</version>
    <modules>
    <module>lesson001</module>
+   <module>lesson002</module>
    </modules>
 </project>
