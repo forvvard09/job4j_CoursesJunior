@@ -1,11 +1,10 @@
 package ru.spoddubnyak.models;
 
 public class Item {
-    private String id;
-
     public String name;
     public String description;
     public long create;
+    private String id;
 
     public Item() {
     }
@@ -24,16 +23,16 @@ public class Item {
         return this.id;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getDescription() {
         return this.description;
     }
 
     public long getCreate() {
         return this.create;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
 }

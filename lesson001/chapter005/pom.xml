@@ -1,12 +1,12 @@
 <project>
-   <modelVersion>4.0.0</modelVersion>
-   <groupId>ru.spoddubnyak.lesson001.chapter005</groupId>
-   <artifactId>job4j_CoursesJunior.lesson001.chapter005</artifactId>
-   <packaging>pom</packaging>
-   <version>1.0.0</version>
-   <modules>
-   <module>task01</module>
-   <module>task02</module>
-   <module>task03</module>
-   </modules>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>ru.spoddubnyak.lesson001.chapter005</groupId>
+    <artifactId>job4j_CoursesJunior.lesson001.chapter005</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.0</version>
+    <modules>
+        <module>task01</module>
+        <module>task02</module>
+        <module>task03</module>
+    </modules>
 </project>
