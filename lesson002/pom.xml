@@ -5,6 +5,6 @@
     <packaging>pom</packaging>
     <version>1.0.0</version>
     <modules>
-        <module>chapter001</module>
+        <module>chapter002</module>
     </modules>
 </project>
