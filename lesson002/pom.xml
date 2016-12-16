@@ -1,6 +1,6 @@
 <project>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>ru.spoddubnyak.lesson002</groupId>
+    <groupId>lesson002</groupId>
     <artifactId>lesson002</artifactId>
     <name>lesson002</name>
     <packaging>pom</packaging>

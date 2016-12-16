@@ -1,10 +1,8 @@
 <project>
-
  <modelVersion>4.0.0</modelVersion>
  <groupId>task01</groupId>
  <artifactId>task01</artifactId>
  <name>lesson002-chapter002-task01</name>
- <packaging>pom</packaging>
  <version>1.0.0</version>
 
 <parent>

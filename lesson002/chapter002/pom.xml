@@ -1,12 +1,12 @@
 <project>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>ru.spoddubnyak.lesson002.chapter002</groupId>
+    <groupId>chapter002</groupId>
     <artifactId>chapter002</artifactId>
     <name>lesson002-chapter002</name>
     <version>1.0.0</version>
 
     <parent>
-        <groupId>ru.spoddubnyak.lesson002</groupId>
+        <groupId>lesson002</groupId>
         <artifactId>lesson002</artifactId>
         <version>1.0.0</version>
     </parent>
