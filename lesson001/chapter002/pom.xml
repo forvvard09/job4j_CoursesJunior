@@ -4,6 +4,7 @@
     <artifactId>chapter002</artifactId>
     <name>lesson001-chapter002</name>
     <version>1.0.0</version>
+    <packaging>pom</packaging>
 
     <parent>
         <groupId>lesson001</groupId>
