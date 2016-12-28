@@ -13,6 +13,6 @@
     </parent>
 
     <modules>
-    <module>task01</module>
+    <module>Tracker</module>
     </modules>
 </project>

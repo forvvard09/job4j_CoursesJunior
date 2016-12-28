@@ -1,0 +1,15 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>Tracker</groupId>
+    <artifactId>Tracker</artifactId>
+    <name>Tracker</name>
+    <packaging>jar</packaging>
+    <version>1.0.0</version>
+
+    <parent>
+        <groupId>chapter002</groupId>
+        <artifactId>chapter002</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+</project>
