@@ -1,0 +1,17 @@
+package ru.spoddubnyak.start;
+
+/**
+ * Interface class to communicate via the console.
+ *
+ * @author Sergei Poddubnyak (forvvard09@gmail.com)
+ * @version 1.0
+ * @since 04.01.2017
+ */
+public interface Input {
+
+    /** Method ask and get an answer to a question.
+     * @param question - question in console
+     * @return - answer
+     */
+    String ask(String question);
+}

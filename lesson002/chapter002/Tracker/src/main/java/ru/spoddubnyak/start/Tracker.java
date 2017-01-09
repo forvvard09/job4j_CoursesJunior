@@ -6,26 +6,39 @@ import java.util.Random;
 
 /**
  * Class class storages of records in a tracker.
+ *
  * @author Sergei Poddubnyak (forvvard09@gmail.com)
- * @since 11.12.2016
  * @version 1.0
+ * @since 11.12.2016
  */
 public class Tracker {
-    /**  property - identification number.  */
+    /**
+     * property - identification number.
+     */
     private static final Random RN = new Random();
-    /**  range of numbers for the generation of the identification number.  */
+    /**
+     * range of numbers for the generation of the identification number.
+     */
     private static final int RANGERANDOM = 100;
-    /**  property - initial size of a store.  */
+    /**
+     * property - initial size of a store.
+     */
     private static final int INITIALIZE = 3;
-    /**  items store.  */
+    /**
+     * items store.
+     */
     private Item[] items = new Item[INITIALIZE];
-    /** element position for record in. */
+    /**
+     * element position for record in.
+     */
     private int position = 0;
 
 
-    /** Method adds a new application to the tracker.
-     * @param  item  - new application to the tracker
-     * @return  - new Item
+    /**
+     * Method adds a new application to the tracker.
+     *
+     * @param item - new application to the tracker
+     * @return - new Item
      */
     public Item add(Item item) {
         item.setId(this.generationId());
@@ -37,7 +50,9 @@ public class Tracker {
         return item;
     }
 
-    /** Method generates id - identification number.
+    /**
+     * Method generates id - identification number.
+     *
      * @return id  - generated identification number
      */
     int generationId() {
@@ -45,7 +60,9 @@ public class Tracker {
 
     }
 
-    /** Method searches for a given parameter in the id.
+    /**
+     * Method searches for a given parameter in the id.
+     *
      * @param id - string to search by the name of the array
      * @return Item  - entries, which corresponds @param id
      */
@@ -60,7 +77,9 @@ public class Tracker {
         return result;
     }
 
-    /** Method returns the position in the Tracker.
+    /**
+     * Method returns the position in the Tracker.
+     *
      * @param findItem -  item of Tracker
      * @return - position in the Tracker
      */
@@ -75,7 +94,9 @@ public class Tracker {
         return indexItem;
     }
 
-    /** Method update the record from the Tracker.
+    /**
+     * Method update the record from the Tracker.
+     *
      * @param itemNew -  new item
      */
     public void update(Item itemNew) {
@@ -88,7 +109,9 @@ public class Tracker {
         }
     }
 
-    /** Method removes the record from the Tracker.
+    /**
+     * Method removes the record from the Tracker.
+     *
      * @param itemDelete -  record for deletion
      */
     public void delete(Item itemDelete) {
@@ -103,7 +126,9 @@ public class Tracker {
         }
     }
 
-    /** Method looking for all applications in the Tracker.
+    /**
+     * Method looking for all applications in the Tracker.
+     *
      * @return Item[] value  - all entries Tracker
      */
     public Item[] findAll() {
@@ -116,7 +141,9 @@ public class Tracker {
         return result;
     }
 
-    /** Method searches for a given parameter in the name.
+    /**
+     * Method searches for a given parameter in the name.
+     *
      * @param key - string to search by the name of the array
      * @return Item[] value  - all entries, that meet the search filter
      */

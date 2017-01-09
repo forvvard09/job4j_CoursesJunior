@@ -26,6 +26,16 @@ public class Item {
         this.create = create;
     }
 
+    /** Constructor it creates a new object with the specified values except for creation time.
+     * @param name - name
+     * @param description - description
+     */
+    public Item(String name, String description) {
+        this.name = name;
+        this.description = description;
+
+    }
+
     /** Constructor it creates a new object with the specified values.
      * @param id - identification number
      * @param name - name
@@ -37,6 +47,17 @@ public class Item {
         this.name = name;
         this.description = description;
         this.create = create;
+    }
+
+    /** Constructor it creates a new object with the specified values.
+     * @param id - identification number
+     * @param name - name
+     * @param description - description
+     */
+    public Item(int id, String name, String description) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
     }
 
     /** Getter property -  name.
