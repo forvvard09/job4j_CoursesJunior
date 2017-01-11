@@ -19,7 +19,7 @@ public class MenuTest {
     /**
      * property - items menu.
      */
-    private String[] expectedAnswers = {"1: Menu 1", "2: Menu 2", "3: Menu 3"};
+    private String[] expectedMenu = {"1: Menu 1", "2: Menu 2", "3: Menu 3"};
     /**
      * property - greeting.
      */
@@ -31,8 +31,8 @@ public class MenuTest {
     @Test
     public void whenSetListActionMenuThenGetListActionMenu() {
         Menu menu = new Menu();
-        menu.setMenuActions(expectedAnswers);
-        assertThat(expectedAnswers, is(menu.getMenuActions()));
+        menu.setMenuActions(expectedMenu);
+        assertThat(expectedMenu, is(menu.getMenuActions()));
     }
 
     /**
@@ -56,5 +56,21 @@ public class MenuTest {
         menu.setGreeting(expectedGreeting);
         menu.showGreeting();
         assertThat(out.toString(), is(expectedGreeting + System.getProperty("line.separator") + System.getProperty("line.separator")));
+    }
+
+    /**
+     * Test method writes a menu and out to console.
+     */
+    @Test
+    public void whenShowMenuThenOutMenu() {
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+        Menu menu = new Menu();
+        menu.setMenuActions(expectedMenu);
+        menu.showMenuActions();
+        String expectedResponse = expectedMenu[0] + System.getProperty("line.separator")
+                + expectedMenu[1] + System.getProperty("line.separator")
+                + expectedMenu[2] + System.getProperty("line.separator");
+        assertThat(out.toString(), is(expectedResponse));
     }
 }

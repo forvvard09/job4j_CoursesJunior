@@ -1,5 +1,7 @@
 package ru.spoddubnyak.start;
 
+import java.util.Arrays;
+
 /**
  * Class emulation of the user experience.
  *
@@ -21,7 +23,8 @@ public class StubInput implements Input {
      * @param answers - the array of possible answers
      */
     public StubInput(String[] answers) {
-        this.answers = answers;
+        String[] copyAnswers = Arrays.copyOf(answers, answers.length);
+        this.answers = copyAnswers;
     }
 
     @Override

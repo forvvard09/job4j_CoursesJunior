@@ -15,12 +15,12 @@ public class ConsoleInput implements Input {
     /**
      * property - Sysstem object Scanner for make in console.
      */
-    private Scanner scanner = new Scanner(System.in);
+
+    private Scanner scanner = new Scanner(System.in, "UTF-8");
 
     @Override
     public String ask(String question) {
         System.out.print(question);
         return scanner.nextLine();
     }
-
 }

@@ -1,5 +1,7 @@
 package ru.spoddubnyak.start;
 
+import java.util.Arrays;
+
 /**
  * Class console menu .
  * @author Sergei Poddubnyak (forvvard09@gmail.com)
@@ -28,14 +30,16 @@ public class Menu {
      * @return  property -  items menu
      */
     public String[] getMenuActions() {
-        return this.menuActions;
+        String[] getMenuAction = Arrays.copyOf(this.menuActions, this.menuActions.length);
+        return getMenuAction;
     }
 
     /** Setter property -  menuActions.
      * @param   menuActions -  list record for menu
      */
     public void setMenuActions(String[] menuActions) {
-        this.menuActions = menuActions;
+        String[] copyMenuActions = Arrays.copyOf(menuActions, menuActions.length);
+        this.menuActions = copyMenuActions;
     }
 
     /** Getter property -  greeting.

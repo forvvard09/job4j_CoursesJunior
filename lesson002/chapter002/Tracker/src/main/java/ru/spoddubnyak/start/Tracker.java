@@ -4,6 +4,8 @@ import ru.spoddubnyak.models.Item;
 
 import java.util.Random;
 
+import static java.lang.Math.abs;
+
 /**
  * Class class storages of records in a tracker.
  *
@@ -56,7 +58,7 @@ public class Tracker {
      * @return id  - generated identification number
      */
     int generationId() {
-        return (int) (System.currentTimeMillis() + RN.nextInt(RANGERANDOM));
+        return abs((int) (System.currentTimeMillis() + RN.nextInt(RANGERANDOM)));
 
     }
 

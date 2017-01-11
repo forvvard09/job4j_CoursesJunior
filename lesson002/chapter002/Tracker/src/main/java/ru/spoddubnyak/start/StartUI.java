@@ -15,8 +15,6 @@ public class StartUI {
      */
     private Input input;
 
-
-
     /** Constructor it creates a new object with the specified values.
      * @param input - interface class to communicate via the console
      */
@@ -75,8 +73,10 @@ public class StartUI {
                 String nameItem = input.ask("Enter name Item :> ");
                 String descreptionItem = input.ask("Enter descreption Item :> ");
                 Long createItem = Long.parseLong(input.ask("Enter create Item in formating Long :> "));
-                System.out.println("-----");
                 tracker.add(new Item(nameItem, descreptionItem, createItem));
+                System.out.println("=>");
+                System.out.println("The add operation is successful.");
+                System.out.println("-----");
                 break;
 
             case "2":
@@ -86,6 +86,8 @@ public class StartUI {
                 String descreptionNewItem = input.ask("Enter descreption new Item :> ");
                 Long createNewItem = Long.parseLong(input.ask("Enter create Item in formating Long :> "));
                 tracker.update(new Item(idItem, nameNewItem, descreptionNewItem, createNewItem));
+                System.out.println("=>");
+                System.out.println("The update operation is successful.");
                 System.out.println("-----");
                 break;
 
@@ -93,6 +95,8 @@ public class StartUI {
                 System.out.println("Delete item in tracker:");
                 idItem = Integer.parseInt(input.ask("Enter id Item delete :>"));
                 tracker.delete(tracker.findById(idItem));
+                System.out.println("=>");
+                System.out.println("The delete operation is successful.");
                 System.out.println("-----");
                 break;
 
@@ -102,6 +106,8 @@ public class StartUI {
                 for (Item item : tracker.findAll()) {
                     System.out.println(item.getId() + "--" + item.getName() + "--" + item.getDescription() + "--" + item.getCreate());
                 }
+                System.out.println("=>");
+                System.out.println("The find all operation is successful.");
                 System.out.println("-----");
                 break;
 
@@ -112,6 +118,8 @@ public class StartUI {
                 for (Item item : tracker.findByName(key)) {
                     System.out.println(item.getId() + "--" + item.getName() + "--" + item.getDescription() + "--" + item.getCreate());
                 }
+                System.out.println("=>");
+                System.out.println("The find by name operation is successful.");
                 System.out.println("-----");
                 break;
 
@@ -121,6 +129,8 @@ public class StartUI {
                 Item itemFindId = tracker.findById(id);
                 System.out.println("-----");
                 System.out.println(itemFindId.getId() + "--" + itemFindId.getName() + "--" + itemFindId.getDescription() + "--" + itemFindId.getCreate());
+                System.out.println("=>");
+                System.out.println("The find by id operation is successful.");
                 System.out.println("-----");
                 break;
 

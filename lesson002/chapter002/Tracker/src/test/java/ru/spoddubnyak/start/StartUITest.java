@@ -3,131 +3,167 @@ package ru.spoddubnyak.start;
 import org.junit.Test;
 import ru.spoddubnyak.models.Item;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 /**
- * Class test to emulate the user experience through the console.
+ * Tests class StartUI.
  *
  * @author Sergei Poddubnyak (forvvard09@gmail.com)
  * @version 1.0
- * @since 05.01.2017
+ * @since 06.01.2016
  */
 public class StartUITest {
-    /**
-     * property - the user interaction method.
-     */
-    private Input input;
-    /**
-     * property - the array of possible answers.
-     */
-    private static String[] answers = {"1","2","3","4","5","6","7","8","test","q"};
-
-    /** Constructor it creates a new object with the specified values.
-     * @param input - interface class to communicate via the console
-     */
-    public StartUITest(Input input) {
-        this.input = input;
-    }
-    /*
-    public static void main(String[] args) {
-        Input input = new StubInput(answers);
-        new StartUITest(input).init();
-    }
-    */
 
     /**
-     * Test method writes and read a list of available actions menu.
+     * Test method change Emulation menu item 1 -  Add a new item in the tracker.
      */
-
-    public void init() {
-        Tracker tracker = new Tracker();
-        Menu menu = new Menu();
-        choiceAction(menu, tracker);
-    }
-
-    public void choiceAction(Menu menu, Tracker tracker) {
-        String answer;
-        do {
-            menu.showMenuActions();
-            System.out.println("------");
-            answer = input.ask("Select a menu item :> ");
-            if (!answer.equals("q")) {
-                action(answer, tracker);
-            }
-
-            System.out.println(System.getProperty("line.separator"));
-        } while (!answer.equals("q"));
-    }
-
-    public void action(String menuItem, Tracker tracker) {
-        switch (menuItem) {
-            case "1":
-                System.out.println("Add a new item in the tracker:");
-                String nameItem = input.ask("Enter name Item :> ");
-                String descreptionItem = input.ask("Enter descreption Item :> ");
-                Long createItem = Long.parseLong(input.ask("Enter create Item in formating Long :> "));
-                System.out.println("-----");
-                tracker.add(new Item(nameItem, descreptionItem, createItem));
-                break;
-
-            case "2":
-                System.out.println("Update item in tracker:");
-                int idItem = Integer.parseInt(input.ask("Enter id Item :>"));
-                String nameNewItem = input.ask("Enter name new Item :> ");
-                String descreptionNewItem = input.ask("Enter descreption new Item :> ");
-                Long createNewItem = Long.parseLong(input.ask("Enter create Item in formating Long :> "));
-                tracker.update(new Item(idItem, nameNewItem, descreptionNewItem, createNewItem));
-                System.out.println("-----");
-                break;
-
-            case "3":
-                System.out.println("Delete item in tracker:");
-                idItem = Integer.parseInt(input.ask("Enter id Item delete :>"));
-                tracker.delete(tracker.findById(idItem));
-                System.out.println("-----");
-                break;
-
-            case "4":
-                System.out.println("Find all item's in tracker:");
-                System.out.println("-----");
-                for (Item item : tracker.findAll()) {
-                    System.out.println(item.getId() + "--" + item.getName() + "--" + item.getDescription() + "--" + item.getCreate());
-                }
-                System.out.println("-----");
-                break;
-
-            case "5":
-                System.out.println("Find item by name in tracker:");
-                String key = input.ask("Enter key for find by name in Tracker :> ");
-                System.out.println("-----");
-                for (Item item : tracker.findByName(key)) {
-                    System.out.println(item.getId() + "--" + item.getName() + "--" + item.getDescription() + "--" + item.getCreate());
-                }
-                System.out.println("-----");
-                break;
-
-            case "6":
-                System.out.println("Find item by id in tracker:");
-                int id = Integer.parseInt(input.ask("Enter id for find by id Item in Tracker :> "));
-                Item itemFindId = tracker.findById(id);
-                System.out.println("-----");
-                System.out.println(itemFindId.getId() + "--" + itemFindId.getName() + "--" + itemFindId.getDescription() + "--" + itemFindId.getCreate());
-                System.out.println("-----");
-                break;
-
-            default:
-                System.out.print(System.getProperty("line.separator"));
-                System.out.print("Error. You have entered an invalid character. Repeat the entry or press 'q' to exit the program.");
-                break;
-        }
-    }
-
     @Test
-    public void whenMenu1() {
+    public void whenChangeAddNewItemThenGetNewItem() {
+        String[] answers = {"1", "name1", "desc1", "001"};
         Input input = new StubInput(answers);
-        new StartUITest(input).init();
-
+        StartUI startUI = new StartUI(input);
+        Tracker tracker = new Tracker();
+        String itemsMenu = input.ask("Testing: ");
+        startUI.action(itemsMenu, tracker);
+        Item[] items = tracker.findByName(answers[1]);
+        assertThat(items, is(tracker.findAll()));
     }
 
+    /**
+     * Test method change Emulation menu item 2 -  Update item in tracker.
+     */
+    @Test
+    public void whenChangeUpdateIemThenGetUpdateItem() {
+        String[] answers = {"2", "id", "name2", "desc2", "999"};
+        final Long create = 777L;
+        Item item = new Item("test", "test", create);
+        Tracker tracker = new Tracker();
+        tracker.add(item);
+        answers[1] = String.valueOf(item.getId());
+        Input input = new StubInput(answers);
+        StartUI startUI = new StartUI(input);
+        String itemsMenu = input.ask("Testing: ");
+        startUI.action(itemsMenu, tracker);
+        Item[] itemUpdate = tracker.findByName(answers[2]);
+        assertThat(itemUpdate, is(tracker.findAll()));
+    }
+
+    /**
+     * Test method change Emulation menu item 3 -  Delete item in tracker.
+     */
+    @Test
+    public void whenChangeDeleteItemThenGetItemsWithoutDeleteItem() {
+        final int firstElement = 0;
+        String[] answers = {"3", "id"};
+        final Long createOne = 111L;
+        final Long createTwo = 222L;
+        Item itemOne = new Item("name01", "desc01", createOne);
+        Item itemTwo = new Item("name02", "desc02", createTwo);
+        Tracker tracker = new Tracker();
+        tracker.add(itemOne);
+        tracker.add(itemTwo);
+        answers[1] = String.valueOf(itemOne.getId());
+        Input input = new StubInput(answers);
+        StartUI startUI = new StartUI(input);
+        String itemsMenu = input.ask("Testing: ");
+        startUI.action(itemsMenu, tracker);
+        assertThat(itemTwo, is(tracker.findAll()[firstElement]));
+    }
+
+    /**
+     * Test method change Emulation menu item 4 -  Find all item's in tracker.
+     */
+    @Test
+    public void whenChangeFindAllItemsGetAllItemsToConsole() {
+        String[] answers = {"4", "name"};
+        final int size = 3;
+        Item[] items = new Item[size];
+        items[0] = new Item("name01", "desc01");
+        items[1] = new Item("name02", "desc02");
+        items[2] = new Item("test", "test");
+        Tracker tracker = new Tracker();
+        tracker.add(items[0]);
+        tracker.add(items[1]);
+        tracker.add(items[2]);
+        Input input = new StubInput(answers);
+        StartUI startUI = new StartUI(input);
+        String itemsMenu = input.ask("Testing: ");
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+        startUI.action(itemsMenu, tracker);
+        String expectedResponse = "Find all item's in tracker:" + System.getProperty("line.separator")
+                + "-----" + System.getProperty("line.separator")
+                + items[0].getId() + "--" + items[0].getName() + "--" + items[0].getDescription() + "--" + items[0].getCreate() + System.getProperty("line.separator")
+                + items[1].getId() + "--" + items[1].getName() + "--" + items[1].getDescription() + "--" + items[1].getCreate() + System.getProperty("line.separator")
+                + items[2].getId() + "--" + items[2].getName() + "--" + items[2].getDescription() + "--" + items[2].getCreate() + System.getProperty("line.separator")
+                + "=>" + System.getProperty("line.separator")
+                + "The find all operation is successful." + System.getProperty("line.separator")
+                + "-----" + System.getProperty("line.separator");
+        assertThat(out.toString(), is(expectedResponse));
+    }
+
+    /**
+     * Test method change Emulation menu item 5 -  Find item by name in tracker.
+     */
+    @Test
+    public void whenChangeFindNameGetAllItemsByFindToConsole() {
+        String[] answers = {"5", "name"};
+        Item[] items = new Item[2];
+        items[0] = new Item("name01", "desc01");
+        items[1] = new Item("name02", "desc02");
+        Item itemThree = new Item("test", "test");
+        Tracker tracker = new Tracker();
+        tracker.add(items[0]);
+        tracker.add(items[1]);
+        tracker.add(itemThree);
+        Input input = new StubInput(answers);
+        StartUI startUI = new StartUI(input);
+        String itemsMenu = input.ask("Testing: ");
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+        startUI.action(itemsMenu, tracker);
+        String expectedResponse = "Find item by name in tracker:" + System.getProperty("line.separator")
+                + "-----" + System.getProperty("line.separator")
+                + items[0].getId() + "--" + items[0].getName() + "--" + items[0].getDescription() + "--" + items[0].getCreate() + System.getProperty("line.separator")
+                + items[1].getId() + "--" + items[1].getName() + "--" + items[1].getDescription() + "--" + items[1].getCreate() + System.getProperty("line.separator")
+                + "=>" + System.getProperty("line.separator")
+                + "The find by name operation is successful." + System.getProperty("line.separator")
+                + "-----" + System.getProperty("line.separator");
+        assertThat(out.toString(), is(expectedResponse));
+    }
+
+    /**
+     * Test method change Emulation menu item 6 -  Find item by id in tracker.
+     */
+    @Test
+    public void whenChangeFinIdGetItemByIdToConsole() {
+        String[] answers = {"6", "name"};
+        final int size = 3;
+        Item[] items = new Item[size];
+        items[0] = new Item("name01", "desc01");
+        items[1] = new Item("name02", "desc02");
+        items[2] = new Item("name03", "desc03");
+        Tracker tracker = new Tracker();
+        tracker.add(items[0]);
+        tracker.add(items[1]);
+        tracker.add(items[2]);
+        answers[1] = String.valueOf(items[1].getId());
+        Input input = new StubInput(answers);
+        StartUI startUI = new StartUI(input);
+        String itemsMenu = input.ask("Testing: ");
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+        startUI.action(itemsMenu, tracker);
+        String expectedResponse = "Find item by id in tracker:" + System.getProperty("line.separator")
+                + "-----" + System.getProperty("line.separator")
+                + items[1].getId() + "--" + items[1].getName() + "--" + items[1].getDescription() + "--" + items[1].getCreate() + System.getProperty("line.separator")
+                + "=>" + System.getProperty("line.separator")
+                + "The find by id operation is successful." + System.getProperty("line.separator")
+                + "-----" + System.getProperty("line.separator");
+        assertThat(out.toString(), is(expectedResponse));
+    }
 }
