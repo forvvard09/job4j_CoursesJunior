@@ -1,0 +1,14 @@
+3. Проанализировать полученный код и попытаться выделить в нем группы классов и методов.
+-----------------------------------------------------------------------------------------
+Про группы классов:
+1. Заявки, действия с заявками и их хранения: public class Item, public class Tracker, public class RequiredSize;
+2. Меню и вызов возможных действий: public class Menu, public class StartUI; 
+3. Консоль: public interface Input, public class ConsoleInput implements Input, public class StubInput implements Input;
+
+
+Пакет start:
+1. Консоль ввод: String ask();
+2. Размер трекера и и массива заявок(скоро будет сделано): методы класса RequiredSize
+3. Управление заявками: методы классов Item и Tracker
+3. Меню и приветствие, и действия меню: методы классов Menu и StartUI
+4. Вход в программу: public static void main();
