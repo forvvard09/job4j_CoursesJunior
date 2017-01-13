@@ -14,6 +14,10 @@ public class StartUI {
      * property - the user interaction method.
      */
     private Input input;
+    /**
+     * property -  use console out.
+     */
+    private String newLine = System.getProperty("line.separator");
 
     /** Constructor it creates a new object with the specified values.
      * @param input - interface class to communicate via the console
@@ -57,7 +61,7 @@ public class StartUI {
                 action(answer, tracker);
             }
 
-            System.out.println(System.getProperty("line.separator"));
+            System.out.println(newLine);
         } while (!answer.equals("q"));
     }
 
@@ -104,7 +108,7 @@ public class StartUI {
                 System.out.println("Find all item's in tracker:");
                 System.out.println("-----");
                 for (Item item : tracker.findAll()) {
-                    System.out.println(item.getId() + "--" + item.getName() + "--" + item.getDescription() + "--" + item.getCreate());
+                    System.out.printf("%s--%s--%s--%s%s", item.getId(), item.getName(), item.getDescription(), item.getCreate(), newLine);
                 }
                 System.out.println("=>");
                 System.out.println("The find all operation is successful.");
@@ -116,7 +120,7 @@ public class StartUI {
                 String key = input.ask("Enter key for find by name in Tracker :> ");
                 System.out.println("-----");
                 for (Item item : tracker.findByName(key)) {
-                    System.out.println(item.getId() + "--" + item.getName() + "--" + item.getDescription() + "--" + item.getCreate());
+                    System.out.printf("%s--%s--%s--%s%s", item.getId(), item.getName(), item.getDescription(), item.getCreate(), newLine);
                 }
                 System.out.println("=>");
                 System.out.println("The find by name operation is successful.");
@@ -128,14 +132,14 @@ public class StartUI {
                 int id = Integer.parseInt(input.ask("Enter id for find by id Item in Tracker :> "));
                 Item itemFindId = tracker.findById(id);
                 System.out.println("-----");
-                System.out.println(itemFindId.getId() + "--" + itemFindId.getName() + "--" + itemFindId.getDescription() + "--" + itemFindId.getCreate());
+                System.out.printf("%s--%s--%s--%s%s", itemFindId.getId(), itemFindId.getName(), itemFindId.getDescription(), itemFindId.getCreate(), newLine);
                 System.out.println("=>");
                 System.out.println("The find by id operation is successful.");
                 System.out.println("-----");
                 break;
 
             default:
-                System.out.print(System.getProperty("line.separator"));
+                System.out.print(newLine);
                 System.out.print("Error. You have entered an invalid character. Repeat the entry or press 'q' to exit the program.");
                 break;
         }

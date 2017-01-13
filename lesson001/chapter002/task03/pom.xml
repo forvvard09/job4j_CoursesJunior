@@ -6,9 +6,8 @@
     <version>1.0.0</version>
 
     <parent>
-        <groupId>chapter002</groupId>
-        <artifactId>chapter002</artifactId>
+        <groupId>lesson001-chapter002</groupId>
+        <artifactId>lesson001-chapter002</artifactId>
         <version>1.0.0</version>
     </parent>
-
 </project>

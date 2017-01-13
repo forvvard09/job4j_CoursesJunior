@@ -3,6 +3,14 @@
     <groupId>Tracker</groupId>
     <artifactId>Tracker</artifactId>
     <name>Tracker</name>
+    <dependencies>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>19.0</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
     <packaging>jar</packaging>
     <version>1.0.0</version>
 

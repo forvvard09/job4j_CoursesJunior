@@ -1,5 +1,6 @@
 package ru.spoddubnyak.start;
 
+import com.google.common.base.Joiner;
 import org.junit.Test;
 import ru.spoddubnyak.models.Item;
 
@@ -17,6 +18,11 @@ import static org.junit.Assert.assertThat;
  * @since 06.01.2016
  */
 public class StartUITest {
+
+    /**
+     * property -  use console out.
+     */
+    private String newLine = System.getProperty("line.separator");
 
     /**
      * Test method change Emulation menu item 1 -  Add a new item in the tracker.
@@ -95,14 +101,14 @@ public class StartUITest {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
         startUI.action(itemsMenu, tracker);
-        String expectedResponse = "Find all item's in tracker:" + System.getProperty("line.separator")
-                + "-----" + System.getProperty("line.separator")
-                + items[0].getId() + "--" + items[0].getName() + "--" + items[0].getDescription() + "--" + items[0].getCreate() + System.getProperty("line.separator")
-                + items[1].getId() + "--" + items[1].getName() + "--" + items[1].getDescription() + "--" + items[1].getCreate() + System.getProperty("line.separator")
-                + items[2].getId() + "--" + items[2].getName() + "--" + items[2].getDescription() + "--" + items[2].getCreate() + System.getProperty("line.separator")
-                + "=>" + System.getProperty("line.separator")
-                + "The find all operation is successful." + System.getProperty("line.separator")
-                + "-----" + System.getProperty("line.separator");
+        String[] expectedItems = new String[size];
+        int i = 0;
+        for (Item item : tracker.findAll()) {
+            expectedItems[i] = String.format("%s--%s--%s--%s", items[i].getId(), items[i].getName(), items[i].getDescription(), items[i].getCreate());
+            i++;
+        }
+        String expectedResponseJoin = Joiner.on(newLine).join(expectedItems);
+        String expectedResponse = String.format("%s%s-----%s%s%s=>%s%s%s-----%s", "Find all item's in tracker:", newLine, newLine, expectedResponseJoin, newLine, newLine, "The find all operation is successful.", newLine, newLine);
         assertThat(out.toString(), is(expectedResponse));
     }
 
@@ -126,13 +132,12 @@ public class StartUITest {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
         startUI.action(itemsMenu, tracker);
-        String expectedResponse = "Find item by name in tracker:" + System.getProperty("line.separator")
-                + "-----" + System.getProperty("line.separator")
-                + items[0].getId() + "--" + items[0].getName() + "--" + items[0].getDescription() + "--" + items[0].getCreate() + System.getProperty("line.separator")
-                + items[1].getId() + "--" + items[1].getName() + "--" + items[1].getDescription() + "--" + items[1].getCreate() + System.getProperty("line.separator")
-                + "=>" + System.getProperty("line.separator")
-                + "The find by name operation is successful." + System.getProperty("line.separator")
-                + "-----" + System.getProperty("line.separator");
+        String[] expectedItems = new String[2];
+        for (int i = 0; i < items.length; i++) {
+            expectedItems[i] = String.format("%s--%s--%s--%s", items[i].getId(), items[i].getName(), items[i].getDescription(), items[i].getCreate());
+        }
+        String expectedResponseJoin = Joiner.on(newLine).join(expectedItems);
+        String expectedResponse = String.format("%s%s-----%s%s%s=>%s%s%s-----%s", "Find item by name in tracker:", newLine, newLine, expectedResponseJoin, newLine, newLine, "The find by name operation is successful.", newLine, newLine);
         assertThat(out.toString(), is(expectedResponse));
     }
 
@@ -158,12 +163,8 @@ public class StartUITest {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
         startUI.action(itemsMenu, tracker);
-        String expectedResponse = "Find item by id in tracker:" + System.getProperty("line.separator")
-                + "-----" + System.getProperty("line.separator")
-                + items[1].getId() + "--" + items[1].getName() + "--" + items[1].getDescription() + "--" + items[1].getCreate() + System.getProperty("line.separator")
-                + "=>" + System.getProperty("line.separator")
-                + "The find by id operation is successful." + System.getProperty("line.separator")
-                + "-----" + System.getProperty("line.separator");
+        String responseItem = String.format("%s--%s--%s--%s", items[1].getId(), items[1].getName(), items[1].getDescription(), items[1].getCreate());
+        String expectedResponse = String.format("%s%s-----%s%s%s=>%s%s%s-----%s", "Find item by id in tracker:", newLine, newLine, responseItem, newLine, newLine, "The find by id operation is successful.", newLine, newLine);
         assertThat(out.toString(), is(expectedResponse));
     }
 }
