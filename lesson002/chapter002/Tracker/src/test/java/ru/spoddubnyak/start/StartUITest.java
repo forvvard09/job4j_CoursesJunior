@@ -111,7 +111,6 @@ public class StartUITest {
         String expectedResponse = String.format("%s%s-----%s%s%s=>%s%s%s-----%s", "Find all item's in tracker:", newLine, newLine, expectedResponseJoin, newLine, newLine, "The find all operation is successful.", newLine, newLine);
         assertThat(out.toString(), is(expectedResponse));
     }
-
     /**
      * Test method change Emulation menu item 5 -  Find item by name in tracker.
      */
