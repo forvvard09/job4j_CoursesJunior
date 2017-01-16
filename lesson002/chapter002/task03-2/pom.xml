@@ -1,0 +1,14 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>task03-2</groupId>
+    <artifactId>task03-2</artifactId>
+    <name>lesson002-chapter002-task03-2</name>
+    <version>1.0.0</version>
+
+    <parent>
+        <groupId>chapter002</groupId>
+        <artifactId>chapter002</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+</project>
