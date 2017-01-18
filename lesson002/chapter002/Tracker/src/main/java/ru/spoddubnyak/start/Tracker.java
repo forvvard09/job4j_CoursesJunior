@@ -1,10 +1,9 @@
 package ru.spoddubnyak.start;
 
+import ru.spoddubnyak.models.Comment;
 import ru.spoddubnyak.models.Item;
 
 import java.util.Random;
-
-import static java.lang.Math.abs;
 
 /**
  * Class class storages of records in a tracker.
@@ -21,7 +20,7 @@ public class Tracker {
     /**
      * range of numbers for the generation of the identification number.
      */
-    private static final int RANGERANDOM = 100;
+    private static final int RANGERANDOM = 9999;
     /**
      * property - initial size of a store.
      */
@@ -58,8 +57,7 @@ public class Tracker {
      * @return id  - generated identification number
      */
     int generationId() {
-        return abs((int) (System.currentTimeMillis() + RN.nextInt(RANGERANDOM)));
-
+        return RN.nextInt(RANGERANDOM);
     }
 
     /**
@@ -105,6 +103,11 @@ public class Tracker {
         for (int index = 0; index != items.length; ++index) {
             Item item = this.items[index];
             if (item != null && item.getId() == itemNew.getId()) {
+                if (this.items[index].getComments().length != 0) {
+                    for (Comment comment : this.items[index].getComments()) {
+                        itemNew.addComment(comment);
+                    }
+                }
                 this.items[index] = itemNew;
                 break;
             }
@@ -122,7 +125,8 @@ public class Tracker {
         this.items[index] = null;
         this.position--;
         System.arraycopy(this.items, index + 1, this.items, index, this.items.length - (index + 1));
-        if ((this.items.length / this.position) > 2) {
+        int quantityPos = (this.position == 0) ? 1 : this.position;
+        if (((this.items.length) / quantityPos) > 2) {
             RequiredSize requiredSize = new RequiredSize();
             this.items = requiredSize.removeEmpti(this.items);
         }

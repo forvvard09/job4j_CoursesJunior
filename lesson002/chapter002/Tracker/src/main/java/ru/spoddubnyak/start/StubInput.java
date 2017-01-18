@@ -20,7 +20,9 @@ public class StubInput implements Input {
     private int position = 0;
 
     /** Constructor it creates a new object with the specified values.
+     *
      * @param answers - the array of possible answers
+     *
      */
     public StubInput(String[] answers) {
         String[] copyAnswers = Arrays.copyOf(answers, answers.length);

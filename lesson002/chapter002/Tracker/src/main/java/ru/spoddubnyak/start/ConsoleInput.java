@@ -9,16 +9,19 @@ import java.util.Scanner;
  * @version 1.0
  * @since 04.01.2017
  */
-
 public class ConsoleInput implements Input {
 
     /**
-     * property - Sysstem object Scanner for make in console.
+     * property - System object Scanner for make in console.
      */
-
     private Scanner scanner = new Scanner(System.in, "UTF-8");
 
-    @Override
+    /**
+     * Method ask and get an answer to a question.
+     *
+     * @param question - question in console
+     * @return - answer
+     */
     public String ask(String question) {
         System.out.print(question);
         return scanner.nextLine();
