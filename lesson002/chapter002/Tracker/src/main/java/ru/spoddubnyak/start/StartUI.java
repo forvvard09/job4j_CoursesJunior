@@ -13,6 +13,12 @@ public class StartUI {
      */
     private Input input;
 
+    /*
+    *//**
+     * property - range of possible responses.
+     *//*
+    private int[] ranges = new int[7];
+*/
     /**
      * property - the Tracker storage items.
      */

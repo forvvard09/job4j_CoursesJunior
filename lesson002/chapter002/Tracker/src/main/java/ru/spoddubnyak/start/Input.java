@@ -14,4 +14,14 @@ public interface Input {
      * @return - answer
      */
     String ask(String question);
+
+    /*
+    *//** Method ask and get an answer to a question.
+     * @param question - question in console
+     * @param range - range of possible responses
+     * @return - answer
+     *//*
+    int ask(String question, int[] range);
+    */
+
 }
