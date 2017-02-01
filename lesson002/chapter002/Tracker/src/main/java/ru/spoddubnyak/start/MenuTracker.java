@@ -91,13 +91,13 @@ class FindById implements UserAction {
  */
 public class MenuTracker {
     /**
-     * property - newLine.
-     */
-    private static String newLine = System.getProperty("line.separator");
-    /**
      * property - the number of actions in the menu.
      */
     private static final int COUNT_ACTIONS = 7;
+    /**
+     * property - newLine.
+     */
+    private static String newLine = System.getProperty("line.separator");
     /**
      * property - greeting.
      */
@@ -148,20 +148,14 @@ public class MenuTracker {
     public void fillActions(String greeting) {
         this.greeting = String.format("%s%s", greeting, newLine);
         System.out.println(this.greeting);
-        final int actionsAdd = 0;
-        final int actionsEdit = 1;
-        final int actionsDel = 2;
-        final int actionsGetAll = 3;
-        final int actionsGetName = 4;
-        final int actionsGetId = 5;
-        final int actionsComm = 6;
-        this.actions[actionsAdd] = new AddItem();
-        this.actions[actionsEdit] = new EditItem();
-        this.actions[actionsDel] = new DeleteItem();
-        this.actions[actionsGetAll] = new FindAllItems();
-        this.actions[actionsGetName] = new FinByName();
-        this.actions[actionsGetId] = new FindById();
-        this.actions[actionsComm] = new AddCommentItem();
+        int index = 0;
+        this.actions[index++] = new AddItem();
+        this.actions[index++] = new EditItem();
+        this.actions[index++] = new DeleteItem();
+        this.actions[index++] = new FindAllItems();
+        this.actions[index++] = new FinByName();
+        this.actions[index++] = new FindById();
+        this.actions[index++] = new AddCommentItem();
     }
 
     /**
