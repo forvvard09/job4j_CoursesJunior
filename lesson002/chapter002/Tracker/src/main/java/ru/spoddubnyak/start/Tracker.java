@@ -18,13 +18,17 @@ public class Tracker {
      */
     private static final Random RN = new Random();
     /**
-     * range of numbers for the generation of the identification number.
+     * property - range of numbers for the generation of the identification number.
      */
     private static final int RANGERANDOM = 9999;
     /**
      * property - initial size of a store.
      */
     private static final int INITIALIZE = 3;
+    /**
+     * property - max number for Create time.
+     */
+    private final long maskCreation = 999999999L;
     /**
      * items store.
      */
@@ -34,6 +38,15 @@ public class Tracker {
      */
     private int position = 0;
 
+    /**
+     * getter - rerutn max number for Create time Item.
+     *
+     * @return - max number
+     */
+    public long getMascCreate() {
+        long mask = this.maskCreation;
+        return mask;
+    }
 
     /**
      * Method adds a new application to the tracker.

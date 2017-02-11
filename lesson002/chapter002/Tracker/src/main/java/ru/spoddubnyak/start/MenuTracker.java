@@ -3,6 +3,8 @@ package ru.spoddubnyak.start;
 import ru.spoddubnyak.models.Comment;
 import ru.spoddubnyak.models.Item;
 
+import java.util.Optional;
+
 /**
  * Internal class Execute actions "Update item in tracker.".
  *
@@ -25,13 +27,34 @@ class EditItem implements UserAction {
 
     @Override
     public void execute(Input input, Tracker tracker) {
-        System.out.println("Update item in tracker:");
-        int idItem = Integer.parseInt(input.ask("Enter id Item :>"));
+        String newLine = System.getProperty("line.separator");
+        boolean invalid = true;
+        System.out.printf("%s%s%s%s%s%s", "-----", newLine, "Update item in tracker:", newLine, "-----", newLine);
+        int idItem = 0;
+        do {
+            try {
+                String answer = input.ask("Enter id Item or press 'm' to return to the menu :> ");
+                if (answer.equals("m")) {
+                    System.out.println("Return menu.");
+                    return;
+                }
+                idItem = Integer.parseInt(answer);
+                invalid = false;
+            } catch (NumberFormatException nfe) {
+                System.out.printf("%s%s%s%s%s%s", "=>", newLine, "You entered incorrect data or 'm' to return to the menu.", newLine, "-----", newLine);
+            }
+        } while (invalid);
+        if (tracker.findById(idItem) == null) {
+            System.out.printf("%s%s%s%s%s%s", "=>", newLine, "Items with not found.", newLine, "-----", newLine);
+            return;
+        }
         String nameNewItem = input.ask("Enter name new Item :> ");
         String descreptionNewItem = input.ask("Enter descreption new Item :> ");
-        Long createNewItem = Long.parseLong(input.ask("Enter create Item in formating Long :> "));
+        long createNewItem = input.ask("Enter create Item in formating long :> ", tracker.getMascCreate());
         tracker.update(new Item(idItem, nameNewItem, descreptionNewItem, createNewItem));
+        showSuccess();
     }
+
 
     @Override
     public void showSuccess() {
@@ -50,6 +73,11 @@ class EditItem implements UserAction {
  */
 class FindById implements UserAction {
 
+    /**
+     * property - carriage shift.
+     */
+    private String newLine = System.getProperty("line.separator");
+
     @Override
     public int key() {
         final int ACTION = 5;
@@ -63,15 +91,34 @@ class FindById implements UserAction {
 
     @Override
     public void execute(Input input, Tracker tracker) {
-        System.out.println("Find item by id in tracker:");
-        int id = Integer.parseInt(input.ask("Enter id for find by id Item in Tracker :> "));
-        Item itemFindId = tracker.findById(id);
-        System.out.println("-----");
-        System.out.printf("%s--%s--%s--%s%s", itemFindId.getId(), itemFindId.getName(), itemFindId.getDescription(), itemFindId.getCreate(), System.getProperty("line.separator"));
-        if (itemFindId.getComments().length != 0) {
-            MenuTracker.showComments(itemFindId);
+        System.out.printf("%s%s%s%s%s%s", "-----", newLine, "Find item by id in tracker:", newLine, "-----", newLine);
+        int id = 0;
+        boolean invalid = true;
+        do {
+            try {
+                String answer = input.ask("Enter id for find by id Item in Tracker or press 'm' return to menu. :> ");
+                if (answer.equals("m")) {
+                    System.out.println("Return menu.");
+                    return;
+                }
+                id = Integer.parseInt(answer);
+                invalid = false;
+            } catch (NumberFormatException nfe) {
+                System.out.printf("%s%s%s%s%s%s", "=>", newLine, "You entered incorrect data, again or 'm' to return to the menu.", newLine, "-----", newLine);
+            }
+        } while (invalid);
+        Optional<Item> itemFindId = Optional.ofNullable(tracker.findById(id));
+        if (!itemFindId.isPresent()) {
+            System.out.printf("%s%s%s%s%s%s", "=>", newLine, "Items with not found.", newLine, "-----", newLine);
+            return;
+        } else {
+            System.out.println("-----");
+            System.out.printf("%s--%s--%s--%s%s", itemFindId.get().getId(), itemFindId.get().getName(), itemFindId.get().getDescription(), itemFindId.get().getCreate(), System.getProperty("line.separator"));
+            if (itemFindId.get().getComments().length != 0) {
+                MenuTracker.showComments(itemFindId.get());
+            }
+            showSuccess();
         }
-        showSuccess();
     }
 
     @Override
@@ -102,6 +149,7 @@ public class MenuTracker {
      * property - greeting.
      */
     private String greeting;
+
     /**
      * property - specimen Tracker.
      */
@@ -110,6 +158,7 @@ public class MenuTracker {
      * property - items menu.
      */
     private UserAction[] actions = new UserAction[COUNT_ACTIONS];
+
 
     /**
      * property - for use with the console.
@@ -127,7 +176,6 @@ public class MenuTracker {
         this.tracker = tracekr;
     }
 
-
     /**
      * Static method out console comments for Item.
      *
@@ -138,6 +186,23 @@ public class MenuTracker {
         for (Comment comment : item.getComments()) {
             System.out.println(String.format("%s %s: %s", " Coment", ++count, comment.getComment()));
         }
+    }
+
+    /**
+     * Geter get number actions.
+     *
+     * @return number actions
+     */
+    public int[] getActions() {
+        int[] getActions = new int[this.actions.length];
+        int i = 0;
+        for (UserAction action : this.actions) {
+            if (action != null) {
+                getActions[i] = action.key();
+            }
+            i++;
+        }
+        return getActions;
     }
 
     /**
@@ -186,6 +251,10 @@ public class MenuTracker {
      * @since 19.01.2017
      */
     private static class FindAllItems implements UserAction {
+        /**
+         * property - number Records.
+         */
+        private int numberRecords = 0;
 
         @Override
         public int key() {
@@ -200,9 +269,10 @@ public class MenuTracker {
 
         @Override
         public void execute(Input input, Tracker tracker) {
-            System.out.println("Find all item's in tracker:");
-            System.out.println("-----");
+            System.out.printf("%s%s%s%s%s%s", "-----", newLine, "Find all item's in tracker:", newLine, "-----", newLine);
+            numberRecords = 0;
             for (Item item : tracker.findAll()) {
+                numberRecords++;
                 System.out.printf("%s--%s--%s--%s%s", item.getId(), item.getName(), item.getDescription(), item.getCreate(), newLine);
                 if (item.getComments().length != 0) {
                     showComments(item);
@@ -213,9 +283,13 @@ public class MenuTracker {
 
         @Override
         public void showSuccess() {
-            System.out.println("=>");
-            System.out.println("The find all item's in tracker is successful.");
-            System.out.println("-----");
+            if (numberRecords == 0) {
+                System.out.printf("%s%s%s%s%s", "=>", newLine, "No records found.", newLine, "-----");
+            } else {
+                System.out.println("=>");
+                System.out.println("The find all item's in tracker is successful.");
+                System.out.println("-----");
+            }
         }
     }
 
@@ -227,6 +301,11 @@ public class MenuTracker {
      * @since 19.01.2017
      */
     private static class FinByName implements UserAction {
+
+        /**
+         * property - number Records.
+         */
+        private int numberRecords = 0;
 
         @Override
         public int key() {
@@ -241,10 +320,11 @@ public class MenuTracker {
 
         @Override
         public void execute(Input input, Tracker tracker) {
-            System.out.println("Find item by name in tracker:");
-            String key = input.ask("Enter key for find by name in Tracker :> ");
+            System.out.printf("%s%s%s%s%s%s", "-----", newLine, "Find item by name in tracker:", newLine, "-----", newLine);
+            String key = input.ask("Enter key for find by name in Tracker:> ");
             System.out.println("-----");
             for (Item item : tracker.findByName(key)) {
+                numberRecords++;
                 System.out.printf("%s--%s--%s--%s%s", item.getId(), item.getName(), item.getDescription(), item.getCreate(), newLine);
                 if (item.getComments().length != 0) {
                     showComments(item);
@@ -255,9 +335,14 @@ public class MenuTracker {
 
         @Override
         public void showSuccess() {
-            System.out.println("=>");
-            System.out.println("Find item by name in tracker is successful.");
-            System.out.println("-----");
+
+            if (numberRecords == 0) {
+                System.out.printf("%s%s%s%s%s", "=>", newLine, "No records found.", newLine, "-----");
+            } else {
+                System.out.println("=>");
+                System.out.println("Find item by name in tracker is successful.");
+                System.out.println("-----");
+            }
         }
     }
 
@@ -283,10 +368,10 @@ public class MenuTracker {
 
         @Override
         public void execute(Input input, Tracker tracker) {
-            System.out.println("Add a new item in the tracker:");
+            System.out.printf("%s%s%s%s%s%s", "-----", newLine, "Add a new item in the tracker:", newLine, "-----", newLine);
             String nameItem = input.ask("Enter name Item :> ");
             String descreptionItem = input.ask("Enter descreption Item :> ");
-            Long createItem = Long.parseLong(input.ask("Enter create Item in formating Long :> "));
+            Long createItem = input.ask("Enter create Item in formating Long :> ", tracker.getMascCreate());
             tracker.add(new Item(nameItem, descreptionItem, createItem));
             showSuccess();
         }
@@ -298,6 +383,7 @@ public class MenuTracker {
             System.out.println("-----");
         }
     }
+
 
     /**
      * Internal  class Execute actions "Add a new comment in Item.".
@@ -321,11 +407,31 @@ public class MenuTracker {
 
         @Override
         public void execute(Input input, Tracker tracker) {
-            System.out.println("Add a new comment by Item in the tracker:");
-            int id = Integer.parseInt(input.ask("Enter id for find by id Item in Tracker :> "));
+            System.out.printf("%s%s%s%s%s%s", "-----", newLine, "Add a new comment by Item in the tracker:", newLine, "-----", newLine);
+            int id = 0;
+            boolean invalid = true;
+            do {
+                try {
+
+                    String answer = input.ask("Enter id for find by id Item in Tracker or press 'm' return to menu:> ");
+                    if (answer.equals("m")) {
+                        System.out.println("Return menu.");
+                        return;
+                    }
+                    id = Integer.parseInt(answer);
+                    invalid = false;
+                } catch (NumberFormatException nfe) {
+                    System.out.printf("%s%s%s%s%s%s", "=>", newLine, "You entered incorrect data, again or 'm' to return to the menu.", newLine, "-----", newLine);
+                }
+            } while (invalid);
+            Optional<Item> itemFindId = Optional.ofNullable(tracker.findById(id));
+            if (!itemFindId.isPresent()) {
+                System.out.printf("%s%s%s%s%s%s", "=>", newLine, "Items with not found.", newLine, "-----", newLine);
+                return;
+            }
             String commentInConsole = input.ask("Enter comment by Item :> ");
             Comment comment = new Comment(commentInConsole);
-            tracker.findById(id).addComment(comment);
+            itemFindId.get().addComment(comment);
             showSuccess();
         }
 
@@ -359,7 +465,26 @@ public class MenuTracker {
 
         @Override
         public void execute(Input input, Tracker tracker) {
-            int idItem = Integer.parseInt(input.ask("Enter id Item delete:>"));
+            System.out.printf("%s%s%s%s%s%s", "-----", newLine, "Delete item in tracker:", newLine, "-----", newLine);
+            boolean invalid = true;
+            int idItem = 0;
+            do {
+                try {
+                    String answer = input.ask("Enter id Item delete or press 'm' for return to menu:> ");
+                    if (answer.equals("m")) {
+                        System.out.println("Return to menu.");
+                        return;
+                    }
+                    idItem = Integer.parseInt(answer);
+                    invalid = false;
+                } catch (NumberFormatException nfe) {
+                    System.out.printf("%s%s%s%s%s%s", "=>", newLine, "You entered incorrect data, agayn or press 'm' to return to the menu.", newLine, "-----", newLine);
+                }
+            } while (invalid);
+            if (tracker.findById(idItem) == null) {
+                System.out.printf("%s%s%s%s%s%s", "=>", newLine, "Items with not found.", newLine, "-----", newLine);
+                return;
+            }
             if (tracker.findById(idItem).getComments().length != 0) {
                 tracker.findById(idItem).delComments();
             }
@@ -372,7 +497,6 @@ public class MenuTracker {
             System.out.println("=>");
             System.out.println("The delete operation is successful.");
             System.out.println("-----");
-
         }
     }
 }

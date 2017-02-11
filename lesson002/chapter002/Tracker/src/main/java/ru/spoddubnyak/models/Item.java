@@ -14,6 +14,7 @@ public class Item {
      * property - identification number.
      */
     private int id;
+
     /**
      * property -  name.
      */
@@ -99,12 +100,30 @@ public class Item {
     }
 
     /**
+     * Setter property -  name.
+     *
+     * @param name - name.
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
      * Getter property -  id.
      *
      * @return property -  id
      */
     public int getId() {
         return this.id;
+    }
+
+    /**
+     * Setter property -  id.
+     *
+     * @param id - id.
+     */
+    public void setId(int id) {
+        this.id = id;
     }
 
     /**
@@ -117,15 +136,6 @@ public class Item {
     }
 
     /**
-     * Getter property -  create.
-     *
-     * @return property -  create
-     */
-    public Long getCreate() {
-        return create;
-    }
-
-    /**
      * Setter property -  description.
      *
      * @param description - description.
@@ -135,30 +145,21 @@ public class Item {
     }
 
     /**
+     * Getter property -  create.
+     *
+     * @return property -  create
+     */
+    public Long getCreate() {
+        return create;
+    }
+
+    /**
      * Setter property -  create.
      *
      * @param create - time.
      */
     public void setCreate(Long create) {
         this.create = create;
-    }
-
-    /**
-     * Setter property -  name.
-     *
-     * @param name - name.
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * Setter property -  id.
-     *
-     * @param id - id.
-     */
-    public void setId(int id) {
-        this.id = id;
     }
 
     /**

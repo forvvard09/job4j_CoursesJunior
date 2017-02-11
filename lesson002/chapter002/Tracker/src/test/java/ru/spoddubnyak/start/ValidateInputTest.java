@@ -8,14 +8,13 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 /**
- * Tests class ConsoleInputTest.
+ * Class ValidateInput checks the validity of entered data.
  *
  * @author Sergei Poddubnyak (forvvard09@gmail.com)
- * @version 1.0
- * @since 06.01.2016
+ * @version 2.0
+ * @since 11.02.2017
  */
-
-public class ConsoleInputTest {
+public class ValidateInputTest extends ConsoleInput {
 
     /**
      * property - data in console.
@@ -40,25 +39,23 @@ public class ConsoleInputTest {
     public void whenAddTwoNewItemsThenGetSameResultInTracker() {
         java.io.InputStream inputStream = System.in;
         System.setIn(new ByteArrayInputStream(consoleInName.getBytes()));
-        ConsoleInput consoleInput = new ConsoleInput();
-        String data = consoleInput.ask("Testing question: ");
+        ValidateInput validate = new ValidateInput();
+        String data = validate.ask("Testing question: ");
         System.setIn(inputStream);
         assertThat(consoleInName, is(data));
     }
 
     /**
-     *
      * Test method long ask.
-     *
      */
     @Test
     public void whenAddNewCreateThenGetSameResultat() {
         java.io.InputStream inputStream = System.in;
         System.setIn(new ByteArrayInputStream(consoleInCreate.getBytes()));
-        ConsoleInput consoleInput = new ConsoleInput();
+        ValidateInput validate = new ValidateInput();
         final long mask = 99;
         long expectedResult = Long.parseLong(consoleInCreate);
-        Long data = consoleInput.ask("Testing question: ", mask);
+        Long data = validate.ask("Testing question: ", mask);
         System.setIn(inputStream);
         assertThat(expectedResult, is(data));
     }
@@ -71,10 +68,11 @@ public class ConsoleInputTest {
         final int[] range = {1, 2, 3, 4};
         java.io.InputStream inputStream = System.in;
         System.setIn(new ByteArrayInputStream(consoleInMenu.getBytes()));
-        ConsoleInput consoleInput = new ConsoleInput();
+        ValidateInput validate = new ValidateInput();
         int expectedResult = Integer.parseInt(consoleInMenu) - 1;
-        int key = consoleInput.ask("Testing question: ", range);
+        int key = validate.ask("Testing question: ", range);
         System.setIn(inputStream);
         assertThat(expectedResult, is(key));
     }
 }
+

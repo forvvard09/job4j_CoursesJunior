@@ -1,5 +1,7 @@
 package ru.spoddubnyak.start;
 
+import ru.spoddubnyak.errors.MenuOutException;
+
 import java.util.Scanner;
 
 /**
@@ -11,6 +13,7 @@ import java.util.Scanner;
  */
 public class ConsoleInput implements Input {
 
+
     /**
      * property - System object Scanner for make in console.
      */
@@ -19,24 +22,54 @@ public class ConsoleInput implements Input {
     /**
      * Method ask and get an answer to a question.
      *
-     * @param question - question in console
-     * @return - answer
+     * @param question question in console
+     * @return answer
      */
     public String ask(String question) {
         System.out.print(question);
         return scanner.nextLine();
     }
 
-  /*  @Override
+    /**
+     * Method ask and get an answer to a question, checks no longer whether the resulting number is the maximum possible.
+     *
+     * @param question  question in console
+     * @param maxNumber the maximum possible
+     * @return answer
+     */
+    public long ask(String question, long maxNumber) {
+        System.out.print(question);
+        String inConsole = scanner.nextLine();
+        long answer = Long.parseLong(inConsole);
+        return answer;
+    }
+
+    /**
+     * Method ask and get an answer to a question and check with possible answers.
+     *
+     * @param question question in console
+     * @param range    possible answers
+     * @return answer
+     */
     public int ask(String question, int[] range) {
-        int key = Integer.valueOf(this.ask(question));
+        String answer = this.ask(question);
+        String newLine = System.getProperty("line.separator");
+        if (answer.equals("q")) {
+            System.out.printf("%s%s%s%s%s%s", "=>", newLine, "Completion of the work program.", newLine, "-----", newLine);
+            System.exit(0);
+        }
+        int key = ((Integer.valueOf(answer)) - 1);
         boolean exist = false;
         for (int value : range) {
-           if (value == key) {
-               exist = true;
-               break;
-           }
+            if (value == key) {
+                exist = true;
+                break;
+            }
         }
-        return exist ? key : -1;*/
-
+        if (exist) {
+            return key;
+        } else {
+            throw new MenuOutException("Out of menu range.");
+        }
+    }
 }

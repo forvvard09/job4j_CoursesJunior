@@ -13,12 +13,6 @@ public class StartUI {
      */
     private Input input;
 
-    /*
-    *//**
-     * property - range of possible responses.
-     *//*
-    private int[] ranges = new int[7];
-*/
     /**
      * property - the Tracker storage items.
      */
@@ -29,10 +23,11 @@ public class StartUI {
      */
     private String newLine = System.getProperty("line.separator");
 
-    /** Constructor it creates a new object with the specified values.
-     * @param input - interface class to communicate via the console
-     * @param tracker - ithe Tracker storage items.
+    /**
+     * Constructor it creates a new object with the specified values.
      *
+     * @param input   - interface class to communicate via the console
+     * @param tracker - ithe Tracker storage items.
      */
     public StartUI(Input input, Tracker tracker) {
         this.input = input;
@@ -41,11 +36,12 @@ public class StartUI {
 
     /**
      * Static method point of entry the program.
+     *
      * @param args - incoming parameters
      */
     public static void main(String[] args) {
         Tracker tracker = new Tracker();
-        Input input = new ConsoleInput();
+        Input input = new ValidateInput();
         new StartUI(input, tracker).init();
     }
 
@@ -54,16 +50,13 @@ public class StartUI {
      */
     public void init() {
         MenuTracker menu = new MenuTracker(this.input, this.tracker);
-        String answer;
         menu.fillActions("Hello! Welcome to the tracking program.");
-        do {
+        int[] range = menu.getActions();
+        for (; ; ) {
             menu.showMenu();
             System.out.print(newLine);
-            answer = this.input.ask("Select a menu item, to exit, press 'q' :> ");
-            if (!answer.equals("q")) {
-                menu.select(Integer.parseInt(answer) - 1);
-            }
+            menu.select(this.input.ask("Select a menu item, to exit 'q' :> ", range));
             System.out.println();
-        } while (!answer.equals("q"));
+        }
     }
 }

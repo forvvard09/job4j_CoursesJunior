@@ -1,5 +1,7 @@
 package ru.spoddubnyak.start;
 
+import ru.spoddubnyak.errors.MenuOutException;
+
 import java.util.Arrays;
 
 /**
@@ -34,11 +36,36 @@ public class StubInput implements Input {
         return this.answers[position++];
     }
 
-   /* @Override
+    @Override
     public int ask(String question, int[] range) {
-//        throw new UnsupportedOperationException("Unsupported operation");
-        return -1;
-    }*/
+        String answer = this.answers[position++];
+        String newLine = System.getProperty("line.separator");
+        if (answer.equals("q")) {
+            System.out.printf("%s%s%s%s%s%s", "=>", newLine, "Completion of the work program.", newLine, "-----", newLine);
+            System.exit(0);
+        }
+        int key = ((Integer.valueOf(answer)) - 1);
+        boolean exist = false;
+        for (int value : range) {
+            if (value == key) {
+                exist = true;
+                break;
+            }
+        }
+        if (exist) {
+            return key;
+        } else {
+            throw new MenuOutException("Out of menu range.");
+        }
+    }
+
+
+    @Override
+    public long ask(String question, long maxNumber) {
+        String inConsole = this.answers[position++];
+        long answer = Long.parseLong(inConsole);
+        return answer;
+    }
 
 
 }
