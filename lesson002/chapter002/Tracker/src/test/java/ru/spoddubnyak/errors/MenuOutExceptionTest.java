@@ -1,9 +1,5 @@
 package ru.spoddubnyak.errors;
 
-import org.junit.Test;
-
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
 
 /**
  * Test Class MenuOutException.
@@ -14,12 +10,5 @@ import static org.junit.Assert.assertThat;
  */
 public class MenuOutExceptionTest extends RuntimeException {
 
-    /**
-     * Test class MenuOutException.
-     */
-    @Test
-    public void whenRunErrorThenGetErrorMessage() {
-        new MenuOutException("ErrorTesting.");
-        assertThat("ErrorTesting.", is("ErrorTesting."));
-    }
+
 }

@@ -14,9 +14,13 @@ import java.util.Optional;
  */
 class EditItem implements UserAction {
 
+    /**
+     * property - number action.
+     */
+    private static final int ACTION = 1;
+
     @Override
     public int key() {
-        final int ACTION = 1;
         return ACTION;
     }
 
@@ -74,13 +78,17 @@ class EditItem implements UserAction {
 class FindById implements UserAction {
 
     /**
+     * property - number action.
+     */
+    private static final int ACTION = 5;
+
+    /**
      * property - carriage shift.
      */
     private String newLine = System.getProperty("line.separator");
 
     @Override
     public int key() {
-        final int ACTION = 5;
         return ACTION;
     }
 
@@ -252,13 +260,16 @@ public class MenuTracker {
      */
     private static class FindAllItems implements UserAction {
         /**
+         * property - number action.
+         */
+        private static final int ACTION = 3;
+        /**
          * property - number Records.
          */
         private int numberRecords = 0;
 
         @Override
         public int key() {
-            final int ACTION = 3;
             return ACTION;
         }
 
@@ -303,13 +314,16 @@ public class MenuTracker {
     private static class FinByName implements UserAction {
 
         /**
+         * property - number action.
+         */
+        private static final int ACTION = 4;
+        /**
          * property - number Records.
          */
         private int numberRecords = 0;
 
         @Override
         public int key() {
-            final int ACTION = 4;
             return ACTION;
         }
 
@@ -355,9 +369,13 @@ public class MenuTracker {
      */
     private static class AddItem implements UserAction {
 
+        /**
+         * property - number action.
+         */
+        private static final int ACTION = 0;
+
         @Override
         public int key() {
-            final int ACTION = 0;
             return ACTION;
         }
 
@@ -393,10 +411,13 @@ public class MenuTracker {
      * @since 19.01.2017
      */
     private static class AddCommentItem implements UserAction {
+        /**
+         * property - number action.
+         */
+        private static final int ACTION = 6;
 
         @Override
         public int key() {
-            final int ACTION = 6;
             return ACTION;
         }
 
@@ -451,10 +472,13 @@ public class MenuTracker {
      * @since 19.01.2017
      */
     private static class DeleteItem implements UserAction {
+        /**
+         * property - number action.
+         */
+        private static final int ACTION = 2;
 
         @Override
         public int key() {
-            final int ACTION = 2;
             return ACTION;
         }
 

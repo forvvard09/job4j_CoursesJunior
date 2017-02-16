@@ -9,19 +9,17 @@ package ru.spoddubnyak.start;
  */
 public class StartUI {
     /**
+     * property -  use console out.
+     */
+    private static final String NEWLINE = System.getProperty("line.separator");
+    /**
      * property - the user interaction method.
      */
     private Input input;
-
     /**
      * property - the Tracker storage items.
      */
     private Tracker tracker;
-
-    /**
-     * property -  use console out.
-     */
-    private String newLine = System.getProperty("line.separator");
 
     /**
      * Constructor it creates a new object with the specified values.
@@ -52,11 +50,12 @@ public class StartUI {
         MenuTracker menu = new MenuTracker(this.input, this.tracker);
         menu.fillActions("Hello! Welcome to the tracking program.");
         int[] range = menu.getActions();
-        for (; ; ) {
+        do {
+            System.out.print(NEWLINE);
             menu.showMenu();
-            System.out.print(newLine);
-            menu.select(this.input.ask("Select a menu item, to exit 'q' :> ", range));
+            System.out.print(NEWLINE);
+            menu.select(this.input.ask("Select a menu item :> ", range));
             System.out.println();
-        }
+        } while (!"q".equals(this.input.ask("To exit, press 'q' to proceed any other key :> ")));
     }
 }

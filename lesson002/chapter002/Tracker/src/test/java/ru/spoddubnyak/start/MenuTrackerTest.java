@@ -2,6 +2,7 @@ package ru.spoddubnyak.start;
 
 import com.google.common.base.Joiner;
 import org.junit.Test;
+import ru.spoddubnyak.errors.MenuOutException;
 import ru.spoddubnyak.models.Comment;
 import ru.spoddubnyak.models.Item;
 
@@ -70,10 +71,40 @@ public class MenuTrackerTest {
     }
 
     /**
+     * Test method change emulation menu input error  -  message error.
+     */
+    @Test(expected = NumberFormatException.class)
+    public void whenChangeAddWitErrorThenGetErrorMessage() {
+        String[] answers = {"1", "name", "desc", "test", "4"};
+        Input input = new StubInput(answers);
+        Tracker tracker = new Tracker();
+        MenuTracker menuTracker = new MenuTracker(input, tracker);
+        menuTracker.fillActions("Hello! Welcome to the tracking program.");
+        int[] range = menuTracker.getActions();
+        int itemsMenu = input.ask("Select a menu item, to exit 'q' :> ", range);
+        menuTracker.select(itemsMenu);
+    }
+
+    /**
+     * Test method change emulation not an existing menu item  -  message error.
+     */
+    @Test(expected = MenuOutException.class)
+    public void whenChangeNotExistingItemMenuThenGetErrorMessage() {
+        String[] answers = {"99", "name", "desc", "test", "4"};
+        Input input = new StubInput(answers);
+        Tracker tracker = new Tracker();
+        MenuTracker menuTracker = new MenuTracker(input, tracker);
+        menuTracker.fillActions("Hello! Welcome to the tracking program.");
+        int[] range = menuTracker.getActions();
+        int itemsMenu = input.ask("Select a menu item, to exit 'q' :> ", range);
+        menuTracker.select(itemsMenu);
+    }
+
+    /**
      * Test method change Emulation menu item 2 -  Update item in tracker.
      */
     @Test
-    public void whenChangeUpdateIemThenGetUpdateItem() {
+    public void whenChangeUpdateItemThenGetUpdateItem() {
         String[] answers = {"2", "id", "name2", "desc2", "777", "4"};
         final Long create = 777L;
         Item item = new Item("test", "test", create);
@@ -97,6 +128,106 @@ public class MenuTrackerTest {
         String outItem = String.format("%s--%s--%s--%s", itemGetId[0].getId(), answers[positionName], answers[positionDesc], Long.parseLong(answers[positionCreate]));
         String expectedResponse = String.format("-----%s%s%s-----%s%s%s=>%s%s%s-----%s", newLine, "Find all item's in tracker:", newLine, newLine, outItem, newLine, newLine, "The find all item's in tracker is successful.", newLine, newLine);
         assertThat(out.toString(), is(expectedResponse));
+    }
+
+    /**
+     * Test method change Emulation menu item 2 with error in id Item -  Get an error message.
+     */
+    @Test(expected = NumberFormatException.class)
+    public void whenChangeUpdateItemWithErrorIdItemThenGetMessageAnError() {
+        String[] answers = {"2", "99", "name2", "desc2", "777", "4"};
+        final Long create = 777L;
+        Item item = new Item("test", "test", create);
+        Tracker tracker = new Tracker();
+        tracker.add(item);
+        Input input = new StubInput(answers);
+        MenuTracker menuTracker = new MenuTracker(input, tracker);
+        menuTracker.fillActions("Hello! Welcome to the tracking program.");
+        int[] range = menuTracker.getActions();
+        int itemsMenu = input.ask("Select a menu item, to exit 'q' :> ", range);
+        menuTracker.select(itemsMenu);
+        itemsMenu = input.ask("Select a menu item, to exit 'q' :> ", range);
+        menuTracker.select(itemsMenu);
+    }
+
+    /**
+     * Test method change Emulation menu item 2 with error in id Item -  Get an error message.
+     */
+    @Test(expected = NumberFormatException.class)
+    public void whenChangeUpdateItemWithErrorCreateNewItemThenGetMessageAnError() {
+        String[] answers = {"2", "99", "name2", "desc2", "test", "4"};
+        final Long create = 777L;
+        Item item = new Item("test", "test", create);
+        Tracker tracker = new Tracker();
+        tracker.add(item);
+        answers[1] = String.valueOf(item.getId());
+        Input input = new StubInput(answers);
+        MenuTracker menuTracker = new MenuTracker(input, tracker);
+        menuTracker.fillActions("Hello! Welcome to the tracking program.");
+        int[] range = menuTracker.getActions();
+        int itemsMenu = input.ask("Select a menu item, to exit 'q' :> ", range);
+        menuTracker.select(itemsMenu);
+    }
+
+
+    /**
+     * Test method change Emulation menu item 2 -  Update item in tracker Item with comment.
+     */
+    @Test
+    public void whenChangeUpdateIeWithCommentaryThenGetUpdateItemWithCommentary() {
+        String[] answers = {"2", "id", "name2", "desc2", "999", "4"};
+        final Long create = 777L;
+        Item item = new Item("test", "test", create);
+        Tracker tracker = new Tracker();
+        tracker.add(item);
+        Comment comment = new Comment("Comment 1");
+        item.addComment(comment);
+        answers[1] = String.valueOf(item.getId());
+        Input input = new StubInput(answers);
+        MenuTracker menuTracker = new MenuTracker(input, tracker);
+        menuTracker.fillActions("Hello! Welcome to the tracking program.");
+        int[] range = menuTracker.getActions();
+        int itemsMenu = input.ask("Select a menu item, to exit 'q' :> ", range);
+        menuTracker.select(itemsMenu);
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+        itemsMenu = input.ask("Select a menu item, to exit 'q' :> ", range);
+        menuTracker.select(itemsMenu);
+        Item[] itemGetId = tracker.findByName(answers[2]);
+        final int positionName = 2;
+        final int positionDesc = 3;
+        final int positionCreate = 4;
+        String outItem = String.format("%s--%s--%s--%s", itemGetId[0].getId(), answers[positionName], answers[positionDesc], Long.parseLong(answers[positionCreate]));
+        if (item.getComments().length != 0) {
+            int count = 0;
+            for (Comment comments : item.getComments()) {
+                outItem = (String.format("%s%s%s%s: %s", outItem, newLine, " Coment ", ++count, comments.getComment()));
+            }
+        }
+        String expectedResponse = String.format("-----%s%s%s-----%s%s%s=>%s%s%s-----%s", newLine, "Find all item's in tracker:", newLine, newLine, outItem, newLine, newLine, "The find all item's in tracker is successful.", newLine, newLine);
+        assertThat(out.toString(), is(expectedResponse));
+    }
+
+    /**
+     * Test method change Emulation menu item 2 -  Return to menu.
+     */
+    @Test
+    public void whenChangeUpdateItemAndReturnMenuThenReturnMenu() {
+        String[] answers = {"2", "id", "m"};
+        final Long create = 777L;
+        Item item = new Item("test", "test", create);
+        Tracker tracker = new Tracker();
+        tracker.add(item);
+        //answers[1] = String.valueOf(item.getId());
+        Input input = new StubInput(answers);
+        MenuTracker menuTracker = new MenuTracker(input, tracker);
+        menuTracker.fillActions("Hello! Welcome to the tracking program.");
+        int[] range = menuTracker.getActions();
+        int itemsMenu = input.ask("Select a menu item, to exit 'q' :> ", range);
+        input.ask("return menu");
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+        assertThat(out.toString(), is(""));
     }
 
     /**
@@ -133,7 +264,7 @@ public class MenuTrackerTest {
      * Test method change Emulation menu item 3 -  Delete item in tracker.
      */
     @Test
-    public void whenChangeDeleteItemWidthCommentThenGetItemsWithoutDeleteItem() {
+    public void whenChangeDeleteItemWithCommentThenGetItemsWithoutDeleteItem() {
         String[] answers = {"3", "id", "4"};
         final int size = 2;
         Item[] items = new Item[size];
@@ -172,6 +303,7 @@ public class MenuTrackerTest {
         String expectedResponse = String.format("-----%s%s%s-----%s%s%s=>%s%s%s-----%s", newLine, "Find all item's in tracker:", newLine, newLine, expectedResponseJoin, newLine, newLine, "The find all item's in tracker is successful.", newLine, newLine);
         assertThat(out.toString(), is(expectedResponse));
     }
+
 
     /**
      * Test method change Emulation menu item 4 -  Find all item's in tracker.
@@ -389,4 +521,23 @@ public class MenuTrackerTest {
         assertThat(out.toString(), is(expectedResponse));
     }
 
+
+    /**
+     * Test method change Emulation menu item 7 -  Add two comment in Item.
+     */
+    @Test
+    public void whenTryToAddCommentToNonExistentThenGetHandleError() {
+        String[] answers = {"7", "999"};
+        Tracker tracker = new Tracker();
+        Input input = new StubInput(answers);
+        MenuTracker menuTracker = new MenuTracker(input, tracker);
+        menuTracker.fillActions("Hello! Welcome to the tracking program.");
+        String itemsMenu = input.ask("Select a menu item, to exit, press 'q' :> ");
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+        menuTracker.select(Integer.parseInt(itemsMenu) - 1);
+        String expectedResponse = String.format("-----%s%s%s-----%s=>%s%s%s-----%s", newLine, "Add a new comment by Item in the tracker:", newLine, newLine, newLine, "Items with not found.", newLine, newLine);
+        assertThat(out.toString(), is(expectedResponse));
+
+    }
 }

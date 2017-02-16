@@ -3,6 +3,7 @@ package ru.spoddubnyak.start;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
+import java.util.NoSuchElementException;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -74,5 +75,17 @@ public class ValidateInputTest extends ConsoleInput {
         System.setIn(inputStream);
         assertThat(expectedResult, is(key));
     }
-}
 
+    /**
+     * Test method int ask emulate a variety of non-existent menu item.
+     */
+    @Test(expected = NoSuchElementException.class)
+    public void whenChangeDoesNotExistMenuItemThenGetError() {
+        final int[] range = {1, 2, 3, 4};
+        java.io.InputStream inputStream = System.in;
+        System.setIn(new ByteArrayInputStream("9".getBytes()));
+        ValidateInput validate = new ValidateInput();
+        validate.ask("Testing question: ", range);
+        System.setIn(inputStream);
+    }
+}

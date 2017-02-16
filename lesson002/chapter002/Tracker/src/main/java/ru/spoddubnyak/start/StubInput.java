@@ -39,12 +39,7 @@ public class StubInput implements Input {
     @Override
     public int ask(String question, int[] range) {
         String answer = this.answers[position++];
-        String newLine = System.getProperty("line.separator");
-        if (answer.equals("q")) {
-            System.out.printf("%s%s%s%s%s%s", "=>", newLine, "Completion of the work program.", newLine, "-----", newLine);
-            System.exit(0);
-        }
-        int key = ((Integer.valueOf(answer)) - 1);
+        int key = Integer.parseInt(answer) - 1;
         boolean exist = false;
         for (int value : range) {
             if (value == key) {

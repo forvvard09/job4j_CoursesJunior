@@ -28,7 +28,7 @@ public class Tracker {
     /**
      * property - max number for Create time.
      */
-    private final long maskCreation = 999999999L;
+    private static final long MASK_CREATION = 999999999L;
     /**
      * items store.
      */
@@ -44,7 +44,7 @@ public class Tracker {
      * @return - max number
      */
     public long getMascCreate() {
-        long mask = this.maskCreation;
+        long mask = this.MASK_CREATION;
         return mask;
     }
 
