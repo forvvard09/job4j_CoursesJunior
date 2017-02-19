@@ -16,13 +16,6 @@ public interface UserAction {
     int key();
 
     /**
-     * Method return information about action.
-     *
-     * @return key - number action
-     */
-    String showInfo();
-
-    /**
      * Method execute action.
      *
      * @param input   - work with the console
@@ -34,4 +27,11 @@ public interface UserAction {
      * Method out console  success message actions.
      */
     void showSuccess();
+
+    /**
+     * Method return information about action.
+     *
+     * @return key - number action
+     */
+    String showInfo();
 }

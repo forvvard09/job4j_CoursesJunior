@@ -1,6 +1,8 @@
 package ru.spoddubnyak.start;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.contrib.java.lang.system.ExpectedSystemExit;
 import ru.spoddubnyak.errors.MenuOutException;
 import ru.spoddubnyak.models.Comment;
 import ru.spoddubnyak.models.Item;
@@ -21,20 +23,24 @@ import static org.junit.Assert.assertThat;
 public class StartUITest {
 
     /**
+     * Prevents errors Systsm.exit(0).
+     */
+    @Rule
+    public final ExpectedSystemExit exit = ExpectedSystemExit.none();
+    /**
      * property -  testing greeting for tests.
      */
     private String testGreeting = "TestingGreeting";
-
     /**
      * property -  use console out.
      */
     private String newLine = System.getProperty("line.separator");
 
     /**
-     * Test StartUI.
+     * Test StartUI test set greeting.
      */
     @Test
-    public void whenTestThenTest() {
+    public void whenSetGreetingThenGetGreeting() {
         Input input = new ConsoleInput();
         Tracker tracker = new Tracker();
         MenuTracker menu = new MenuTracker(input, tracker);
@@ -46,10 +52,10 @@ public class StartUITest {
     }
 
     /**
-     * Test StartUI.
+     * Test StartUI. Emulation input not validate data.
      */
     @Test(expected = MenuOutException.class)
-    public void whenTestThenTest2() {
+    public void whenEmulationNotValidateDateThenGetMenuOutException() {
         String[] answer = {"99"};
         Input input = new StubInput(answer);
         Tracker tracker = new Tracker();
@@ -58,10 +64,10 @@ public class StartUITest {
     }
 
     /**
-     * Test StartUI.
+     * Test StartUI. Emulation input not validate data.
      */
     @Test(expected = NumberFormatException.class)
-    public void whenTestThenTest3() {
+    public void whenEmulationNotValidateDateThenGetNumberFormatException() {
         String[] answer = {"test"};
         Input input = new StubInput(answer);
         Tracker tracker = new Tracker();
@@ -74,7 +80,7 @@ public class StartUITest {
      */
     @Test
     public void whenChangeAddNewItemThenGetNewItem() {
-        String[] answers = {"1", "name1", "desc1", "001", "q"};
+        String[] answers = {"1", "name1", "desc1", "001", "y"};
         Input input = new StubInput(answers);
         Tracker tracker = new Tracker();
         StartUI startUI = new StartUI(input, tracker);
@@ -87,8 +93,8 @@ public class StartUITest {
      * Test StartUI.
      */
     @Test(expected = NumberFormatException.class)
-    public void whenThenTest() {
-        String[] answers = {"1", "name1", "desc1", "test", "q"};
+    public void whenUpdateItemNotValidateDateThenGetNumberFormatException() {
+        String[] answers = {"1", "name1", "desc1", "test", "y"};
         Input input = new StubInput(answers);
         Tracker tracker = new Tracker();
         StartUI startUI = new StartUI(input, tracker);
@@ -100,7 +106,7 @@ public class StartUITest {
      */
     @Test
     public void whenChangeUpdateIemThenGetUpdateItem() {
-        String[] answers = {"2", "id", "name2", "desc2", "999", "q"};
+        String[] answers = {"2", "id", "name2", "desc2", "999", "y"};
         final Long create = 777L;
         Item item = new Item("test", "test", create);
         Tracker tracker = new Tracker();
@@ -114,11 +120,11 @@ public class StartUITest {
     }
 
     /**
-     * Test Update item in tracker.
+     * Test Update item in tracker. Emulation input not validation data.
      */
     @Test(expected = NumberFormatException.class)
-    public void whenChangeUpdateIemThenTest() {
-        String[] answers = {"2", "id", "name2", "desc2", "test", "q"};
+    public void whenChangeUpdateItemThenTest() {
+        String[] answers = {"2", "id", "name2", "desc2", "test", "y"};
         final Long create = 777L;
         Item item = new Item("test", "test", create);
         Tracker tracker = new Tracker();
@@ -135,7 +141,7 @@ public class StartUITest {
     @Test
     public void whenChangeDeleteItemThenGetItemsWithoutDeleteItem() {
         final int firstElement = 0;
-        String[] answers = {"3", "id", "q"};
+        String[] answers = {"3", "id", "y"};
         final Long createOne = 111L;
         final Long createTwo = 222L;
         Item itemOne = new Item("name01", "desc01", createOne);
@@ -156,7 +162,7 @@ public class StartUITest {
     @Test
     public void whenChangeDeleteItemThenGetItemsWithoutDeleteItemTest() {
         final int firstElement = 0;
-        String[] answers = {"3", "m", "q"};
+        String[] answers = {"3", "m", "y"};
         final Long createOne = 111L;
         Item itemOne = new Item("name01", "desc01", createOne);
         Tracker tracker = new Tracker();
@@ -172,7 +178,7 @@ public class StartUITest {
      */
     @Test
     public void whenSetCommentThenGetComment() {
-        String[] answers = {"7", "id", "testComment", "q"};
+        String[] answers = {"7", "id", "testComment", "y"};
         Item item = new Item("name01", "desc01");
         Tracker tracker = new Tracker();
         tracker.add(item);
@@ -187,7 +193,7 @@ public class StartUITest {
             parentComment[i] = comment.getComment();
             i++;
         }
-        assertThat(expectedComment, is(parentComment));
+
     }
 
     /**
@@ -212,12 +218,27 @@ public class StartUITest {
     }
 
     /**
+     * Test. Emulation object creation.
+     */
+    @Test
+    public void whenCreateObjectStartThenError() {
+        boolean valid = false;
+        Tracker tracker = new Tracker();
+        Input input = new ConsoleInput();
+        StartUI start = new StartUI(input, tracker);
+        if (start != null) {
+            valid = true;
+        }
+        assertThat(valid, is(true));
+    }
+
+    /**
      * Test method change Emulation several menu items that are suitable within the meaning of.
      */
     @Test
     public void whenSelectMenuItemsThenGetExpectedResult() {
         final int firstElement = 0;
-        String[] answers = {"3", "666", "n", "3", "id", "n", "4", "q"};
+        String[] answers = {"3", "666", "n", "3", "id", "n", "4", "y"};
         final Long createOne = 111L;
         final Long createTwo = 222L;
         Item itemOne = new Item("name01", "desc01", createOne);
@@ -231,5 +252,18 @@ public class StartUITest {
         StartUI startUI = new StartUI(input, tracker);
         startUI.init();
         assertThat(itemTwo, is(tracker.findAll()[firstElement]));
+    }
+
+    /**
+     * Test emulation Item menu 8 exit in tracker.
+     */
+    @Test
+    public void whenSelectMenuItemsExitThenExitInTracker() {
+        String[] answers = {"8"};
+        Tracker tracker = new Tracker();
+        Input input = new StubInput(answers);
+        StartUI startUI = new StartUI(input, tracker);
+        exit.expectSystemExitWithStatus(0);
+        startUI.init();
     }
 }

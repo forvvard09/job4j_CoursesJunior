@@ -161,6 +161,14 @@ public class Tracker {
     }
 
     /**
+     * Method performs closing tracker.
+     *
+     */
+    public void exitTracker() {
+        System.exit(0);
+    }
+
+    /**
      * Method searches for a given parameter in the name.
      *
      * @param key - string to search by the name of the array

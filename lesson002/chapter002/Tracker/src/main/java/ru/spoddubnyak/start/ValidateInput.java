@@ -28,7 +28,7 @@ public class ValidateInput extends ConsoleInput {
             } catch (MenuOutException exMoe) {
                 //exMoe.printStackTrace();
                 System.out.println("-----");
-                System.out.println("Please select key from menu or press 'q' for Exit program.");
+                System.out.println("Error. Please select key from menu.");
                 System.out.println("-----");
             } catch (NumberFormatException exNfe) {
                 System.out.println("-----");

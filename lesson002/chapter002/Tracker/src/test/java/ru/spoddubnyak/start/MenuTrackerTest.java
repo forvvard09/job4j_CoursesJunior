@@ -538,6 +538,5 @@ public class MenuTrackerTest {
         menuTracker.select(Integer.parseInt(itemsMenu) - 1);
         String expectedResponse = String.format("-----%s%s%s-----%s=>%s%s%s-----%s", newLine, "Add a new comment by Item in the tracker:", newLine, newLine, newLine, "Items with not found.", newLine, newLine);
         assertThat(out.toString(), is(expectedResponse));
-
     }
 }

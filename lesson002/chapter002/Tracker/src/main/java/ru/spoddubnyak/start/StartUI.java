@@ -49,6 +49,29 @@ public class StartUI {
     public void init() {
         MenuTracker menu = new MenuTracker(this.input, this.tracker);
         menu.fillActions("Hello! Welcome to the tracking program.");
+        final int keysActionExit = 7;
+        UserAction exitTracker = new BaseAction(String.format("%s. %s", keysActionExit + 1, "Exit tracker.")) {
+
+            @Override
+            public void execute(Input input, Tracker tracker) {
+                showSuccess();
+                tracker.exitTracker();
+            }
+
+            @Override
+            public int key() {
+                return keysActionExit;
+            }
+
+            @Override
+            public void showSuccess() {
+                System.out.println("Exit Tracker.");
+            }
+
+
+        };
+
+        menu.addAction(exitTracker);
         int[] range = menu.getActions();
         do {
             System.out.print(NEWLINE);
@@ -56,6 +79,6 @@ public class StartUI {
             System.out.print(NEWLINE);
             menu.select(this.input.ask("Select a menu item :> ", range));
             System.out.println();
-        } while (!"q".equals(this.input.ask("To exit, press 'q' to proceed any other key :> ")));
+        } while (!"y".equals(this.input.ask("Exit Tracker? (y)Yes/(n)No :> ")));
     }
 }

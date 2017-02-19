@@ -12,21 +12,25 @@ import java.util.Optional;
  * @version 1.0
  * @since 19.01.2017
  */
-class EditItem implements UserAction {
+class EditItem extends BaseAction {
 
     /**
      * property - number action.
      */
     private static final int ACTION = 1;
 
-    @Override
-    public int key() {
-        return ACTION;
+    /**
+     * Constructor of EditItem.
+     *
+     * @param name name of action to show in menu
+     */
+    EditItem(String name) {
+        super(name);
     }
 
     @Override
-    public String showInfo() {
-        return String.format("%s. %s", this.key() + 1, "Update item in tracker.");
+    public int key() {
+        return ACTION;
     }
 
     @Override
@@ -37,15 +41,14 @@ class EditItem implements UserAction {
         int idItem = 0;
         do {
             try {
-                String answer = input.ask("Enter id Item or press 'm' to return to the menu :> ");
+                String answer = input.ask("Enter id Item or press 'm' to exit:> ");
                 if (answer.equals("m")) {
-                    System.out.println("Return menu.");
                     return;
                 }
                 idItem = Integer.parseInt(answer);
                 invalid = false;
             } catch (NumberFormatException nfe) {
-                System.out.printf("%s%s%s%s%s%s", "=>", newLine, "You entered incorrect data or 'm' to return to the menu.", newLine, "-----", newLine);
+                System.out.printf("%s%s%s%s%s%s", "=>", newLine, "You entered incorrect data, again.", newLine, "-----", newLine);
             }
         } while (invalid);
         if (tracker.findById(idItem) == null) {
@@ -75,7 +78,7 @@ class EditItem implements UserAction {
  * @version 1.0
  * @since 20.01.2017
  */
-class FindById implements UserAction {
+class FindById extends BaseAction {
 
     /**
      * property - number action.
@@ -87,14 +90,18 @@ class FindById implements UserAction {
      */
     private String newLine = System.getProperty("line.separator");
 
-    @Override
-    public int key() {
-        return ACTION;
+    /**
+     * Constructor of FindById.
+     *
+     * @param name name of action to show in menu
+     */
+    FindById(String name) {
+        super(name);
     }
 
     @Override
-    public String showInfo() {
-        return String.format("%s. %s", this.key() + 1, "Find item by id in tracker.");
+    public int key() {
+        return ACTION;
     }
 
     @Override
@@ -104,7 +111,7 @@ class FindById implements UserAction {
         boolean invalid = true;
         do {
             try {
-                String answer = input.ask("Enter id for find by id Item in Tracker or press 'm' return to menu. :> ");
+                String answer = input.ask("Enter id for find by id Item in Tracker, or press 'm' to exit:> ");
                 if (answer.equals("m")) {
                     System.out.println("Return menu.");
                     return;
@@ -112,7 +119,7 @@ class FindById implements UserAction {
                 id = Integer.parseInt(answer);
                 invalid = false;
             } catch (NumberFormatException nfe) {
-                System.out.printf("%s%s%s%s%s%s", "=>", newLine, "You entered incorrect data, again or 'm' to return to the menu.", newLine, "-----", newLine);
+                System.out.printf("%s%s%s%s%s%s", "=>", newLine, "You entered incorrect data, again.", newLine, "-----", newLine);
             }
         } while (invalid);
         Optional<Item> itemFindId = Optional.ofNullable(tracker.findById(id));
@@ -144,11 +151,11 @@ class FindById implements UserAction {
  * @version 1.0
  * @since 19.01.2017
  */
-public class MenuTracker {
+class MenuTracker {
     /**
      * property - the number of actions in the menu.
      */
-    private static final int COUNT_ACTIONS = 7;
+    private static final int COUNT_ACTIONS = 8;
     /**
      * property - newLine.
      */
@@ -157,6 +164,11 @@ public class MenuTracker {
      * property - greeting.
      */
     private String greeting;
+
+    /**
+     * property - position action in menu action.
+     */
+    private int position = 0;
 
     /**
      * property - specimen Tracker.
@@ -179,7 +191,7 @@ public class MenuTracker {
      * @param input   - console
      * @param tracekr - storage Items
      */
-    public MenuTracker(Input input, Tracker tracekr) {
+    MenuTracker(Input input, Tracker tracekr) {
         this.input = input;
         this.tracker = tracekr;
     }
@@ -193,6 +205,17 @@ public class MenuTracker {
         int count = 0;
         for (Comment comment : item.getComments()) {
             System.out.println(String.format("%s %s: %s", " Coment", ++count, comment.getComment()));
+        }
+    }
+
+    /**
+     * Method out console menu actions.
+     */
+    public void showMenu() {
+        for (UserAction action : this.actions) {
+            if (action != null) {
+                System.out.println(action.showInfo());
+            }
         }
     }
 
@@ -221,14 +244,23 @@ public class MenuTracker {
     public void fillActions(String greeting) {
         this.greeting = String.format("%s%s", greeting, newLine);
         System.out.println(this.greeting);
-        int index = 0;
-        this.actions[index++] = new AddItem();
-        this.actions[index++] = new EditItem();
-        this.actions[index++] = new DeleteItem();
-        this.actions[index++] = new FindAllItems();
-        this.actions[index++] = new FinByName();
-        this.actions[index++] = new FindById();
-        this.actions[index++] = new AddCommentItem();
+
+        this.actions[position++] = new MenuTracker.AddItem(String.format("%s. %s", position, "Add a new item in the tracker."));
+        this.actions[position++] = new EditItem(String.format("%s. %s", position, "Update item in tracker."));
+        this.actions[position++] = new MenuTracker.DeleteItem(String.format("%s. %s", position, "Delete item in tracker."));
+        this.actions[position++] = new FindAllItems(String.format("%s. %s", position, "Find all item's in tracker."));
+        this.actions[position++] = new MenuTracker.FinByName(String.format("%s. %s", position, "Find item by name in tracker."));
+        this.actions[position++] = new FindById(String.format("%s. %s", position, "Find item by id in tracker."));
+        this.actions[position++] = new MenuTracker.AddCommentItem(String.format("%s. %s", position, "Add a new comment in Item."));
+    }
+
+    /**
+     * Method adds a new action to the menu.
+     *
+     * @param actoin - adds a new action to the menu
+     */
+    public void addAction(UserAction actoin) {
+        this.actions[position++] = actoin;
     }
 
     /**
@@ -241,24 +273,13 @@ public class MenuTracker {
     }
 
     /**
-     * Method out console menu actions.
-     */
-    public void showMenu() {
-        for (UserAction action : this.actions) {
-            if (action != null) {
-                System.out.println(action.showInfo());
-            }
-        }
-    }
-
-    /**
      * Internal static class Execute actions "Find all item's in tracker.".
      *
      * @author Sergei Poddubnyak (forvvard09@gmail.com)
      * @version 1.0
      * @since 19.01.2017
      */
-    private static class FindAllItems implements UserAction {
+    private static class FindAllItems extends BaseAction {
         /**
          * property - number action.
          */
@@ -268,14 +289,18 @@ public class MenuTracker {
          */
         private int numberRecords = 0;
 
-        @Override
-        public int key() {
-            return ACTION;
+        /**
+         * Constructor of FindAllItems.
+         *
+         * @param name name of action to show in menu
+         */
+        private FindAllItems(String name) {
+            super(name);
         }
 
         @Override
-        public String showInfo() {
-            return String.format("%s. %s", this.key() + 1, "Find all item's in tracker.");
+        public int key() {
+            return ACTION;
         }
 
         @Override
@@ -311,7 +336,7 @@ public class MenuTracker {
      * @version 1.0
      * @since 19.01.2017
      */
-    private static class FinByName implements UserAction {
+    private static class FinByName extends BaseAction {
 
         /**
          * property - number action.
@@ -322,14 +347,18 @@ public class MenuTracker {
          */
         private int numberRecords = 0;
 
-        @Override
-        public int key() {
-            return ACTION;
+        /**
+         * Constructor of FindByName.
+         *
+         * @param name name of action to show in menu
+         */
+        private FinByName(String name) {
+            super(name);
         }
 
         @Override
-        public String showInfo() {
-            return String.format("%s. %s", this.key() + 1, "Find item by name in tracker.");
+        public int key() {
+            return ACTION;
         }
 
         @Override
@@ -367,21 +396,25 @@ public class MenuTracker {
      * @version 1.0
      * @since 19.01.2017
      */
-    private static class AddItem implements UserAction {
+    private static class AddItem extends BaseAction {
 
         /**
          * property - number action.
          */
         private static final int ACTION = 0;
 
-        @Override
-        public int key() {
-            return ACTION;
+        /**
+         * Constructor of AddItem.
+         *
+         * @param name name of action to show in menu
+         */
+        private AddItem(String name) {
+            super(name);
         }
 
         @Override
-        public String showInfo() {
-            return String.format("%s. %s", this.key() + 1, "Add a new item in the tracker.");
+        public int key() {
+            return ACTION;
         }
 
         @Override
@@ -410,20 +443,24 @@ public class MenuTracker {
      * @version 1.0
      * @since 19.01.2017
      */
-    private static class AddCommentItem implements UserAction {
+    private static class AddCommentItem extends BaseAction {
         /**
          * property - number action.
          */
         private static final int ACTION = 6;
 
-        @Override
-        public int key() {
-            return ACTION;
+        /**
+         * Constructor of AddCommentItem.
+         *
+         * @param name name of action to show in menu
+         */
+        private AddCommentItem(String name) {
+            super(name);
         }
 
         @Override
-        public String showInfo() {
-            return String.format("%s. %s", this.key() + 1, "Add a new comment in Item.");
+        public int key() {
+            return ACTION;
         }
 
         @Override
@@ -434,15 +471,14 @@ public class MenuTracker {
             do {
                 try {
 
-                    String answer = input.ask("Enter id for find by id Item in Tracker or press 'm' return to menu:> ");
+                    String answer = input.ask("Enter id for find by id Item in Tracker, or press 'm' to exit:> ");
                     if (answer.equals("m")) {
-                        System.out.println("Return menu.");
                         return;
                     }
                     id = Integer.parseInt(answer);
                     invalid = false;
                 } catch (NumberFormatException nfe) {
-                    System.out.printf("%s%s%s%s%s%s", "=>", newLine, "You entered incorrect data, again or 'm' to return to the menu.", newLine, "-----", newLine);
+                    System.out.printf("%s%s%s%s%s%s", "=>", newLine, "You entered incorrect data, again.", newLine, "-----", newLine);
                 }
             } while (invalid);
             Optional<Item> itemFindId = Optional.ofNullable(tracker.findById(id));
@@ -471,20 +507,24 @@ public class MenuTracker {
      * @version 1.0
      * @since 19.01.2017
      */
-    private static class DeleteItem implements UserAction {
+    private static class DeleteItem extends BaseAction {
         /**
          * property - number action.
          */
         private static final int ACTION = 2;
 
-        @Override
-        public int key() {
-            return ACTION;
+        /**
+         * Constructor of DeleteItem.
+         *
+         * @param name name of action to show in menu
+         */
+        private DeleteItem(String name) {
+            super(name);
         }
 
         @Override
-        public String showInfo() {
-            return String.format("%s. %s", this.key() + 1, "Delete item in tracker.");
+        public int key() {
+            return ACTION;
         }
 
         @Override
@@ -494,15 +534,14 @@ public class MenuTracker {
             int idItem = 0;
             do {
                 try {
-                    String answer = input.ask("Enter id Item delete or press 'm' for return to menu:> ");
+                    String answer = input.ask("Enter id Item delete, or press 'm' to exit:> ");
                     if (answer.equals("m")) {
-                        System.out.println("Return to menu.");
                         return;
                     }
                     idItem = Integer.parseInt(answer);
                     invalid = false;
                 } catch (NumberFormatException nfe) {
-                    System.out.printf("%s%s%s%s%s%s", "=>", newLine, "You entered incorrect data, agayn or press 'm' to return to the menu.", newLine, "-----", newLine);
+                    System.out.printf("%s%s%s%s%s%s", "=>", newLine, "You entered incorrect data, again.", newLine, "-----", newLine);
                 }
             } while (invalid);
             if (tracker.findById(idItem) == null) {
