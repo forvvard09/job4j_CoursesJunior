@@ -10,7 +10,7 @@ import static org.junit.Assert.assertThat;
  *
  * @author @author Sergei Poddubnyak (forvvard09@gmail.com)
  * @version 1.0
- * @since 19.01.2017
+ * @since 19.01.2017z
  */
 public class CommentTest {
 
