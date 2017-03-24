@@ -346,7 +346,7 @@ public class ChessBoardTest {
     }
 
     /**
-     * Test .
+     * Test emulation of erroneous motion.
      *
      * @throws ChessBoardException     if the cell is occupied by another figure.
      * @throws ImpossibleMoveException if the start is impossible.
@@ -354,7 +354,7 @@ public class ChessBoardTest {
      * @throws OccupiedWayException    - if Obstacle in the way.
      */
     @Test(expected = ImpossibleMoveException.class)
-    public void whenThenO() throws ChessBoardException, OccupiedWayException, ImpossibleMoveException, FigureNotFoundException {
+    public void whenErrorMoveOneThenGetImpossibleMoveException() throws ChessBoardException, OccupiedWayException, ImpossibleMoveException, FigureNotFoundException {
         String nameCellStart = "A1";
         String nameCellFinish = "A8";
         ChessBoard board = new ChessBoard();
@@ -368,7 +368,7 @@ public class ChessBoardTest {
     }
 
     /**
-     * Test .
+     * Test emulation of erroneous motion.
      *
      * @throws ChessBoardException     if the cell is occupied by another figure.
      * @throws ImpossibleMoveException if the start is impossible.
@@ -376,7 +376,7 @@ public class ChessBoardTest {
      * @throws OccupiedWayException    - if Obstacle in the way.
      */
     @Test(expected = ImpossibleMoveException.class)
-    public void whenThenOn() throws ChessBoardException, OccupiedWayException, ImpossibleMoveException, FigureNotFoundException {
+    public void whenErrorMoveTwoThenGetImpossibleMoveException() throws ChessBoardException, OccupiedWayException, ImpossibleMoveException, FigureNotFoundException {
         String nameCellStart = "E4";
         String nameCellFinish = "B8";
         ChessBoard board = new ChessBoard();
@@ -390,7 +390,7 @@ public class ChessBoardTest {
     }
 
     /**
-     * Test .
+     * Test emulation of erroneous motion.
      *
      * @throws ChessBoardException     if the cell is occupied by another figure.
      * @throws ImpossibleMoveException if the start is impossible.
@@ -398,7 +398,7 @@ public class ChessBoardTest {
      * @throws OccupiedWayException    - if Obstacle in the way.
      */
     @Test(expected = ImpossibleMoveException.class)
-    public void whenThenOne() throws ChessBoardException, OccupiedWayException, ImpossibleMoveException, FigureNotFoundException {
+    public void whenErrorMoveThreeThenGetImpossibleMoveException() throws ChessBoardException, OccupiedWayException, ImpossibleMoveException, FigureNotFoundException {
         String nameCellStart = "B5";
         String nameCellFinish = "B1";
         ChessBoard board = new ChessBoard();
@@ -412,7 +412,7 @@ public class ChessBoardTest {
     }
 
     /**
-     * Test .
+     * Test emulation of erroneous motion.
      *
      * @throws ChessBoardException     if the cell is occupied by another figure.
      * @throws ImpossibleMoveException if the start is impossible.
@@ -420,7 +420,7 @@ public class ChessBoardTest {
      * @throws OccupiedWayException    - if Obstacle in the way.
      */
     @Test(expected = ImpossibleMoveException.class)
-    public void whenThenOnet() throws ChessBoardException, OccupiedWayException, ImpossibleMoveException, FigureNotFoundException {
+    public void whenErrorMoveFourThenGetImpossibleMoveException() throws ChessBoardException, OccupiedWayException, ImpossibleMoveException, FigureNotFoundException {
         String nameCellStart = "B3";
         String nameCellFinish = "B7";
         ChessBoard board = new ChessBoard();
@@ -434,7 +434,7 @@ public class ChessBoardTest {
     }
 
     /**
-     * Test .
+     * Test emulation of erroneous motion.
      *
      * @throws ChessBoardException     if the cell is occupied by another figure.
      * @throws ImpossibleMoveException if the start is impossible.
@@ -442,7 +442,7 @@ public class ChessBoardTest {
      * @throws OccupiedWayException    - if Obstacle in the way.
      */
     @Test(expected = ImpossibleMoveException.class)
-    public void whenThenOnett() throws ChessBoardException, OccupiedWayException, ImpossibleMoveException, FigureNotFoundException {
+    public void whenErrorMovefiveThenGetImpossibleMoveException() throws ChessBoardException, OccupiedWayException, ImpossibleMoveException, FigureNotFoundException {
         String nameCellStart = "D6";
         String nameCellFinish = "A2";
         ChessBoard board = new ChessBoard();
