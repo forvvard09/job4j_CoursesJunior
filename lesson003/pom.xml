@@ -1,0 +1,17 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>lesson003</groupId>
+    <artifactId>lesson003</artifactId>
+    <name>lesson003</name>
+    <packaging>pom</packaging>
+    <version>1.0.0</version>
+
+    <parent>
+        <groupId>ru.spoddubnyak</groupId>
+        <artifactId>job4j_CoursesJunior</artifactId>
+        <version>1.0.0</version>
+    </parent>
+    <modules>
+        <module>chapter001</module>
+    </modules>
+</project>

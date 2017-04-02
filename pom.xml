@@ -7,6 +7,7 @@
     <modules>
         <module>lesson001</module>
         <module>lesson002</module>
+        <module>lesson003</module>
     </modules>
 
     <properties>
