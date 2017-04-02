@@ -46,8 +46,8 @@ public class PerfomanceCollections {
         Iterator iterator = collection.iterator();
         for (int i = 0; i < amount; i++) {
             if (iterator.hasNext()) {
-                iterator.remove();
                 iterator.next();
+                iterator.remove();
             }
         }
         return System.currentTimeMillis() - startTime;
