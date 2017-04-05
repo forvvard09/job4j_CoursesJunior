@@ -1,0 +1,12 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>task03</groupId>
+    <artifactId>task03</artifactId>
+    <name>ConvertList</name>
+    <version>1.0.0</version>
+    <parent>
+        <groupId>chapter001</groupId>
+        <artifactId>chapter001</artifactId>
+        <version>1.0.0</version>
+    </parent>
+</project>
