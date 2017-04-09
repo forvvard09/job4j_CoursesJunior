@@ -2,6 +2,7 @@ package ru.spoddubnyak;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -80,5 +81,29 @@ public class ConvertListTest {
         final int[][] expectedArray = {{1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {0}, {0}, {0}, {0}, {0}};
         final int ROWS = 15;
         assertThat(expectedArray, is(new ConvertList().toArrayByIterator(TEST_LIST, ROWS)));
+    }
+
+    /**
+     * Test .
+     */
+    @Test
+    public void whenThen() {
+        List list = new ArrayList<int[]>();
+        list.add(new int[]{1, 2});
+        list.add(new int[]{3, 4, 5, 6, 7, 8});
+        List<Integer> expectedList = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8);
+        assertThat(expectedList, is(new ConvertList().convert(list)));
+    }
+
+    /**
+     * Test .
+     */
+    @Test
+    public void whenThenTwo() {
+        List list = new ArrayList<int[]>();
+        list.add(new int[]{5, 6});
+        list.add(new int[]{1, 2, 3, 4, 4, 5});
+        List<Integer> expectedList = Arrays.asList(5, 6, 1, 2, 3, 4, 4, 5);
+        assertThat(expectedList, is(new ConvertList().convert(list)));
     }
 }

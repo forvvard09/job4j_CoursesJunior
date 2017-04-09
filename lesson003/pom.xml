@@ -13,5 +13,6 @@
     </parent>
     <modules>
         <module>chapter001</module>
+        <module>chapter002</module>
     </modules>
 </project>
