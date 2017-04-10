@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>task03</groupId>
     <artifactId>task03</artifactId>
-    <name>ConvertList</name>
+    <name>UserConverting</name>
     <version>1.0.0</version>
 
     <parent>

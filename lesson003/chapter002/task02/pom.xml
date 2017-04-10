@@ -1,0 +1,13 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>task02</groupId>
+    <artifactId>task02</artifactId>
+    <name>UserConvertHashMap</name>
+    <version>1.0.0</version>
+
+    <parent>
+        <groupId>chapter002</groupId>
+        <artifactId>chapter002</artifactId>
+        <version>1.0.0</version>
+    </parent>
+</project>
