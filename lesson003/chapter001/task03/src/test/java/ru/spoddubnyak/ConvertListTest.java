@@ -84,26 +84,30 @@ public class ConvertListTest {
     }
 
     /**
-     * Test .
+     * Test One method convert List<int[]> to List<Integer>,  Different array sizes.
      */
     @Test
-    public void whenThen() {
+    public void whenDifferentSizesArraysThenExpectedCollections() {
         List list = new ArrayList<int[]>();
-        list.add(new int[]{1, 2});
-        list.add(new int[]{3, 4, 5, 6, 7, 8});
-        List<Integer> expectedList = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8);
+        final int[] oneArray = new int[]{1, 2, 3, 4};
+        final int[] twoArray = new int[]{5, 6, 7, 8};
+        list.add(oneArray);
+        list.add(twoArray);
+        final List<Integer> expectedList = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8);
         assertThat(expectedList, is(new ConvertList().convert(list)));
     }
 
     /**
-     * Test .
+     * Test Two method convert List<int[]> to List<Integer>, Same array sizes.
      */
     @Test
-    public void whenThenTwo() {
+    public void whenSametSizesArraysThenExpectedCollections() {
         List list = new ArrayList<int[]>();
-        list.add(new int[]{5, 6});
-        list.add(new int[]{1, 2, 3, 4, 4, 5});
-        List<Integer> expectedList = Arrays.asList(5, 6, 1, 2, 3, 4, 4, 5);
+        final int[] oneArray = new int[]{5, 6};
+        final int[] twoArray = new int[]{1, 2, 3, 4, 4, 5};
+        list.add(oneArray);
+        list.add(twoArray);
+        final List<Integer> expectedList = Arrays.asList(5, 6, 1, 2, 3, 4, 4, 5);
         assertThat(expectedList, is(new ConvertList().convert(list)));
     }
 }

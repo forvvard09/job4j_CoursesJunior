@@ -90,19 +90,18 @@ public class ConvertList {
     }
 
     /**
-     * Method converts the collection List into a two-dimensional array consisting of rows lines with an iterator.
+     * Method converts the collection List<int[]> in colection List<Integer>.
      *
-     * @param list collection List
-     * @return coll
+     * @param list List<int[]>
+     * @return list List<Inteher>
      */
     public List<Integer> convert(List<int[]> list) {
         List<Integer> arrayToList = new ArrayList<>();
-        for (int[] Array : list) {
-            for (int elementArray : Array) {
+        for (int[] array : list) {
+            for (int elementArray : array) {
                 arrayToList.add(elementArray);
             }
         }
         return arrayToList;
     }
 }
-
