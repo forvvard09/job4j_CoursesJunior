@@ -31,36 +31,6 @@ public class ConvertList {
     }
 
     /**
-     * Method converts the collection List into a two-dimensional array consisting of rows lines.
-     *
-     * @param list collection List
-     * @param rows number of lines in a two-dimensional array
-     * @return array result array
-     */
-    public int[][] toArray(List<Integer> list, int rows) {
-        int lengthList = list.size();
-        int column;
-        if (lengthList % rows != 0) {
-            column = lengthList / rows + 1;
-        } else {
-            column = lengthList / rows;
-        }
-        int[][] array = new int[rows][column];
-        int index = 0;
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < column; j++) {
-                if (index < lengthList) {
-                    array[i][j] = list.get(index);
-                    index++;
-                } else {
-                    array[i][j] = 0;
-                }
-            }
-        }
-        return array;
-    }
-
-    /**
      * Method converts the collection List into a two-dimensional array consisting of rows lines with an iterator.
      *
      * @param list collection List

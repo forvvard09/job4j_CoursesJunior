@@ -22,6 +22,7 @@ public class ConvertListTest {
      */
     private static final List<Integer> TEST_LIST = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
+
     /**
      * Test method convert two-dimensional array into a collection List.
      */
@@ -30,26 +31,6 @@ public class ConvertListTest {
         final int[][] testArray = {{1, 2, 3, 4, 5}, {6, 7, 8, 9, 10}, {11, 12, 13, 14, 15}, {16, 17, 18, 19, 20}};
         final List<Integer> expectedList = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20);
         assertThat(expectedList, is(new ConvertList().toList(testArray)));
-    }
-
-    /**
-     * Test One method convert a collection List to two-dimensional.
-     */
-    @Test
-    public void whenConvertListThenGetTwoDimensionalArrayOne() {
-        final int[][] expectedArray = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}, {10, 0, 0}};
-        final int ROWS = 4;
-        assertThat(expectedArray, is(new ConvertList().toArray(TEST_LIST, ROWS)));
-    }
-
-    /**
-     * Test Two method convert a collection List to two-dimensional.
-     */
-    @Test
-    public void whenConvertListThenGetTwoDimensionalArrayTwo() {
-        final int[][] expectedArray = {{1, 2}, {3, 4}, {5, 6}, {7, 8}, {9, 10}};
-        final int ROWS = 5;
-        assertThat(expectedArray, is(new ConvertList().toArray(TEST_LIST, ROWS)));
     }
 
     /**
