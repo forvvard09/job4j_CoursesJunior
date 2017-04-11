@@ -1,6 +1,6 @@
 package ru.spoddubnyak.models;
 
-import ru.spoddubnyak.start.RequiredSize;
+import java.util.ArrayList;
 
 /**
  * Class class storage of the massif of the records Item and performance of actions with this massif.
@@ -30,7 +30,7 @@ public class Item {
     /**
      * property - comments for Item.
      */
-    private Comment[] comments = new Comment[2];
+    private ArrayList<Comment> comments = new ArrayList<Comment>(2);
 
     /**
      * property - positionComments.
@@ -168,11 +168,7 @@ public class Item {
      * @param comment - new comment
      */
     public void addComment(Comment comment) {
-        if (this.comments.length < commentPosition + 1) {
-            RequiredSize requiredSize = new RequiredSize();
-            this.comments = requiredSize.increaseSize(this.comments);
-        }
-        this.comments[commentPosition++] = comment;
+        this.comments.add(commentPosition++, comment);
 
     }
 
@@ -180,7 +176,7 @@ public class Item {
      * Method delete comment object.
      */
     public void delComments() {
-        this.comments = null;
+        this.comments.clear();
     }
 
     /**
@@ -188,10 +184,10 @@ public class Item {
      *
      * @return Comment[] - array comments
      */
-    public Comment[] getComments() {
-        Comment[] result = new Comment[this.commentPosition];
+    public ArrayList<Comment> getComments() {
+        ArrayList<Comment> result = new ArrayList<>(this.commentPosition);
         for (int i = 0; i != this.commentPosition; i++) {
-            result[i] = comments[i];
+            result.add(i, this.comments.get(i));
         }
         return result;
     }

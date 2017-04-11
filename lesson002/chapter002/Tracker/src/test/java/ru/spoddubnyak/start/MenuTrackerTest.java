@@ -198,7 +198,7 @@ public class MenuTrackerTest {
         final int positionDesc = 3;
         final int positionCreate = 4;
         String outItem = String.format("%s--%s--%s--%s", itemGetId[0].getId(), answers[positionName], answers[positionDesc], Long.parseLong(answers[positionCreate]));
-        if (item.getComments().length != 0) {
+        if (item.getComments().size() != 0) {
             int count = 0;
             for (Comment comments : item.getComments()) {
                 outItem = (String.format("%s%s%s%s: %s", outItem, newLine, " Coment ", ++count, comments.getComment()));
@@ -291,7 +291,7 @@ public class MenuTrackerTest {
         int i = 0;
         for (Item item : tracker.findAll()) {
             expectedItems[i] = String.format("%s--%s--%s--%s", items[i].getId(), items[i].getName(), items[i].getDescription(), items[i].getCreate());
-            if (items[i].getComments().length != 0) {
+            if (items[i].getComments().size() != 0) {
                 int count = 0;
                 for (Comment comments : item.getComments()) {
                     expectedItems[i] = (String.format("%s%s%s%s: %s", expectedItems[i], newLine, " Coment ", ++count, comments.getComment()));
@@ -425,7 +425,7 @@ public class MenuTrackerTest {
         menuTracker.select(Integer.parseInt(itemsMenu) - 1);
         String expectedItems;
         expectedItems = String.format("%s--%s--%s--%s", items[1].getId(), items[1].getName(), items[1].getDescription(), items[1].getCreate());
-        if (items[1].getComments().length != 0) {
+        if (items[1].getComments().size() != 0) {
             int count = 0;
             for (Comment comments : items[1].getComments()) {
                 expectedItems = (String.format("%s%s%s%s: %s", expectedItems, newLine, " Coment ", ++count, comments.getComment()));
@@ -464,7 +464,7 @@ public class MenuTrackerTest {
         int i = 0;
         for (Item item : tracker.findAll()) {
             expectedItems[i] = String.format("%s--%s--%s--%s", items[i].getId(), items[i].getName(), items[i].getDescription(), items[i].getCreate());
-            if (items[i].getComments().length != 0) {
+            if (items[i].getComments().size() != 0) {
                 int count = 0;
                 for (Comment comment : item.getComments()) {
                     expectedItems[i] = (String.format("%s%s%s%s: %s", expectedItems[i], newLine, " Coment ", ++count, comment.getComment()));
@@ -508,7 +508,7 @@ public class MenuTrackerTest {
         int i = 0;
         for (Item item : tracker.findAll()) {
             expectedItems[i] = String.format("%s--%s--%s--%s", items[i].getId(), items[i].getName(), items[i].getDescription(), items[i].getCreate());
-            if (items[i].getComments().length != 0) {
+            if (items[i].getComments().size() != 0) {
                 int count = 0;
                 for (Comment comment : item.getComments()) {
                     expectedItems[i] = (String.format("%s%s%s%s: %s", expectedItems[i], newLine, " Coment ", ++count, comment.getComment()));

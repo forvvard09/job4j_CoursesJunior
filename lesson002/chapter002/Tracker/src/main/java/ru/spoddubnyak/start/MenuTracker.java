@@ -129,7 +129,7 @@ class FindById extends BaseAction {
         } else {
             System.out.println("-----");
             System.out.printf("%s--%s--%s--%s%s", itemFindId.get().getId(), itemFindId.get().getName(), itemFindId.get().getDescription(), itemFindId.get().getCreate(), System.getProperty("line.separator"));
-            if (itemFindId.get().getComments().length != 0) {
+            if (itemFindId.get().getComments().size() != 0) {
                 MenuTracker.showComments(itemFindId.get());
             }
             showSuccess();
@@ -310,7 +310,7 @@ class MenuTracker {
             for (Item item : tracker.findAll()) {
                 numberRecords++;
                 System.out.printf("%s--%s--%s--%s%s", item.getId(), item.getName(), item.getDescription(), item.getCreate(), newLine);
-                if (item.getComments().length != 0) {
+                if (item.getComments().size() != 0) {
                     showComments(item);
                 }
             }
@@ -369,7 +369,7 @@ class MenuTracker {
             for (Item item : tracker.findByName(key)) {
                 numberRecords++;
                 System.out.printf("%s--%s--%s--%s%s", item.getId(), item.getName(), item.getDescription(), item.getCreate(), newLine);
-                if (item.getComments().length != 0) {
+                if (item.getComments().size() != 0) {
                     showComments(item);
                 }
             }
@@ -548,7 +548,7 @@ class MenuTracker {
                 System.out.printf("%s%s%s%s%s%s", "=>", newLine, "Items with not found.", newLine, "-----", newLine);
                 return;
             }
-            if (tracker.findById(idItem).getComments().length != 0) {
+            if (tracker.findById(idItem).getComments().size() != 0) {
                 tracker.findById(idItem).delComments();
             }
             tracker.delete(tracker.findById(idItem));

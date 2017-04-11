@@ -113,7 +113,7 @@ public class Tracker {
         for (int index = 0; index != items.size(); ++index) {
             Item item = this.items.get(index);
             if (item != null && item.getId() == itemNew.getId()) {
-                if (this.items.get(index).getComments().length != 0) {
+                if (this.items.get(index).getComments().size() != 0) {
                     for (Comment comment : this.items.get(index).getComments()) {
                         itemNew.addComment(comment);
                     }
