@@ -3,6 +3,7 @@ package ru.spoddubnyak.start;
 import ru.spoddubnyak.models.Comment;
 import ru.spoddubnyak.models.Item;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 /**
@@ -153,10 +154,6 @@ class FindById extends BaseAction {
  */
 class MenuTracker {
     /**
-     * property - the number of actions in the menu.
-     */
-    private static final int COUNT_ACTIONS = 8;
-    /**
      * property - newLine.
      */
     private static String newLine = System.getProperty("line.separator");
@@ -177,7 +174,7 @@ class MenuTracker {
     /**
      * property - items menu.
      */
-    private UserAction[] actions = new UserAction[COUNT_ACTIONS];
+    private ArrayList<UserAction> actions = new ArrayList<>();
 
 
     /**
@@ -225,7 +222,7 @@ class MenuTracker {
      * @return number actions
      */
     public int[] getActions() {
-        int[] getActions = new int[this.actions.length];
+        int[] getActions = new int[this.actions.size()];
         int i = 0;
         for (UserAction action : this.actions) {
             if (action != null) {
@@ -245,13 +242,13 @@ class MenuTracker {
         this.greeting = String.format("%s%s", greeting, newLine);
         System.out.println(this.greeting);
 
-        this.actions[position++] = new MenuTracker.AddItem(String.format("%s. %s", position, "Add a new item in the tracker."));
-        this.actions[position++] = new EditItem(String.format("%s. %s", position, "Update item in tracker."));
-        this.actions[position++] = new MenuTracker.DeleteItem(String.format("%s. %s", position, "Delete item in tracker."));
-        this.actions[position++] = new FindAllItems(String.format("%s. %s", position, "Find all item's in tracker."));
-        this.actions[position++] = new MenuTracker.FinByName(String.format("%s. %s", position, "Find item by name in tracker."));
-        this.actions[position++] = new FindById(String.format("%s. %s", position, "Find item by id in tracker."));
-        this.actions[position++] = new MenuTracker.AddCommentItem(String.format("%s. %s", position, "Add a new comment in Item."));
+        this.actions.add(position++, new MenuTracker.AddItem(String.format("%s. %s", position, "Add a new item in the tracker.")));
+        this.actions.add(position++, new EditItem(String.format("%s. %s", position, "Update item in tracker.")));
+        this.actions.add(position++, new MenuTracker.DeleteItem(String.format("%s. %s", position, "Delete item in tracker.")));
+        this.actions.add(position++, new FindAllItems(String.format("%s. %s", position, "Find all item's in tracker.")));
+        this.actions.add(position++, new MenuTracker.FinByName(String.format("%s. %s", position, "Find item by name in tracker.")));
+        this.actions.add(position++, new FindById(String.format("%s. %s", position, "Find item by id in tracker.")));
+        this.actions.add(position++, new MenuTracker.AddCommentItem(String.format("%s. %s", position, "Add a new comment in Item.")));
     }
 
     /**
@@ -260,7 +257,7 @@ class MenuTracker {
      * @param actoin - adds a new action to the menu
      */
     public void addAction(UserAction actoin) {
-        this.actions[position++] = actoin;
+        this.actions.add(position++, actoin);
     }
 
     /**
@@ -269,7 +266,7 @@ class MenuTracker {
      * @param key - number actions
      */
     public void select(int key) {
-        this.actions[key].execute(this.input, this.tracker);
+        this.actions.get(key).execute(this.input, this.tracker);
     }
 
     /**
