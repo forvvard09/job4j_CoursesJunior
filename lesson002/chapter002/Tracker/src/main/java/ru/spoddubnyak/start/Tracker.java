@@ -3,6 +3,7 @@ package ru.spoddubnyak.start;
 import ru.spoddubnyak.models.Comment;
 import ru.spoddubnyak.models.Item;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -30,9 +31,9 @@ public class Tracker {
      */
     private static final long MASK_CREATION = 999999999L;
     /**
-     * items store.
+     * ArrayList items - items store.
      */
-    private Item[] items = new Item[INITIALIZE];
+    private ArrayList<Item> items = new ArrayList<>(INITIALIZE);
     /**
      * element position for record in.
      */
@@ -56,11 +57,7 @@ public class Tracker {
      */
     public Item add(Item item) {
         item.setId(this.generationId());
-        if (this.position + 1 > this.items.length) {
-            RequiredSize requiredSize = new RequiredSize();
-            this.items = requiredSize.increaseSize(this.items);
-        }
-        this.items[position++] = item;
+        this.items.add(position++, item);
         return item;
     }
 
@@ -113,15 +110,15 @@ public class Tracker {
      * @param itemNew -  new item
      */
     public void update(Item itemNew) {
-        for (int index = 0; index != items.length; ++index) {
-            Item item = this.items[index];
+        for (int index = 0; index != items.size(); ++index) {
+            Item item = this.items.get(index);
             if (item != null && item.getId() == itemNew.getId()) {
-                if (this.items[index].getComments().length != 0) {
-                    for (Comment comment : this.items[index].getComments()) {
+                if (this.items.get(index).getComments().length != 0) {
+                    for (Comment comment : this.items.get(index).getComments()) {
                         itemNew.addComment(comment);
                     }
                 }
-                this.items[index] = itemNew;
+                this.items.add(index, itemNew);
                 break;
             }
         }
@@ -135,14 +132,8 @@ public class Tracker {
     public void delete(Item itemDelete) {
         int index = 0;
         index = getPosition(itemDelete);
-        this.items[index] = null;
+        this.items.remove(index);
         this.position--;
-        System.arraycopy(this.items, index + 1, this.items, index, this.items.length - (index + 1));
-        int quantityPos = (this.position == 0) ? 1 : this.position;
-        if (((this.items.length) / quantityPos) > 2) {
-            RequiredSize requiredSize = new RequiredSize();
-            this.items = requiredSize.removeEmpti(this.items);
-        }
     }
 
     /**
@@ -154,7 +145,7 @@ public class Tracker {
         Item[] result = new Item[this.position];
         for (int index = 0; index != this.position; index++) {
             if (this.items != null) {
-                result[index] = this.items[index];
+                result[index] = this.items.get(index);
             }
         }
         return result;
@@ -162,7 +153,6 @@ public class Tracker {
 
     /**
      * Method performs closing tracker.
-     *
      */
     public void exitTracker() {
         System.exit(0);
