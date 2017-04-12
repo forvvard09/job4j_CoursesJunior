@@ -1,4 +1,4 @@
-package spoddubnyak;
+package ru.spoddubnyak;
 
 import org.junit.Test;
 import ru.spoddubnyak.User;

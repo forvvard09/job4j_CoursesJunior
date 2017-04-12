@@ -13,8 +13,8 @@
     </parent>
 
     <modules>
-    <module>Tracker</module>
-    <module>task03-2</module>
+        <module>Tracker</module>
+        <module>task03-2</module>
         <module>Chess</module>
     </modules>
 </project>

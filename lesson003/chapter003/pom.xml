@@ -1,8 +1,8 @@
 <project>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>chapter002</groupId>
-    <artifactId>chapter002</artifactId>
-    <name>lesson003-chapter002</name>
+    <groupId>chapter003</groupId>
+    <artifactId>chapter003</artifactId>
+    <name>lesson003-chapter003</name>
     <version>1.0.0</version>
     <packaging>pom</packaging>
 
@@ -13,6 +13,6 @@
     </parent>
 
     <modules>
-        <module>task02</module>
+        <module>task01</module>
     </modules>
 </project>
