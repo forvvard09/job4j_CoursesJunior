@@ -71,4 +71,32 @@ public class User implements Comparable {
         User user = (User) o;
         return this.age - user.getAge();
     }
+
+    @Override
+    public String toString() {
+        return String.format("User: name %s, age %d}", name, age);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        User user = (User) o;
+        if (age != user.age) {
+            return false;
+        }
+        return name != null ? name.equals(user.name) : user.name == null;
+    }
+
+    @Override
+    public int hashCode() {
+        final int temp = 31;
+        int result = name != null ? name.hashCode() : 0;
+        result = temp * result + age;
+        return result;
+    }
 }
