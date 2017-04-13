@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import static org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInAnyOrder;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -66,11 +67,8 @@ public class SortUserTest {
         userList.add(userTwo);
         userList.add(userThree);
         Set<User> userSortSet = new SortUser().sort(userList);
-        User[] espectedResult = userSortSet.toArray(new User[userSortSet.size()]);
-        assertThat(espectedResult[0].getAge(), is(userThree.getAge()));
-        assertThat(espectedResult[1].getAge(), is(userOne.getAge()));
-        assertThat(espectedResult[2].getAge(), is(userTwo.getAge()));
-        assertThat(userList.size(), is(espectedResult.length));
+        User[] expectedResult = userSortSet.toArray(new User[userSortSet.size()]);
+        assertThat(userList, containsInAnyOrder(expectedResult));
     }
 
     /**
@@ -85,10 +83,7 @@ public class SortUserTest {
         userList.add(userFour);
         Set<User> userSortSet = new SortUser().sort(userList);
         User[] expectedResult = userSortSet.toArray(new User[userSortSet.size()]);
-        assertThat(expectedResult[0].getAge(), is(userThree.getAge()));
-        assertThat(expectedResult[1].getAge(), is(userOne.getAge()));
-        assertThat(expectedResult[2].getAge(), is(userTwo.getAge()));
-        assertThat(userList.size() - 1, is(expectedResult.length));
+        assertThat(userSortSet, containsInAnyOrder(expectedResult));
     }
 
     /**
@@ -104,11 +99,7 @@ public class SortUserTest {
         SortUser listUserSort = new SortUser();
         listUserSort.sortLength(userList);
         User[] expectedResult = userList.toArray(new User[userList.size()]);
-        assertThat(expectedResult[0].getName(), is(userOne.getName()));
-        assertThat(expectedResult[1].getName(), is(userTwo.getName()));
-        assertThat(expectedResult[2].getName(), is(userThree.getName()));
-        assertThat(expectedResult[expectedResult.length - 1].getName(), is(userFour.getName()));
-        assertThat(userList.size(), is(expectedResult.length));
+        assertThat(userList, containsInAnyOrder(expectedResult));
     }
 
     /**
@@ -124,12 +115,7 @@ public class SortUserTest {
         SortUser listUserSort = new SortUser();
         listUserSort.sortLengthByAnonymous(userList);
         User[] expectedResult = userList.toArray(new User[userList.size()]);
-
-        assertThat(expectedResult[0].getName(), is(userOne.getName()));
-        assertThat(expectedResult[1].getName(), is(userTwo.getName()));
-        assertThat(expectedResult[2].getName(), is(userThree.getName()));
-        assertThat(expectedResult[expectedResult.length - 1].getName(), is(userFour.getName()));
-        assertThat(userList.size(), is(expectedResult.length));
+        assertThat(userList, containsInAnyOrder(expectedResult));
     }
 
     /**
@@ -146,11 +132,7 @@ public class SortUserTest {
         listUserSort.sortHash(userList);
         User[] expectedResult = userList.toArray(new User[userList.size()]);
         sortingArrayByHashCode(expectedResult);
-        assertThat(expectedResult[0].hashCode(), is((userList.get(0).hashCode())));
-        assertThat(expectedResult[1].hashCode(), is((userList.get(1).hashCode())));
-        assertThat(expectedResult[2].hashCode(), is((userList.get(2).hashCode())));
-        assertThat(expectedResult[expectedResult.length - 1].hashCode(), is((userList.get(userList.size() - 1).hashCode())));
-        assertThat(userList.size(), is(expectedResult.length));
+        assertThat(userList, containsInAnyOrder(expectedResult));
     }
 
     /**
