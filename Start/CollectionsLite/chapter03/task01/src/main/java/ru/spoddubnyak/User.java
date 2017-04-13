@@ -7,7 +7,7 @@ package ru.spoddubnyak;
  * @version 1.0
  * @since 12.04.2017
  */
-public class User implements Comparable<User> {
+public class User implements Comparable {
 
     /**
      * property name User.
@@ -67,7 +67,8 @@ public class User implements Comparable<User> {
     }
 
     @Override
-    public int compareTo(User user) {
+    public int compareTo(Object o) {
+        User user = (User) o;
         return this.age - user.getAge();
     }
 }

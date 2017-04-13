@@ -1,6 +1,12 @@
 package ru.spoddubnyak;
 
-import java.util.*;
+
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+
 
 /**
  * Class sorting User.
@@ -48,11 +54,35 @@ public class SortUser {
         return userList;
     }
 
+    /**
+     * Method Sorts the list of users by length name, using an anonymous class  and returns it to sort List.
+     *
+     * @param userList - a list of users
+     * @return List - sorting list users
+     */
     public List<User> sortLengthByAnonymous(List<User> userList) {
         Collections.sort(userList, new Comparator<User>() {
             @Override
             public int compare(User o1, User o2) {
                 return o1.getName().length() - o2.getName().length();
+            }
+        });
+        return userList;
+    }
+
+    /**
+     * Method Sorts the list of users by hash code, using an anonymous class  and returns it to sort List.
+     *
+     * @param userList - a list of users
+     * @return List - sorting list users
+     */
+    public List<User> sortHashByAnonymous(List<User> userList) {
+        Collections.sort(userList, new Comparator() {
+            @Override
+            public int compare(Object o1, Object o2) {
+                User user1 = (User) o1;
+                User user2 = (User) o2;
+                return user1.hashCode() - user2.hashCode();
             }
         });
         return userList;
