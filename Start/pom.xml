@@ -1,8 +1,8 @@
 <project>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>lesson003</groupId>
-    <artifactId>lesson003</artifactId>
-    <name>lesson003</name>
+    <groupId>Start</groupId>
+    <artifactId>Start</artifactId>
+    <name>Start</name>
     <packaging>pom</packaging>
     <version>1.0.0</version>
 
@@ -11,7 +11,9 @@
         <artifactId>job4j_CoursesJunior</artifactId>
         <version>1.0.0</version>
     </parent>
+
     <modules>
-        <module>chapter003</module>
+        <module>CollectionsLite</module>
     </modules>
+
 </project>
