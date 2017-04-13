@@ -73,6 +73,34 @@ public class SortUserTest {
         assertThat(espectedResult[2].getAge(), is(userTwo.getAge()));
         assertThat(userList.size() - 1, is(espectedResult.length));
     }
+
+    @Test
+    public void whenThen() {
+        List<User> userList = new ArrayList<>();
+        userList.add(userThree);
+        userList.add(userTwo);
+        userList.add(userOne);
+        userList.add(userFour);
+        SortUser listUserSort = new SortUser();
+        listUserSort.sortLength(userList);
+        for (User user : userList) {
+            System.out.println(String.format("%s %s", user.getName(), user.getAge()));
+        }
+    }
+
+    @Test
+    public void whenThenTwo() {
+        List<User> userList = new ArrayList<>();
+        userList.add(userThree);
+        userList.add(userTwo);
+        userList.add(userOne);
+        userList.add(userFour);
+        SortUser listUserSort = new SortUser();
+        //listUserSort.sortLengthByAnonymous(userList);
+        for (User user : userList) {
+            System.out.println(String.format("%s %s", user.getName(), user.getAge()));
+        }
+    }
 }
 
 

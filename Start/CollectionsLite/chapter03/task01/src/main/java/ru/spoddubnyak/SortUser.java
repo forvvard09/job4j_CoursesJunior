@@ -1,9 +1,6 @@
 package ru.spoddubnyak;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * Class sorting User.
@@ -29,24 +26,35 @@ public class SortUser {
     }
 
     /**
-     * Method Sorts the list of users by hash code age and returns it to TreeSet.
+     * Method Sorts the list of users by hash code  and returns it to List.
      *
      * @param userList - a list of users
-     * @return listUserResult - sorting list users
+     * @return List - sorting list users
      */
     public List<User> sortHash(List<User> userList) {
-        ArrayList<User> listUserResult = new ArrayList<>();
-        return listUserResult;
+        Collections.sort(userList, new UserHashComporator());
+        return userList;
 
     }
 
     /**
-     * Method Sorts the list of users by hash code age and returns it to TreeSet.
+     * Method Sorts the list of users by length name users and returns it to List.
      *
      * @param userList - a list of users
-     * @return ArrayList - sorting list users
+     * @return List - sorting list users
      */
     public List<User> sortLength(List<User> userList) {
-        return new ArrayList<>();
+        Collections.sort(userList, new UserLengthNameComporator());
+        return userList;
+    }
+
+    public List<User> sortLengthByAnonymous(List<User> userList) {
+        Collections.sort(userList, new Comparator<User>() {
+            @Override
+            public int compare(User o1, User o2) {
+                return o1.getName().length() - o2.getName().length();
+            }
+        });
+        return userList;
     }
 }
