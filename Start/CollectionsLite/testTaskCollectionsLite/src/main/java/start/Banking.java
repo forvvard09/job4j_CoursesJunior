@@ -6,12 +6,10 @@ import errors.UsersException;
 import model.Account;
 import model.User;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Iterator;
-import java.util.List;
 import java.util.ArrayList;
-
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -60,12 +58,10 @@ public class Banking {
      * @throws UsersException - not find User in mapBanking
      */
     public void deleteUser(User user) throws UsersException {
-        for (Iterator<User> iteraor = mapBanking.keySet().iterator(); iteraor.hasNext();) {
-            if (user.equals(iteraor.next())) {
-                iteraor.remove();
-            } else {
-                throw new UsersException("User is not found.");
-            }
+        if (this.mapBanking.containsKey(user)) {
+            this.mapBanking.remove(user);
+        } else {
+            throw new UsersException("User is not found.");
         }
     }
 
@@ -74,11 +70,11 @@ public class Banking {
      *
      * @param user    - object User, new user
      * @param account - object Account, new acount
-     * @throws UsersException - not find User in mapBanking
+     * @throws UsersException   - not find User in mapBanking
      * @throws AccountException - not find a in mapBanking
      */
     public void addAccountToUser(User user, Account account) throws UsersException, AccountException {
-        if (!(account == null))  {
+        if (!(account == null)) {
             if (this.mapBanking.containsKey(user)) {
                 this.mapBanking.get(user).add(account);
             } else {
@@ -129,18 +125,16 @@ public class Banking {
      * @param srcAccount - account to be transferred
      * @param dstUser    - the user whose account is to be paid
      * @param dstAccount - account to be transfer for
-     * @param amount -  transfer amount
+     * @param amount     -  transfer amount
      * @return validTransfer - true transfer is possible, false is not possible
-     * @throws UsersException - not find User in mapBanking
+     * @throws UsersException   - not find User in mapBanking
      * @throws AccountException - not find a in mapBanking
      */
     public boolean transferMoney(User srcUser, Account srcAccount, User dstUser, Account dstAccount, double amount) throws UsersException, AccountException {
         boolean validTransfer = false;
-        if (this.mapBanking.containsKey(srcUser) || this.mapBanking.containsKey(dstUser)) {
-            if (this.mapBanking.get(srcUser).contains(srcAccount) || this.mapBanking.get(srcUser).contains(dstAccount)) {
-                if (srcAccount.getValue() - amount >= 0) {
-                    validTransfer = true;
-                }
+        if (this.mapBanking.containsKey(srcUser) && this.mapBanking.containsKey(dstUser)) {
+            if (this.mapBanking.get(srcUser).contains(srcAccount) && this.mapBanking.get(srcUser).contains(dstAccount)) {
+                validTransfer =  srcAccount.getValue() - amount >= 0 ? true : false;
             } else {
                 throw new AccountException("One or a second account not found.");
             }
