@@ -5,15 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>chapter01</groupId>
-        <artifactId>chapter01</artifactId>
+        <groupId>CollectionsLite</groupId>
+        <artifactId>CollectionsLite</artifactId>
         <version>1.0.0</version>
     </parent>
 
-    <groupId>chapter01</groupId>
-    <artifactId>task03</artifactId>
-    <name>start-CollectionsLite-сhapter01-task03</name>
+    <groupId>CollectionsLite</groupId>
+    <artifactId>testTaskCollectionLite</artifactId>
+    <name>testTaskCollectionLite</name>
     <version>1.0.0</version>
-
-    
 </project>

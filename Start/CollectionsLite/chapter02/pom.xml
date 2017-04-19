@@ -12,7 +12,7 @@
 
     <groupId>CollectionsLite</groupId>
     <artifactId>chapter02</artifactId>
-    <name>Start-CollectionsLite-chapter02</name>
+    <name>start-CollectionsLite-chapter02</name>
     <version>1.0.0</version>
     <packaging>pom</packaging>
 
