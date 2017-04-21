@@ -45,4 +45,43 @@ public class UserTest {
         assertThat(user.getName(), is(expectedName));
         assertThat(user.getPassport(), is(expectedPassport));
     }
+
+    /**
+     * Test equals for User.
+     */
+    @Test
+    public void whenNotEqualsThenExpectedFalse() {
+        User user = new User(NAME_TEST, PASSPORT_TEST);
+        assertThat(user.equals(null), is(false));
+    }
+
+    /**
+     * Test equals for User.
+     */
+    @Test
+    public void whenEqualsThenExpectedTrue() {
+        User userOne = new User(NAME_TEST, PASSPORT_TEST);
+        User userTwo = new User(NAME_TEST, PASSPORT_TEST);
+        assertThat(userOne.equals(userTwo), is(true));
+    }
+
+    /**
+     * Test equals for User.
+     */
+    @Test
+    public void whenFieldPassportEqualsThenExpectedFalse() {
+        User userOne = new User(NAME_TEST, PASSPORT_TEST);
+        final int passportTest = 0;
+        User userTwo = new User(NAME_TEST, passportTest);
+        assertThat(userOne.equals(userTwo), is(false));
+    }
+
+    /**
+     * Test hashCode for User.
+     */
+    @Test
+    public void whenHashCodeThenExpectedresult() {
+        User user = new User(null, 0);
+        assertThat(user.hashCode(), is(0));
+    }
 }

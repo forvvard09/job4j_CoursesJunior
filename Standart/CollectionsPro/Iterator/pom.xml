@@ -5,15 +5,20 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>chapter01</groupId>
-        <artifactId>chapter01</artifactId>
+        <groupId>CollectionsPro</groupId>
+        <artifactId>CollectionsPro</artifactId>
         <version>1.0.0</version>
     </parent>
 
-    <groupId>chapter01</groupId>
-    <artifactId>task02</artifactId>
-    <name>Start-CollectionsLite-сhapter01-task02</name>
+    <groupId>Iterator</groupId>
+    <artifactId>Iterator</artifactId>
+    <name>Standart-CollectionsPro-Iterator</name>
     <version>1.0.0</version>
+    <packaging>pom</packaging>
 
-    
+    <modules>
+        <module>task01</module>
+    </modules>
+
+
 </project>

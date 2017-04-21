@@ -65,5 +65,33 @@ public class Account {
         this.value = value;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
+        Account account = (Account) o;
+
+        if (Double.compare(account.value, value) != 0) {
+            return false;
+        }
+        return requisites == account.requisites;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        final int tempNumber = 31;
+        final int tempExpectedNumber = 32;
+        long temp;
+        temp = Double.doubleToLongBits(value);
+        result = (int) (temp ^ (temp >>> tempExpectedNumber));
+        result = tempNumber * result + (int) (requisites ^ (requisites >>> tempExpectedNumber));
+        return result;
+    }
 }

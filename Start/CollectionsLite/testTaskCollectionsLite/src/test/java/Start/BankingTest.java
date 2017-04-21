@@ -77,11 +77,11 @@ public class BankingTest {
      * Test error not find user for remove.
      * @throws UsersException - not find User in mapBanking
      */
-    @Test
+    @Test(expected = UsersException.class)
     public void whenDeleteNotFindUserThenGetErrorUsersException() throws UsersException {
         Banking banking = new Banking();
-        User user = new User(NAME, PASSPORT);
-        banking.deleteUser(user);
+        User userTwo = null;
+        banking.deleteUser(userTwo);
     }
 
     /**
@@ -158,7 +158,7 @@ public class BankingTest {
      * @throws AccountException - not find account in mapBanking
      */
     @Test
-    public void whenNotValidtransferThenGetFalse() throws UsersException, AccountException {
+    public void whenNotValidTransferThenGetFalse() throws UsersException, AccountException {
         Banking banking = new Banking();
         User userOne = new User(NAME, PASSPORT);
         Account accountOne = new Account(VALUE, REQUISITES);
@@ -170,5 +170,63 @@ public class BankingTest {
         banking.addAccountToUser(userTwo, accountTwo);
         boolean valid = banking.transferMoney(userOne, accountOne, userTwo, accountTwo, VALUE * VALUE);
         assertThat(valid, is(false));
+    }
+
+    /**
+     * Test calculates possible transfer of money from one account to another.
+     * @throws UsersException - not find User in mapBanking
+     * @throws AccountException - not find account in mapBanking
+     */
+    @Test(expected = AccountException.class)
+    public void whenNotAccountThenGetErrorAccountException() throws UsersException, AccountException {
+        Banking banking = new Banking();
+        User userOne = new User(NAME, PASSPORT);
+        Account accountOne = new Account(VALUE, REQUISITES);
+        User userTwo = new User(NAME, PASSPORT);
+        Account accountTwo = null;
+        banking.addUser(userOne);
+        banking.addAccountToUser(userOne, accountOne);
+        banking.addUser(userTwo);
+        banking.transferMoney(userOne, accountOne, userTwo, accountTwo, VALUE * VALUE);
+    }
+
+    /**
+     * Test calculates possible transfer of money from one account to another.
+     * @throws UsersException - not find User in mapBanking
+     * @throws AccountException - not find account in mapBanking
+     */
+    @Test(expected = UsersException.class)
+    public void whenNotAccountThenGetErrorUsersException() throws UsersException, AccountException {
+        Banking banking = new Banking();
+        User userOne = new User(NAME, PASSPORT);
+        Account accountOne = new Account(VALUE, REQUISITES);
+        User userTwo = new User(NAME, PASSPORT);
+        Account accountTwo = new Account(VALUE, REQUISITES);
+        final int testPassportError = 9999;
+        User userThree = new User(NAME, testPassportError);
+        banking.addUser(userOne);
+        banking.addAccountToUser(userOne, accountOne);
+        banking.addUser(userTwo);
+        banking.transferMoney(userOne, accountOne, userThree, accountTwo, VALUE * VALUE);
+    }
+
+    /**
+     * Test calculates possible transfer of money from one account to another.
+     * @throws UsersException - not find User in mapBanking
+     * @throws AccountException - not find account in mapBanking
+     */
+    @Test(expected = UsersException.class)
+    public void whenNotAccountThenGetErrorUsersExceptionTwo() throws UsersException, AccountException {
+        Banking banking = new Banking();
+        User userOne = new User(NAME, PASSPORT);
+        Account accountOne = new Account(VALUE, REQUISITES);
+        User userTwo = new User(NAME, PASSPORT);
+        Account accountTwo = new Account(VALUE, REQUISITES);
+        final int testErrorPassport = 9999;
+        User userThree = new User(NAME, testErrorPassport);
+        banking.addUser(userOne);
+        banking.addAccountToUser(userOne, accountOne);
+        banking.addUser(userTwo);
+        banking.transferMoney(userThree, accountOne, userOne, accountTwo, VALUE * VALUE);
     }
 }

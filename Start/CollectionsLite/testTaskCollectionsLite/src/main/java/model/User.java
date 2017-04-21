@@ -63,4 +63,30 @@ public class User {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        User user = (User) o;
+
+        if (passport != user.passport) {
+            return false;
+        }
+        return name != null ? name.equals(user.name) : user.name == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        final int tempNumber = 31;
+        int result = name != null ? name.hashCode() : 0;
+        result = tempNumber * result + passport;
+        return result;
+    }
 }

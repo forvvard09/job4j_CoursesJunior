@@ -45,4 +45,33 @@ public class AccountTest {
         assertThat(account.getValue(), is(expectedValue));
         assertThat(account.getRequisites(), is(expectedRequisites));
     }
+
+    /**
+     * Test equals for Account.
+     */
+    @Test
+    public void whenNotEqualsThenExpectedFalse() {
+        Account account = new Account(VALUE_TEST, REQUISITES_TEST);
+        assertThat(account.equals(null), is(false));
+    }
+
+    /**
+     * Test equals for Account.
+     */
+    @Test
+    public void whenEqualsThenExpectedTrue() {
+        Account accountOne = new Account(VALUE_TEST, REQUISITES_TEST);
+        Account accountTwo = new Account(VALUE_TEST, REQUISITES_TEST);
+        assertThat(accountOne.equals(accountTwo), is(true));
+    }
+
+    /**
+     * Test hashCode for Account.
+     */
+    @Test
+    public void whenHashCodeThenExpectedresult() {
+        Account accountOne = new Account(VALUE_TEST, REQUISITES_TEST);
+        Account accountTwo = new Account(VALUE_TEST, REQUISITES_TEST);
+        assertThat(accountOne.equals(accountTwo), is(true));
+    }
 }
