@@ -150,6 +150,8 @@ public class BankingTest {
         banking.addAccountToUser(userTwo, accountTwo);
         boolean valid = banking.transferMoney(userOne, accountOne, userTwo, accountTwo, VALUE);
         assertThat(valid, is(true));
+        assertThat(accountOne.getValue(), is(0.0));
+        assertThat(accountTwo.getValue(), is(VALUE * 2));
     }
 
     /**

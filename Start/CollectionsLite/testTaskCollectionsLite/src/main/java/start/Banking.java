@@ -134,7 +134,11 @@ public class Banking {
         boolean validTransfer = false;
         if (this.mapBanking.containsKey(srcUser) && this.mapBanking.containsKey(dstUser)) {
             if (this.mapBanking.get(srcUser).contains(srcAccount) && this.mapBanking.get(srcUser).contains(dstAccount)) {
-                validTransfer =  srcAccount.getValue() - amount >= 0 ? true : false;
+                if (srcAccount.getValue() - amount >= 0) {
+                    validTransfer = true;
+                    srcAccount.setValue(srcAccount.getValue() - amount);
+                    dstAccount.setValue(dstAccount.getValue() + amount);
+                }
             } else {
                 throw new AccountException("One or a second account not found.");
             }
