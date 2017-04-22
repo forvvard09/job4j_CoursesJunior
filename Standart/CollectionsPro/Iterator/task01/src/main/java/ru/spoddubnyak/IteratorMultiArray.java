@@ -1,3 +1,5 @@
+package ru.spoddubnyak;
+
 import java.util.Iterator;
 
 /**
