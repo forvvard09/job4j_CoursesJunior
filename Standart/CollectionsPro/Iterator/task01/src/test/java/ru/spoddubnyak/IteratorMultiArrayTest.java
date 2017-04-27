@@ -2,10 +2,8 @@ package ru.spoddubnyak;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
-
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.core.Is.is;
 
 /**
  * Class test class IteratorMultiArray.
@@ -17,17 +15,58 @@ import static org.hamcrest.Matchers.containsInAnyOrder;
 public class IteratorMultiArrayTest {
 
     /**
-     * Test class IteratorMultiArray.
+     * Test class IteratorMultiArray values - matrix.
      */
     @Test
     public void whenArrayMatrixThenGetExpectedResult() {
         final int[][] arrayValue = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
         final int[] expectedResult = {1, 2, 3, 4, 5, 6, 7, 8, 9};
         IteratorMultiArray it = new IteratorMultiArray(arrayValue);
-        ArrayList listResult = new ArrayList(9);
+        final int lengthArr = 9;
+        int[] result = new int[lengthArr];
+        int count = 0;
         while (it.hasNext()) {
-            listResult.add(it.hasNext());
+            result[count++] = (int) it.next();
         }
-        assertThat(expectedResult, containsInAnyOrder(listResult));
+        assertThat(expectedResult, is(result));
+    }
+
+    /**
+     * Test class IteratorMultiArray, values - multidimensional array.
+     */
+    @Test
+    public void whenArrayThenGetExpectedResult() {
+        final int[][] arrayValue = {{1, 2}, {3, 4, 5}, {6, 7, 8, 9}};
+        final int[] expectedResult = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+        IteratorMultiArray it = new IteratorMultiArray(arrayValue);
+        final int lengthArr = 9;
+        int[] result = new int[lengthArr];
+        int count = 0;
+        while (it.hasNext()) {
+            result[count++] = (int) it.next();
+        }
+        assertThat(expectedResult, is(result));
+    }
+
+    /**
+     * Test class IteratorMultiArray, not next element by hashNext false.
+     */
+    @Test
+    public void whenNotNextElementThenGetHashNextFalse() {
+        final int[][] arrayValue = {{1}};
+        IteratorMultiArray it = new IteratorMultiArray(arrayValue);
+        it.next();
+        assertThat(it.hasNext(), is(false));
+    }
+
+    /**
+     * Test class IteratorMultiArray,  next element by hashNext true.
+     */
+    @Test
+    public void whenNextElementThenGetHashNextTrue() {
+        final int[][] arrayValue = {{1}, {2}};
+        IteratorMultiArray it = new IteratorMultiArray(arrayValue);
+        it.next();
+        assertThat(it.hasNext(), is(true));
     }
 }
