@@ -10,7 +10,7 @@ import static org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInA
 import static org.hamcrest.core.Is.is;
 
 /**
- * Class test class IteratorMultiArray.
+ * Class test class IteratorEvenNumber.
  *
  * @author Sergei Poddubnyak (forvvard09@gmail.com)
  * @version 1.0
