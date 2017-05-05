@@ -3,25 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <parent>
-        <groupId>CollectionsPro</groupId>
-        <artifactId>CollectionsPro</artifactId>
+        <groupId>Iterator</groupId>
+        <artifactId>Iterator</artifactId>
         <version>1.0.0</version>
     </parent>
-
     <groupId>Iterator</groupId>
-    <artifactId>Iterator</artifactId>
-    <name>Standart-CollectionsPro-Iterator</name>
+    <artifactId>task04</artifactId>
+    <name>Standart-CollectionsPro-Iterator-task04</name>
     <version>1.0.0</version>
-    <packaging>pom</packaging>
-
-    <modules>
-        <module>task01</module>
-        <module>task02</module>
-        <module>task03</module>
-        <module>task04</module>
-    </modules>
-
-
 </project>
