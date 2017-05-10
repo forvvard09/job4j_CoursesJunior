@@ -82,7 +82,7 @@ public class SimpleArray<T> {
         Object[] copyArr = new Object[this.objects.length - 1];
         if (positionDelete > 0 && positionDelete < this.objects.length - 1) {
             System.arraycopy(this.objects, 0, copyArr, 0, positionDelete);
-            System.arraycopy(this.objects, positionDelete + 1, copyArr, positionDelete, this.objects.length - 2);
+            System.arraycopy(this.objects, positionDelete + 1, copyArr, positionDelete, this.objects.length - positionDelete - 1);
             this.objects = copyArr;
             copyArr = null;
         } else if (positionDelete == 0) {
