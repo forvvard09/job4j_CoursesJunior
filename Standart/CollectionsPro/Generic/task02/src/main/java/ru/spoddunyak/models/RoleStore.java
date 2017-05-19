@@ -7,7 +7,7 @@ package ru.spoddunyak.models;
  * @version 1.0
  * @since 15.05.2017
  */
-public class RoleStore extends BaseStore {
+public class RoleStore extends BaseStore<Role> {
     /**
      * Constructor of new object RoleStore, through the constructor parent class BaseStore.
      *

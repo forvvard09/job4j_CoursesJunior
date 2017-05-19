@@ -10,16 +10,9 @@
         <version>1.0.0</version>
     </parent>
 
-    <groupId>Generic</groupId>
-    <artifactId>Generic</artifactId>
-    <name>Standart-CollectionsPro-Generic</name>
+    <groupId>List</groupId>
+    <artifactId>List</artifactId>
+    <name>Standart-CollectionsPro-List</name>
     <version>1.0.0</version>
     <packaging>pom</packaging>
-
-    <modules>
-        <module>task01</module>
-        <module>task02</module>
-    </modules>
-
-
 </project>

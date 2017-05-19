@@ -7,7 +7,7 @@ package ru.spoddunyak.models;
  * @version 1.0
  * @since 15.05.2017
  */
-public class UserStore extends BaseStore {
+public class UserStore extends BaseStore<User> {
     /**
      * Constructor of new object UserStore, through the constructor parent class BaseStore.
      *
