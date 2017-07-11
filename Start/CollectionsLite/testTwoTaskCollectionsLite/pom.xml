@@ -5,13 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>CollectionsPro</groupId>
-        <artifactId>CollectionsPro</artifactId>
+        <groupId>CollectionsLite</groupId>
+        <artifactId>CollectionsLite</artifactId>
         <version>1.0.0</version>
     </parent>
 
-    <groupId>List</groupId>
-    <artifactId>List</artifactId>
-    <name>Standart-CollectionsPro-List</name>
+    <groupId>CollectionsLite</groupId>
+    <artifactId>testTwoTaskCollectionLite</artifactId>
+    <name>testTwoTaskCollectionLite</name>
     <version>1.0.0</version>
 </project>
