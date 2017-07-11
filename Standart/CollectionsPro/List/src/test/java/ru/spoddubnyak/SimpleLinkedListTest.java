@@ -2,6 +2,8 @@ package ru.spoddubnyak;
 
 import org.junit.Test;
 
+import java.util.Iterator;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
@@ -10,18 +12,57 @@ import static org.hamcrest.core.Is.is;
  *
  * @author Sergei Poddubnyak (forvvard09@gmail.com)
  * @version 1.0
- * @since 19.05.2017
+ * @since 11.07.2017
  */
 public class SimpleLinkedListTest {
     /**
-     * Test method add get class SimpleLinkedList.
+     * Test method add(E value) and get(i index) class SimpleLinkedList.
      */
     @Test
-    public void whenThen() {
+    public void whenAddNewElementStringThenGetExpectedResult() {
+        String expectedResultOne = "1";
+        String expectedResultTwo = "2";
         SimpleLinkedList<String> simpleLinkedList = new SimpleLinkedList<>();
-        simpleLinkedList.add("1");
-        simpleLinkedList.add("2");
-        String expectedResult = "2";
-        assertThat(simpleLinkedList.get(1), is(expectedResult));
+        simpleLinkedList.add(expectedResultOne);
+        simpleLinkedList.add(expectedResultTwo);
+        assertThat(simpleLinkedList.get(0), is(expectedResultOne));
+        assertThat(simpleLinkedList.get(1), is(expectedResultTwo));
     }
+    /**
+     * Test method getSize get class SimpleLinkedList.
+     */
+    @Test
+    public void whenExpectedSizeThenGetResultSize() {
+        String[] testData = {"test", "test", "test", "test", "test"};
+        SimpleLinkedList<String> simpleLinkedList = new SimpleLinkedList<>();
+         for (String item : testData) {
+            simpleLinkedList.add(item);
+         }
+       assertThat(simpleLinkedList.getSize(), is(testData.length));
+    }
+
+    /**
+     * Test iterator and methods iterators in class SimpleLinkedList.
+     */
+    @Test
+    public void whenIteratorObjectThenGetExpectedResult() {
+        SimpleLinkedList<Integer> numberSimpleLinkedList = new SimpleLinkedList<>();
+        numberSimpleLinkedList.add(1);
+        numberSimpleLinkedList.add(2);
+        final int number = 3;
+        numberSimpleLinkedList.add(number);
+        final int numberTwo = 4;
+        numberSimpleLinkedList.add(numberTwo);
+        Integer[] expectedResult = new Integer[numberSimpleLinkedList.getSize()];
+        Iterator<Integer> myIterator = numberSimpleLinkedList.iterator();
+        int i = 0;
+        while (myIterator.hasNext()) {
+            expectedResult[i++] = myIterator.next();
+        }
+        for (int j = 0; j < numberSimpleLinkedList.getSize(); j++) {
+            assertThat(numberSimpleLinkedList.get(j), is(expectedResult[j]));
+        }
+        assertThat(numberSimpleLinkedList.getSize(), is(expectedResult.length));
+    }
+
 }

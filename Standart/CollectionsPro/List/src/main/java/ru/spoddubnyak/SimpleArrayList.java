@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 
 /**
- * Class SimpleArrayList describes the actions of the container.
+ * Class SimpleArrayList describes the actions of an array-based container.
  *
  * @param <E> This describes my type parameter
  * @author Sergei Poddubnyak (forvvard09@gmail.com)
