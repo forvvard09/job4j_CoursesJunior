@@ -18,5 +18,6 @@
         <module>chapter02</module>
         <module>chapter03</module>
         <module>testTaskCollectionsLite</module>
+        <module>testTwoTaskCollectionsLite</module>
     </modules>
 </project>
