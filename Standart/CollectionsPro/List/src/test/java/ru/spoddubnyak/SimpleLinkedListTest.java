@@ -28,6 +28,7 @@ public class SimpleLinkedListTest {
         assertThat(simpleLinkedList.get(0), is(expectedResultOne));
         assertThat(simpleLinkedList.get(1), is(expectedResultTwo));
     }
+
     /**
      * Test method getSize get class SimpleLinkedList.
      */
@@ -35,10 +36,70 @@ public class SimpleLinkedListTest {
     public void whenExpectedSizeThenGetResultSize() {
         String[] testData = {"test", "test", "test", "test", "test"};
         SimpleLinkedList<String> simpleLinkedList = new SimpleLinkedList<>();
-         for (String item : testData) {
+        for (String item : testData) {
             simpleLinkedList.add(item);
-         }
-       assertThat(simpleLinkedList.getSize(), is(testData.length));
+        }
+        assertThat(simpleLinkedList.getSize(), is(testData.length));
+    }
+
+    /**
+     * Test method removeLastElement class SimpleLinkedList.
+     */
+    @Test
+    public void whenRemoveLastElementThenGetExpectedSizeCollections() {
+        String[] testData = {"1", "2", "3"};
+        SimpleLinkedList<String> simpleLinkedList = new SimpleLinkedList<>();
+        for (String item : testData) {
+            simpleLinkedList.add(item);
+        }
+        simpleLinkedList.removeLastElement();
+        assertThat(simpleLinkedList.getSize() + 1, is(testData.length));
+    }
+
+    /**
+     * Test method removeLastElement class SimpleLinkedList.
+     */
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void whenRemoveLastElementThenGetError() {
+        String expectedResultOne = "1";
+        String expectedResultTwo = "2";
+        SimpleLinkedList<String> simpleLinkedList = new SimpleLinkedList<>();
+        simpleLinkedList.add(expectedResultOne);
+        simpleLinkedList.add(expectedResultTwo);
+        simpleLinkedList.removeLastElement();
+        simpleLinkedList.get(1);
+    }
+
+    /**
+     * Test method removeFirstElement class SimpleLinkedList.
+     */
+    @Test
+    public void whenRemoveFirstElementThenGetExpectedSizeCollections() {
+        String[] testData = {"1", "2", "3"};
+        SimpleLinkedList<String> simpleLinkedList = new SimpleLinkedList<>();
+        for (String item : testData) {
+            simpleLinkedList.add(item);
+        }
+        simpleLinkedList.removeFirstElement();
+        simpleLinkedList.removeFirstElement();
+        assertThat(simpleLinkedList.get(0), is(testData[2]));
+        assertThat(simpleLinkedList.getSize() + 2, is(testData.length));
+    }
+
+    /**
+     * Test method removeLastElement and add class SimpleLinkedList.
+     */
+    @Test
+    public void whenRemoveLastElementAndAddElementThenGetExpectedResult() {
+        final String expectedResultOne = "1";
+        final String expectedResultTwo = "2";
+        SimpleLinkedList<String> simpleLinkedList = new SimpleLinkedList<>();
+        simpleLinkedList.add(expectedResultOne);
+        simpleLinkedList.add(expectedResultTwo);
+        simpleLinkedList.removeLastElement();
+        simpleLinkedList.add(expectedResultTwo);
+        assertThat(simpleLinkedList.get(0), is(expectedResultOne));
+        assertThat(simpleLinkedList.get(1), is(expectedResultTwo));
     }
 
     /**
@@ -64,5 +125,4 @@ public class SimpleLinkedListTest {
         }
         assertThat(numberSimpleLinkedList.getSize(), is(expectedResult.length));
     }
-
 }

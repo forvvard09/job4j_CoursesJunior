@@ -1,7 +1,5 @@
 package ru.spoddubnyak;
-
 import java.util.Iterator;
-
 
 /**
  * Class SimpleLinkedList describes the actions of the container on the basis of a bidirectional list.
@@ -15,6 +13,7 @@ public class SimpleLinkedList<E> implements SimpleContainer<E> {
     /**
      * property for a pointer to the first element.
      */
+
     private Element<E> firstElement;
     /**
      * property for a pointer to the last element.
@@ -26,11 +25,23 @@ public class SimpleLinkedList<E> implements SimpleContainer<E> {
     private int size = 0;
 
     /**
+     * Getter for first element.
+     * @return link first element
+     */
+    public Element<E> getFirstElement() {
+        return this.firstElement;
+    }
+
+    /**
      * Constructor it creates a new object SimpleLinkedList container with the specified values.
      */
-    public SimpleLinkedList() {
-        this.lastElement = new Element<E>(null, this.firstElement, null);
-        this.firstElement = new Element<E>(null, null, this.lastElement);
+    SimpleLinkedList() {
+        this.lastElement = new Element<E>();
+        this.firstElement = new Element<E>();
+        this.firstElement.nextElement = this.lastElement;
+        this.firstElement.previusElement = this.lastElement;
+        this.lastElement.previusElement = this.firstElement;
+        this.lastElement.nextElement = this.firstElement;
     }
 
     /**
@@ -41,12 +52,47 @@ public class SimpleLinkedList<E> implements SimpleContainer<E> {
         return this.size;
     }
 
+    /**
+     * Method removeLastElement last element in collections SimpleLinledList<E>.
+     * @throws IndexOutOfBoundsException - if, not elements in collections for removing
+     */
+    public void removeLastElement() throws IndexOutOfBoundsException {
+        if (0 == getSize()) {
+            throw new IndexOutOfBoundsException("There are no objects to delete in the collection.");
+        }
+        Element<E> temporaryLink = this.lastElement.previusElement.previusElement;
+        this.lastElement.previusElement.previusElement.nextElement = null;
+        this.lastElement.previusElement.previusElement = null;
+        this.lastElement.previusElement.nextElement = null;
+        this.lastElement.previusElement = temporaryLink;
+        this.lastElement.previusElement.nextElement = this.lastElement;
+        temporaryLink = null;
+        this.size--;
+    }
+
+    /**
+     * Method removeFirstElement first element in collections SimpleLinledList<E>.
+     * @throws IndexOutOfBoundsException - if, not elements in collections for removing
+     */
+    public void removeFirstElement() throws IndexOutOfBoundsException {
+        if (0 == getSize()) {
+            throw new IndexOutOfBoundsException("There are no objects to delete in the collection.");
+        }
+        Element<E> temporaryLink = this.firstElement.nextElement.nextElement;
+        this.firstElement.nextElement.nextElement.previusElement = null;
+        this.firstElement.nextElement.nextElement = null;
+        this.firstElement.nextElement.previusElement = null;
+        this.firstElement.nextElement = temporaryLink;
+        this.firstElement.nextElement.previusElement = this.firstElement;
+        temporaryLink = null;
+        this.size--;
+    }
+
     @Override
     public void add(E value) {
-        Element<E> temp = lastElement;
-        temp.setValueElement(value);
-        lastElement = new Element<E>(null, temp, null);
-        temp.nextElement = lastElement;
+        Element<E> newElement = new Element<E>(value, lastElement.previusElement, lastElement);
+        lastElement.previusElement.nextElement = newElement;
+        lastElement.previusElement = newElement;
         this.size++;
     }
 
@@ -72,7 +118,7 @@ public class SimpleLinkedList<E> implements SimpleContainer<E> {
      *
      * @param <E> This describes my type parameter
      */
-    private static class Element<E> {
+    public class Element<E> {
         /**
          * property for a pointer to the first element.
          */
@@ -100,6 +146,16 @@ public class SimpleLinkedList<E> implements SimpleContainer<E> {
         }
 
         /**
+         * Constructor it creates a new object Element with the specified.
+         *
+         */
+        Element() {
+            this.valueElement = null;
+            this.previusElement = null;
+            this.nextElement = null;
+        }
+
+        /**
          * Getter for property valueElement.
          * @return value Element
          */
@@ -113,6 +169,22 @@ public class SimpleLinkedList<E> implements SimpleContainer<E> {
          */
         public void setValueElement(E valueElement) {
             this.valueElement = valueElement;
+        }
+
+        /**
+         * Getter for link of previus element.
+         * @return link of previus element
+         */
+        public Element<E> getPreviusElement() {
+            return previusElement;
+        }
+
+        /**
+         * Getter for link of next element.
+         * @return link of next element
+         */
+        public Element<E> getNextElement() {
+            return nextElement;
         }
     }
 
