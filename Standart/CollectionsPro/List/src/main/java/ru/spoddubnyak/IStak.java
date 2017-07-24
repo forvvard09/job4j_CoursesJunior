@@ -15,7 +15,6 @@ public interface IStak<E> {
      * Method puts an object in MyStack.
      *@param value - value element collections
      *
-     * @throws NotElementsInCollections - if, when you try to access an item in an empty collection
      */
     void push(E value);
 
