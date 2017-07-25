@@ -9,10 +9,6 @@ package ru.spoddubnyak;
  * @since 20.05.2017
  */
 public class CyclicityLinkedList<T> {
-    /**
-     * property amount Node.
-     */
-    private int amountNode = 0;
 
     /**
      * Getter link first Node.
@@ -33,16 +29,17 @@ public class CyclicityLinkedList<T> {
      * @return link first Element
      */
     public Node<T> createsNode(boolean cycle) {
-        this.first = new Node(++this.amountNode);
-        Node<T> two = new Node(++this.amountNode);
-        Node<T> third = new Node(++this.amountNode);
-        Node<T> four = new Node(++this.amountNode);
+        int data = 1;
+        this.first = new Node(data++);
+        Node<T> two = new Node(data++);
+        Node<T> third = new Node(data++);
+        Node<T> four = new Node(data);
 
         first.next = two;
         two.next = third;
         third.next = four;
         if (cycle) {
-            four.next = this.first;
+            four.next = four;
         } else {
             four.next = null;
         }
@@ -64,15 +61,17 @@ public class CyclicityLinkedList<T> {
      * @return result, true - link cyclic, false - link not cyclic
      */
     public boolean hasCycle(Node<T> first) {
-        Node<T> tempLink = first;
         boolean result = false;
-        int i = 0;
-        while (!result && i < this.amountNode) {
-            tempLink = tempLink.next;
-            if (tempLink == first) {
+        boolean valid = false;
+        Node<T> linkOneStep = first;
+        Node<T> linkSecondStep = first;
+        while (!valid && !(linkSecondStep == null)) {
+            linkOneStep = linkOneStep.next;
+            linkSecondStep = linkSecondStep.next.next;
+            if (linkOneStep == linkSecondStep) {
+                valid = true;
                 result = true;
             }
-            i++;
         }
         return result;
     }
