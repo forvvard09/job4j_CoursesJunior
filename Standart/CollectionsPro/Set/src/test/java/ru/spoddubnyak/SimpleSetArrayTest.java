@@ -10,14 +10,14 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
 /**
- * Tests class  SimleSetArray.
+ * Tests class  SimpleSetArray.
  *
  * @param <E> This describes my type parameter
  * @author Sergei Poddubnyak (forvvard09@gmail.com)
  * @version 1.0
  * @since 20.05.2017
  */
-public class SimleSetArrayTest<E> {
+public class SimpleSetArrayTest<E> {
 
     /**
      * property array for a test data set.
