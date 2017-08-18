@@ -18,7 +18,6 @@ import static org.hamcrest.core.Is.is;
  * @since 20.05.2017
  */
 public class SimpleSetArrayTest<E> {
-
     /**
      * property array for a test data set.
      */
@@ -39,6 +38,7 @@ public class SimpleSetArrayTest<E> {
         final int testSeven = 7;
         this.testDataSet = new Integer[]{testOne, testTwo, testThree, testFour, testFive, testSix, testSeven};
     }
+
     /**
      * Test method add(E e), getElement(i index), getSizeSet().
      */
@@ -124,5 +124,35 @@ public class SimpleSetArrayTest<E> {
         }
         assertThat(set.getSizeSet(), is(this.testDataSet.length));
      }
+
+    /**
+     * Auxiliary method for data generation.
+     * @param lengthTestArr number test entries
+     * @return test array with a set of test data
+     */
+    private String[] generationTestDate(int lengthTestArr) {
+        String[] testArray = new String[lengthTestArr];
+        for (int i = 0; i < testArray.length; i++) {
+            testArray[i] = String.format("%s - %s", "testRecords", i);
+        }
+        return testArray;
+    }
+
+    /**
+     * Test method add(E e), attempt to add multiple duplicates for big data.
+     */
+    @Test
+    public void whenAddDublicatesThenGetExpectedResultNotDublicatesBigData() {
+        final int lengthTestArr = 5000;
+        String[] testArray = generationTestDate(lengthTestArr);
+        SimpleSetArray<String> set = new SimpleSetArray<String>(lengthTestArr);
+        for (String s : testArray) {
+            set.add(s);
+        }
+        for (String s : testArray) {
+            set.add(s);
+        }
+        assertThat(set.getSizeSet(), is(lengthTestArr));
+    }
 }
 
