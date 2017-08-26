@@ -37,7 +37,6 @@ public class UserTest {
      */
     @Test
     public void whenCreateConstructorObjectGetExpectedFieldObject() {
-
         User user = new User(name, children, birthday);
         assertThat(user.getName(), is(name));
         assertThat(user.getChildren(), is(children));
