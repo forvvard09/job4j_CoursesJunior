@@ -2,6 +2,7 @@ package ru.spoddubnyak;
 
 import org.junit.Test;
 import ru.spoddubnyak.model.User;
+import ru.spoddubnyak.model.UserOverrideHashCode;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -36,7 +37,7 @@ public class UserTest {
      * Test method create object User and get expected field.
      */
     @Test
-    public void whenCreateConstructorObjectGetExpectedFieldObject() {
+    public void whenCreateConstructorObjectThenGetExpectedFieldObject() {
         User user = new User(name, children, birthday);
         assertThat(user.getName(), is(name));
         assertThat(user.getChildren(), is(children));
@@ -47,7 +48,7 @@ public class UserTest {
      * Test do not override methods equals() and hashCode().
      */
     @Test
-    public void whenAddMappElementsNotEqualsAndFashCodeGetExpectedResult() {
+    public void whenAddMappElementsNotEqualsAndHashCodeThenGetExpectedResult() {
         User userOne = new User(name, children, birthday);
         User userTwo = new User(name, children, birthday);
         assertThat(userOne.equals(userTwo), is(false));
@@ -56,5 +57,31 @@ public class UserTest {
         map.put(userOne, "One");
         map.put(userTwo, "One");
         System.out.println(map);
+    }
+
+    /**
+     * Test override method hashCode().
+     */
+    @Test
+    public void whenAddMappElementsOverrideHashCodeThenGetExpectedResult() {
+        UserOverrideHashCode userOne = new UserOverrideHashCode(name, children, birthday);
+        UserOverrideHashCode userTwo = new UserOverrideHashCode(name, children, birthday);
+        assertThat(userOne.equals(userTwo), is(false));
+        assertThat(userOne.hashCode() == userTwo.hashCode(), is(true));
+        Map<User, Object> map = new HashMap<>();
+        map.put(userOne, "One");
+        map.put(userTwo, "One");
+        System.out.println(map);
+    }
+
+    /**
+     * Test override method hashCode() .
+     */
+    @Test
+    public void whenAddMappElementsOverrideHashCodeThenGetNotEqualObjectExpectedResult() {
+        UserOverrideHashCode userOne = new UserOverrideHashCode(null, children, birthday);
+        UserOverrideHashCode userTwo = new UserOverrideHashCode(name, children, birthday);
+        assertThat(userOne.equals(userTwo), is(false));
+        assertThat(userOne.hashCode() == userTwo.hashCode(), is(false));
     }
 }
