@@ -2,6 +2,7 @@ package ru.spoddubnyak;
 
 import org.junit.Test;
 import ru.spoddubnyak.model.User;
+import ru.spoddubnyak.model.UserOverrideEquals;
 import ru.spoddubnyak.model.UserOverrideHashCode;
 
 import java.util.Calendar;
@@ -75,7 +76,7 @@ public class UserTest {
     }
 
     /**
-     * Test override method hashCode() .
+     * Test override method hashCode().
      */
     @Test
     public void whenAddMappElementsOverrideHashCodeThenGetNotEqualObjectExpectedResult() {
@@ -83,5 +84,39 @@ public class UserTest {
         UserOverrideHashCode userTwo = new UserOverrideHashCode(name, children, birthday);
         assertThat(userOne.equals(userTwo), is(false));
         assertThat(userOne.hashCode() == userTwo.hashCode(), is(false));
+    }
+
+    /**
+     * Test override method equals().
+     */
+    @Test
+    public void whenAddMappElementsOverrideEqualsThenGetExpectedResult() {
+        UserOverrideEquals userOne = new UserOverrideEquals(name, children, birthday);
+        UserOverrideEquals userTwo = new UserOverrideEquals(name, children, birthday);
+        assertThat(userOne.equals(userTwo), is(true));
+        assertThat(userOne.hashCode() == userTwo.hashCode(), is(false));
+        Map<User, Object> map = new HashMap<>();
+        map.put(userOne, "One");
+        map.put(userTwo, "One");
+        System.out.println(map);
+    }
+
+    /**
+     * Test override method equals(), equals Object at null.
+     */
+    @Test
+    public void whenEqualsObjectNullThenGetExpectedResult() {
+        UserOverrideEquals userOne = new UserOverrideEquals(name, children, birthday);
+        assertThat(userOne.equals(null), is(false));
+    }
+
+    /**
+     * Test override method equals(), equals diffrent object.
+     */
+    @Test
+    public void whenEqualsDifferentObjectGetExpectedResult() {
+        UserOverrideEquals userOne = new UserOverrideEquals(name, children, birthday);
+        assertThat(userOne.equals(userOne), is(true));
+        assertThat(userOne.hashCode() == userOne.hashCode(), is(true));
     }
 }
