@@ -3,6 +3,7 @@ package ru.spoddubnyak;
 import org.junit.Test;
 import ru.spoddubnyak.model.User;
 import ru.spoddubnyak.model.UserOverrideEquals;
+import ru.spoddubnyak.model.UserOverrideEqualsHashCode;
 import ru.spoddubnyak.model.UserOverrideHashCode;
 
 import java.util.Calendar;
@@ -116,6 +117,40 @@ public class UserTest {
     @Test
     public void whenEqualsDifferentObjectGetExpectedResult() {
         UserOverrideEquals userOne = new UserOverrideEquals(name, children, birthday);
+        assertThat(userOne.equals(userOne), is(true));
+        assertThat(userOne.hashCode() == userOne.hashCode(), is(true));
+    }
+
+    /**
+     * Test override methods hashcode() and equals().
+     */
+    @Test
+    public void whenAddMappElementsOverrideEqualsHashCodeThenGetExpectedResult() {
+        UserOverrideEqualsHashCode userOne = new UserOverrideEqualsHashCode(name, children, birthday);
+        UserOverrideEqualsHashCode userTwo = new UserOverrideEqualsHashCode(name, children, birthday);
+        assertThat(userOne.equals(userTwo), is(true));
+        assertThat(userOne.hashCode() == userTwo.hashCode(), is(true));
+        Map<User, Object> map = new HashMap<>();
+        map.put(userOne, "One");
+        map.put(userTwo, "One");
+        System.out.println(map);
+    }
+
+    /**
+     * Test override methods hashcode() and equals().
+     */
+    @Test
+    public void whenEqualsNullthenExpectedResult() {
+        UserOverrideEqualsHashCode userOne = new UserOverrideEqualsHashCode(name, children, birthday);
+        assertThat(userOne.equals(null), is(false));
+    }
+
+    /**
+     * Test override methods hashcode() and equals(), coparison hashcode one object.
+     */
+    @Test
+    public void whenCoparisoHashCodeOneObjectThenGetExpectedResult() {
+        UserOverrideEqualsHashCode userOne = new UserOverrideEqualsHashCode(name, children, birthday);
         assertThat(userOne.equals(userOne), is(true));
         assertThat(userOne.hashCode() == userOne.hashCode(), is(true));
     }
