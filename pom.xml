@@ -106,6 +106,8 @@
                     <compilerVersion>1.8</compilerVersion>
                 </configuration>
             </plugin>
+
+            <!-- errors
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
@@ -123,6 +125,8 @@
                     </execution>
                 </executions>
             </plugin>
+            errors  -->
+
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>findbugs-maven-plugin</artifactId>

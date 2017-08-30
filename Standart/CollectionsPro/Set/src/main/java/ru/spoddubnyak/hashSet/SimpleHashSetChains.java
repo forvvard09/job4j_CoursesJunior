@@ -6,7 +6,7 @@ import ru.spoddubnyak.hashSet.model.SimpleHashTable;
 import java.util.Arrays;
 
 /**
- * Class SimpleHashSet describes the actions of an Hashh table chain method.
+ * Class SimpleHashSet describes the actions of an Hash table chain method.
  *
  * @param <E> This describes my type parameter
  * @author Sergei Poddubnyak (forvvard09@gmail.com)
