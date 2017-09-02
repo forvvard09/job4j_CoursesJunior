@@ -1,10 +1,10 @@
 package ru.spoddubnyak;
 
 import org.junit.Test;
-import ru.spoddubnyak.model.User;
-import ru.spoddubnyak.model.UserOverrideEquals;
-import ru.spoddubnyak.model.UserOverrideEqualsHashCode;
-import ru.spoddubnyak.model.UserOverrideHashCode;
+import ru.spoddubnyak.user.User;
+import ru.spoddubnyak.user.UserOverrideEquals;
+import ru.spoddubnyak.user.UserOverrideEqualsHashCode;
+import ru.spoddubnyak.user.UserOverrideHashCode;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
