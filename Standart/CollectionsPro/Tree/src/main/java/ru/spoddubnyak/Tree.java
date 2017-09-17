@@ -24,7 +24,7 @@ class Tree<E extends Comparable<E>> implements SimpleTree<E> {
     /**
      * property for getting all the elements in ArrayList.
      */
-    private List<E> listTree = new ArrayList<>();
+    private List<Node<E>> listTree = new ArrayList<>();
 
     /**
      * Constructor for class Tree.
@@ -91,8 +91,8 @@ class Tree<E extends Comparable<E>> implements SimpleTree<E> {
      * @param listTree  List for add
      * @param startTree element of the tree from which the addition of elements begins
      */
-    private void getAllToList(List<E> listTree, Node<E> startTree) {
-        listTree.add(startTree.value);
+    private void getAllToList(List<Node<E>> listTree, Node<E> startTree) {
+        listTree.add(startTree);
         for (Node<E> node : startTree.children) {
             getAllToList(listTree, node);
         }
@@ -137,6 +137,11 @@ class Tree<E extends Comparable<E>> implements SimpleTree<E> {
          * property for children.
          */
         private List<Node<E>> children;
+
+        public E getValue() {
+            return this.value;
+        }
+
         /**
          * property for value.
          */
@@ -156,9 +161,8 @@ class Tree<E extends Comparable<E>> implements SimpleTree<E> {
     /**
      * Inner Class MyTreeIterator implement the iterator .
      *
-     * @param <E> This describes my type parameter
      */
-    private class MyTreeIterator<E> implements Iterator<E> {
+    private class MyTreeIterator implements Iterator {
         /**
          * property index in Iterator.
          */
@@ -174,7 +178,7 @@ class Tree<E extends Comparable<E>> implements SimpleTree<E> {
         public E next() {
             E result;
             if (this.hasNext()) {
-                result = (E) listTree.get(this.positionIterator++);
+                result = listTree.get(this.positionIterator++).value;
             } else {
                 throw new IndexOutOfBoundsException("Went beyond the collection.");
             }
