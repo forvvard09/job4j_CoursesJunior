@@ -37,6 +37,11 @@ public class TreeTest {
     private String testChildSecond = "child 2";
 
     /**
+     * property  test data.
+     */
+    private String testChildThirds = "child 3";
+
+    /**
      * Test testing methods initialRoot, check add dublicates and verifies the existence of a parent.
      */
     @Test
@@ -57,7 +62,7 @@ public class TreeTest {
      * Test testing constructor Tree(E value), methods initialRoot, check add dublicates and verifies the existence of a parent.
      */
     @Test
-    public void whenCreateConstrucrorTreeAndAddElementsThenExpectedNumberElements() {
+    public void whenCreateConstructorTreeAndAddElementsThenExpectedNumberElements() {
         Tree<String> tree = new Tree<>(testRootOne);
         assertThat(tree.initialRoot(testRootSecond), is(false));
         assertThat(tree.add(testRootOne, testChild), is(true));
@@ -72,7 +77,7 @@ public class TreeTest {
      * Test testing iterator for Tree.
      */
     @Test
-    public void whenRunIteratorThenGetExpectedresult() {
+    public void whenRunIteratorThenGetExpectedResult() {
         Tree<String> tree = new Tree<>(testRootOne);
         final int expectedSize = 4;
         String[] expectedElements = new String[expectedSize];
@@ -88,7 +93,35 @@ public class TreeTest {
         assertThat(expectedElements[countIterator++], is(testRootOne));
         assertThat(expectedElements[countIterator++], is(testChild));
         assertThat(expectedElements[countIterator++], is(testChildOne));
-        assertThat(expectedElements[countIterator++], is(testChildSecond));
+        assertThat(expectedElements[countIterator], is(testChildSecond));
         assertThat(tree.getSize(), is(expectedSize));
     }
+
+    /**
+     * Test testing method isisBinary(), when Tree - binary.
+     */
+    @Test
+    public void whenTreeBinaryThenGetExpectedResult() {
+        Tree<String> tree = new Tree<>(testRootOne);
+        tree.add(testRootOne, testChild);
+        tree.add(testChild, testChildOne);
+        tree.add(testChild, testChildSecond);
+        tree.add(testRootOne, testRootSecond);
+        assertThat(tree.isBinary(), is(true));
+    }
+
+    /**
+     * Test testing method isisBinary(), when Tree - not binary.
+     */
+    @Test
+    public void whenNotTreeBinaryThenGetExpectedResult() {
+        Tree<String> tree = new Tree<>(testRootOne);
+        tree.add(testRootOne, testChild);
+        tree.add(testChild, testChildOne);
+        tree.add(testChild, testChildSecond);
+        tree.add(testChild, testChildThirds);
+        assertThat(tree.isBinary(), is(false));
+    }
+
+
 }

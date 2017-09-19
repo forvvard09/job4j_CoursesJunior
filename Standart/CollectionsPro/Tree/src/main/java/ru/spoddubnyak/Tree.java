@@ -16,7 +16,7 @@ class Tree<E extends Comparable<E>> implements SimpleTree<E> {
     /**
      * property root in Parent for Tree.
      */
-    private Node root;
+    private Node<E> root;
     /**
      * property number elements in Tree.
      */
@@ -32,7 +32,7 @@ class Tree<E extends Comparable<E>> implements SimpleTree<E> {
      * @param value value for root elements
      */
     Tree(E value) {
-        this.root = new Node(value);
+        this.root = new Node<E>(value);
         this.size = 1;
     }
 
@@ -52,7 +52,7 @@ class Tree<E extends Comparable<E>> implements SimpleTree<E> {
             Node<E> nodeParent = findElementsInTree(root, parent);
             Node<E> nodeChild = findElementsInTree(root, child);
             if (nodeParent != null && nodeChild == null) {
-                nodeParent.children.add(new Node<E>(child));
+                nodeParent.children.add(new Node(child));
                 result = true;
                 this.size++;
             }
@@ -69,7 +69,7 @@ class Tree<E extends Comparable<E>> implements SimpleTree<E> {
     public boolean initialRoot(E value) {
         boolean result = false;
         if (this.size == 0) {
-            this.root = new Node(value);
+            this.root = new Node<E>(value);
             this.size++;
             result = true;
         }
@@ -128,6 +128,37 @@ class Tree<E extends Comparable<E>> implements SimpleTree<E> {
     }
 
     /**
+     * Method will the collection be a binary tree.
+     *
+     * @return if children of more than two - return false, if two or less - true;
+     */
+    public boolean isBinary() {
+        return 0 == getSizeChildCheckBinary(this.root);
+    }
+
+    /**
+     * Method does the collection have more than 2 children.
+     *
+     * @param startFind element of the tree from which the search of elements begins
+     * @return if children of more than two - return -1; if two or less - 0;
+     */
+    public int getSizeChildCheckBinary(Node<E> startFind) {
+        int result = 0;
+        Node<E> startNode = startFind;
+        if (startNode.children.size() > 2) {
+            result = -1;
+        } else {
+            for (Node<E> child : startNode.children) {
+                if (-1 == getSizeChildCheckBinary(child)) {
+                    result = -1;
+                    break;
+                }
+            }
+        }
+        return result;
+    }
+
+    /**
      * Inner Class Node  .
      *
      * @param <E> This describes my type parameter
@@ -137,11 +168,6 @@ class Tree<E extends Comparable<E>> implements SimpleTree<E> {
          * property for children.
          */
         private List<Node<E>> children;
-
-        public E getValue() {
-            return this.value;
-        }
-
         /**
          * property for value.
          */
@@ -153,14 +179,13 @@ class Tree<E extends Comparable<E>> implements SimpleTree<E> {
          * @param value value
          */
         Node(E value) {
-            this.children = new ArrayList<Node<E>>();
+            this.children = new ArrayList<>();
             this.value = value;
         }
     }
 
     /**
      * Inner Class MyTreeIterator implement the iterator .
-     *
      */
     private class MyTreeIterator implements Iterator {
         /**
