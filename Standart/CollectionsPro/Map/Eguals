@@ -1,0 +1,153 @@
+Метод equals() используется для сравнения объектов, в том числе и для хранения уникальности обектов в некоторых коллекциях. По умолчанию метод equals() реализован в классе java.lang.Object. Этот метод сравнивает ссылки на адреса объектов, и возвращает true только если ссылки равны. Но часто это нарушает естественную логику или бизнес-логику разрабатываемого приложения. Многие классы стандартных библиотек таких как String, Integer содеражат "нормальную" реализацию.
+
+Для безошибочного переопределения  метода equals() для объектов необходимо придерживаться следующих правил отношения эквивалентности (в математике бинарное отношение):
+ 
+ 1. Рефлексивность. Допустим есть объект x, метод x.equals(x) самого себя всегда возвращает - true.
+ 2. Симметричность/коммутативность. Допустим есть два объекта x и у, если x.equals(y) = true, то и y.equals(x) всегда должен возвращать true
+ 3. Транзитивность. Допустим есть три объекта x, y, z.  Если x.equals(y) = true, а y.equals(z) = true, то и x.equals(z) всегда должно быть true 
+ 4. Согласованность: повторный вызов метода equals() должен возвращать одно и тоже значение до тех пор, пока какое-либо значение свойств объекта не будет изменено. То есть, если два объекта равны в Java, то они будут равны пока их свойства остаются неизменными. 
+ 5. Сравнение null: объект должны быть проверен на null. Если объект равен null, то метод должен вернуть false, а не NullPointerException. Например, a.equals(null) должен вернуть false.
+ 
+ Пример:
+ 
+ Допустим у нас есть некий класс User: 
+ 
+public class User {
+    private final String name;
+    private final int age;
+
+    public User(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+ 
+ Без переопределения метода equals(), при сравении одинаоквых созданных объектов, при сравнении мы получим false, сравнились только ссылки, логика
+ приложения не учитывалась.
+ 
+ public class Main {
+    public static void main(String[] args) {
+        User userOne = new User("Ivan", 23);
+        User userTwo = new User("Ivan", 23);
+        System.out.println(userOne.equals(userTwo));
+    }
+}
+----------
+false
+ 
+ теперь переопределим метод equals()
+ 
+ @Override
+    public boolean equals(Object obj) {
+        boolean result = false;
+        if ((obj == null) && (this.getClass() != obj.getClass())) ;
+        else {
+            User that = (User) obj;
+            if ((this.age != that.age) || (this.name != that.name)) ;
+            else
+                result = true;
+        }
+        return result;
+    }
+	
+теперь, наш код при сравнении объектов выыедит true	
+
+ public class Main {
+    public static void main(String[] args) {
+        User userOne = new User("Ivan", 23);
+        User userTwo = new User("Ivan", 23);
+        System.out.println(userOne.equals(userTwo));
+    }
+}
+----------
+true
+
+проверим на разных объектах:
+
+public class Main {
+    public static void main(String[] args) {
+        User userOne = new User("Ivan", 24);
+        User userTwo = new User("Ivan", 23);
+        System.out.println(userOne.equals(userTwo));
+    }
+}
+----------
+false
+
+public class Main {
+    public static void main(String[] args) {
+        User userOne = new User("Vladimir", 23);
+        User userTwo = new User("Ivan", 23);
+        System.out.println(userOne.equals(userTwo));
+    }
+}
+----------
+false
+
+Теперь подробнее о самом методе equals():
+
+@Override
+    public boolean equals(Object obj) {
+    /*
+	так как в хорошем коде должен быть 1 return, заводим переменню для результата
+	*/
+		boolean result = false;  									
+    /*
+	тут прверяем не является ли объект для сравнения null, и является ли он объектом эквивалентным с сравниевым, если
+	у нас реализована иерархия классов с потмками, то для проверки эквивалентности с родителем и возможно кастомизации без последствий
+	можно использовать метод  instanceof() вместо getClass(), но это довольно сильно ударит по производительнсти, если существует большая иерархия классов
+ 	*/
+		if ((obj == null) && (this.getClass() != obj.getClass()));  
+        else {
+            
+	/*
+	если все условия соблюдены, приводим наш входящий объект к сравниваемому
+ 	*/		
+			User that = (User) obj;
+    /*
+	ну и сравниваем, поля, если хоть одно из них не одинаково со сравниваемым, то result остается false,
+	в обратном случае наши сравниваемые объекты равны
+ 	*/    
+            if ((this.age != that.age) || (this.name != that.name));
+            else
+                result = true;
+        }
+        return result;
+    }
+
+	@Override
+    public boolean equals(Object obj) {
+    /*
+	так как в хорошем коде должен быть 1 return, заводим переменню для результата и еще одну переменную для сравнения ссылок
+	*/        
+		boolean result = false;
+        boolean check = true;
+    /*
+	если ссылки равны, тогда и обекты равны, делаем переменную check false
+	*/    
+		if (obj == this) {
+            result = true;
+            check = false;
+        }
+    /*
+	если переменная check не false, значит ссылки не равны, значит идем дальше
+	*/
+        if (check) {
+    /*
+	тут прверяем не является ли объект для сравнения null, и является ли он объектом эквивалентным с сравниевым, если
+	у нас реализована иерархия классов с потмками, то для проверки эквивалентности с родителем и возможно кастомизации без последствий
+	можно использовать метод  instanceof() вместо getClass(), но это довольно сильно ударит по производительнсти, если существует большая иерархия классов
+ 	*/
+			if ((obj == null) || this.getClass() != obj.getClass()) ;
+            else {
+                User that = (User) obj;
+    /*
+	ну и сравниваем, поля, если все поля равны, то result true,
+	в обратном случае наши сравниваемые объекты не равны по нашей логике 
+ 	*/ 
+				if (this.age == that.age && Objects.equals(this.name, that.name)) {
+                    result = true;
+                }
+            }
+        }
+        return result;
+    }
