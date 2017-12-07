@@ -6,7 +6,7 @@
     <version>1.0.0</version>
 
     <modules>
-        <module>Start</module>
+        <module>Trainee</module>
         <module>Standart</module>
     </modules>
 
@@ -43,7 +43,6 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
 

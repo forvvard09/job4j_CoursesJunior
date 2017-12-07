@@ -1,0 +1,24 @@
+<project>
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>BasicSintax</groupId>
+    <artifactId>BasicSintax</artifactId>
+    <name>BasicSintax</name>
+    <packaging>pom</packaging>
+    <version>1.0.0</version>
+
+    <parent>
+        <groupId>Trainee</groupId>
+        <artifactId>Trainee</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <modules>
+        <module>chapter001</module>
+        <module>chapter002</module>
+        <module>chapter003</module>
+        <module>chapter004</module>
+        <module>chapter005</module>
+        <module>chapter006</module>
+    </modules>
+</project>
