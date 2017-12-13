@@ -55,7 +55,9 @@ public class CountSymbolsInLine implements Runnable {
         char[] textToChar = this.line.toCharArray();
         int count = 0;
         for (char ch : textToChar) {
-            count = ch == ' ' ? ++count : count;
+            if (ch == ' ') {
+                count++;
+            }
         }
         System.out.printf("%s. %s: %s.%s", "Thread number 2", "Count space in line", count, System.getProperty("line.separator"));
     }
