@@ -1,8 +1,8 @@
 package ru.spoddubnyak;
 
 /**
- * + * The class CountSymbolsInLine counting spaces and words in String line, use 2 other Thread.
- * + *
+ * The class CountSymbolsInLine counting spaces and words in String line, use 2 other Thread.
+ * <p>
  * + * @author Sergei Poddubnyak (forvvard09@gmail.com)
  * + * @version 1.0
  * + * @since 07.12.2017
@@ -54,6 +54,11 @@ public class CountSymbolsInLine implements Runnable {
     public void run() {
         char[] textToChar = this.line.toCharArray();
         int count = 0;
+        try {
+            Thread.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         for (char ch : textToChar) {
             if (ch == ' ') {
                 count++;
@@ -75,6 +80,11 @@ public class CountSymbolsInLine implements Runnable {
                 if (textToChar[i] == ' ' && textToChar[i + 1] != ' ') {
                     count++;
                 }
+            }
+            try {
+                Thread.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
             System.out.printf("%s. %s: %s.%s", "Thread number 1", "Count words in line", count, System.getProperty("line.separator"));
         }
