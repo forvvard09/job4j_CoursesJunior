@@ -1,0 +1,16 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>ru.spoddubnyak.job4j_CoursesJunior.1_Trainee.02_OOP.01_OOP_Chapter</groupId>
+    <artifactId>task_1_02_01_01</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.0</version>
+
+    <parent>
+        <groupId>ru.spoddubnyak.job4j_CoursesJunior.1_Trainee.02_OOP</groupId>
+        <artifactId>01_OOP_Chapter</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+
+   
+</project>

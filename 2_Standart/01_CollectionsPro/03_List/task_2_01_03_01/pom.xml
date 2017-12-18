@@ -1,0 +1,15 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>ru.spoddubnyak.job4j_CoursesJunior.1_Standart.01_CollectionsPro.03_List</groupId>
+    <artifactId>task_2_01_03_01</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.0</version>
+
+    <parent>
+        <groupId>ru.spoddubnyak.job4j_CoursesJunior.2_Standart.01_CollectionsPro</groupId>
+        <artifactId>03_List</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+   
+</project>

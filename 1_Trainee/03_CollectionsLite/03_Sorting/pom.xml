@@ -1,0 +1,18 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>ru.spoddubnyak.job4j_CoursesJunior.1_Trainee.03_CollectionsLite</groupId>
+    <artifactId>03_Sorting</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.0</version>
+
+    <parent>
+        <groupId>ru.spoddubnyak.job4j_CoursesJunior.1_Trainee</groupId>
+        <artifactId>03_CollectionsLite</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <modules>
+<module>task_1_03_03_01</module>
+    </modules>
+
+</project>

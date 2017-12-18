@@ -1,0 +1,21 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>ru.spoddubnyak.job4j_CoursesJunior.1_Trainee.02_OOP</groupId>
+    <artifactId>02_OOP_Chapter</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.0</version>
+
+    <parent>
+        <groupId>ru.spoddubnyak.job4j_CoursesJunior.1_Trainee</groupId>
+        <artifactId>02_OOP</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <modules>
+        <module>Chess</module>
+        <module>Tracker</module>
+        <module>task_1_02_02_01</module>
+        <module>task_1_02_02_02</module>
+    </modules>
+
+</project>

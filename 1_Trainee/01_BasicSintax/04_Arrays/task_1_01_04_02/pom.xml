@@ -1,0 +1,14 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>ru.spoddubnyak.job4j_CoursesJunior.1_Trainee.01_BasicSintax.04_Arrays</groupId>
+    <artifactId>task_1_01_04_02</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.0</version>
+
+    <parent>
+        <groupId>ru.spoddubnyak.job4j_CoursesJunior.1_Trainee.01_BasicSintax</groupId>
+        <artifactId>04_Arrays</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+</project>

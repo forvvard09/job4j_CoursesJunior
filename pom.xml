@@ -6,8 +6,8 @@
     <version>1.0.0</version>
 
     <modules>
-        <module>Trainee</module>
-        <module>Standart</module>
+        <module>1_Trainee</module>
+        <module>2_Standart</module>
     </modules>
 
     <properties>
