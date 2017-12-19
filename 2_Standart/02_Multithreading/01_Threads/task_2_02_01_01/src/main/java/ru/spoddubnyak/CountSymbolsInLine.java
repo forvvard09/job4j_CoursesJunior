@@ -11,7 +11,7 @@ package ru.spoddubnyak;
 public class CountSymbolsInLine implements Runnable {
     /**
      * property -  input String line for describes count spaces and count words.
-     */
+    */
     private final String line;
 
     /**
@@ -54,11 +54,6 @@ public class CountSymbolsInLine implements Runnable {
     public void run() {
         char[] textToChar = this.line.toCharArray();
         int count = 0;
-        try {
-            Thread.sleep(1);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         for (char ch : textToChar) {
             if (ch == ' ') {
                 count++;
@@ -73,6 +68,7 @@ public class CountSymbolsInLine implements Runnable {
     class CountWordsNewThread extends Thread {
         @Override
         public void run() {
+            final int delay = 100;
             int count = 1;
             String workedLine = getLine().trim();
             char[] textToChar = workedLine.toCharArray();
@@ -82,7 +78,7 @@ public class CountSymbolsInLine implements Runnable {
                 }
             }
             try {
-                Thread.sleep(1);
+                Thread.sleep(delay);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
