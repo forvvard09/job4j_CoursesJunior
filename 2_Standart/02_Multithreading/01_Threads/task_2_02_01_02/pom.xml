@@ -1,0 +1,14 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>ru.spoddubnyak.job4j_CoursesJunior.2_Standart.02_Multithreading.01_Threads</groupId>
+    <artifactId>task_2_02_01_02</artifactId>
+    <version>1.0.0</version>
+
+    <parent>
+        <groupId>ru.spoddubnyak.job4j_CoursesJunior.2_Standart.02_Multithreading</groupId>
+        <artifactId>01_Threads</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+
+</project>

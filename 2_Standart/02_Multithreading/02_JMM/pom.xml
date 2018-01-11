@@ -1,7 +1,7 @@
 <project>
     <modelVersion>4.0.0</modelVersion>
     <groupId>ru.spoddubnyak.job4j_CoursesJunior.2_Standart.02_Multithreading</groupId>
-    <artifactId>01_Threads</artifactId>
+    <artifactId>02_JMM</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0</version>
 
@@ -12,8 +12,7 @@
     </parent>
 
     <modules>
-        <module>task_2_02_01_01</module>
-        <module>task_2_02_01_02</module>
+        <module>task_2_02_02_01</module>
     </modules>
 
 </project>
