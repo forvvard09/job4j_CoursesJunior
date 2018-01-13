@@ -1,0 +1,21 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>ru.spoddubnyak.job4j_CoursesJunior.2_Standart.02_Multithreading.03_MonitoreSynchronize</groupId>
+    <artifactId>task_2_02_03_01</artifactId>
+    <version>1.0.0</version>
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+        </dependency>
+    </dependencies>
+
+    <parent>
+        <groupId>ru.spoddubnyak.job4j_CoursesJunior.2_Standart.02_Multithreading</groupId>
+        <artifactId>03_MonitoreSynchronize</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+
+</project>
