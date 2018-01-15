@@ -1,7 +1,7 @@
 package ru.spoddunyak.models;
 
 import org.junit.Test;
-import ru.spoddubnyak.errors.NoFindValueException;
+import ru.spoddunyak.errors.NoFindValueException;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
