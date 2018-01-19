@@ -18,7 +18,7 @@ public class UserStorage implements Storage<User> {
     /**
      * property -  storage for saving Users.
      */
-    @GuardedBy("UserStorage.class.usersSet")  //@GuardedBy("itself")
+    @GuardedBy("itself")  //@GuardedBy("itself")
     private final Set<User> usersSet;
 
     /**
