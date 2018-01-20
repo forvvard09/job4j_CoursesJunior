@@ -1,7 +1,7 @@
 <project>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>ru.spoddubnyak.job4j_CoursesJunior.2_Standart.02_Multithreading.02_JMM</groupId>
-    <artifactId>task_2_02_02_01</artifactId>
+    <groupId>ru.spoddubnyak.job4j_CoursesJunior.2_Standart.02_Multithreading.03_MonitoreSynchronize</groupId>
+    <artifactId>task_2_02_03_03</artifactId>
     <version>1.0.0</version>
     <dependencies>
         <dependency>
@@ -13,7 +13,7 @@
 
     <parent>
         <groupId>ru.spoddubnyak.job4j_CoursesJunior.2_Standart.02_Multithreading</groupId>
-        <artifactId>02_JMM</artifactId>
+        <artifactId>03_MonitoreSynchronize</artifactId>
         <version>1.0.0</version>
     </parent>
 

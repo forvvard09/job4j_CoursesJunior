@@ -38,13 +38,12 @@ public class UserStorage implements Storage<User> {
     @Override
     public boolean update(User user) throws FindUserError {
         synchronized (this.usersSet) {
-            boolean result = true;
             User userUpdate = getUser(user.getId());
             if (userUpdate == null) {
                 throw new FindUserError("User not find in storage.");
             }
             userUpdate.setAmount(user.getAmount());
-            return result;
+            return true;
         }
     }
 
