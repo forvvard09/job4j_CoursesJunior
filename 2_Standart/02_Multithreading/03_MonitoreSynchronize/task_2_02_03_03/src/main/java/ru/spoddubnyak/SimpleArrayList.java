@@ -123,14 +123,15 @@ public class SimpleArrayList<E> implements SimpleContainer<E> {
         @Override
         public E next() {
             Object result = null;
-            if (this.hasNext()) {
-                synchronized (SimpleArrayList.this) {
+            synchronized (SimpleArrayList.this) {
+                if (this.hasNext()) {
                     result = container[positionIterator++];
+
+                } else {
+                    throw new IndexOutOfBoundsException("Went beyond the collection.");
                 }
-            } else {
-                throw new IndexOutOfBoundsException("Went beyond the collection.");
+                return (E) result;
             }
-            return (E) result;
         }
     }
 }

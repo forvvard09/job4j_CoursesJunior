@@ -225,18 +225,23 @@ public class SimpleLinkedList<E> implements SimpleContainer<E> {
 
         @Override
         public boolean hasNext() {
-            return this.positionIterator < getSize();
+            synchronized (SimpleLinkedList.this) {
+                return this.positionIterator < getSize();
+            }
         }
 
         @Override
         public E next() {
             E result = null;
-            if (this.hasNext()) {
-                result = (E) get(this.positionIterator++);
-            } else {
-                throw new IndexOutOfBoundsException("Went beyond the collection.");
+            synchronized (SimpleLinkedList.this) {
+                if (this.hasNext()) {
+                    result = (E) get(this.positionIterator++);
+                } else {
+                    throw new IndexOutOfBoundsException("Went beyond the collection.");
+                }
+                return result;
             }
-            return result;
+
         }
     }
 }
