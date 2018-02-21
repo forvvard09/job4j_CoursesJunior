@@ -1,7 +1,7 @@
 <project>
     <modelVersion>4.0.0</modelVersion>
     <groupId>ru.spoddubnyak.job4j_CoursesJunior.2_Standart.02_Multithreading</groupId>
-    <artifactId>03_MonitoreSynchronize</artifactId>
+    <artifactId>04_WaitNotiyNotifyAll</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0</version>
 
@@ -12,10 +12,9 @@
     </parent>
 
     <modules>
-        <module>task_2_02_03_01</module>
-        <module>task_2_02_03_02</module>
-        <module>task_2_02_03_03</module>
-
+        <module>task_2_02_04_01</module>
+        <module>task_2_02_04_02</module>
+        <module>task_2_02_04_04</module>
     </modules>
 
 </project>
