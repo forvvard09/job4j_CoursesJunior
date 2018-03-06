@@ -1,7 +1,7 @@
 <project>
     <modelVersion>4.0.0</modelVersion>
     <groupId>ru.spoddubnyak.job4j_CoursesJunior.2_Standart.02_Multithreading.04_WaitNotiyNotifyAll</groupId>
-    <artifactId>task_2_02_04_01</artifactId>
+    <artifactId>task_2_02_04_03</artifactId>
     <version>1.0.0</version>
     <dependencies>
         <dependency>
