@@ -1,5 +1,6 @@
 package ru.spoddubnyak;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,8 +14,8 @@ import static org.junit.Assert.assertThat;
  * Class ThreadPoolTest for testing method's class hreadPool and realization thread pool.
  *
  * @author Sergei Poddubnyak (forvvard09@gmail.com)
- * @version 1.0
- * @since 03.03.2018
+ * @version 2.0
+ * @since 13.03.2018
  */
 public class ThreadPoolTest {
     /**
@@ -45,6 +46,14 @@ public class ThreadPoolTest {
         this.listWork.add(workTwo);
     }
 
+    /**
+     * Method clear test data.
+     */
+    @After
+    public void clearTestData() {
+        this.listWork.clear();
+    }
+
 
     /**
      * Testing thread pool.
@@ -55,14 +64,12 @@ public class ThreadPoolTest {
          * property for count test elements.
          */
         final int countElements = 10;
-
-        generationTestData();
         for (int i = 0; i < countElements; i++) {
             threadPool.add(this.listWork.get(0));
         }
         assertThat(countElements, is(threadPool.getQueuePool().size()));
-        threadPool.startTreathGroup();
-        assertThat(threadPool.getCountProc(), is(threadPool.getThreadGroup().activeCount()));
+        threadPool.startThreadPool();
+        assertThat(threadPool.getCountProc(), is(threadPool.getThreadsList().size()));
 
         try {
             Thread.sleep(this.timer);
@@ -71,15 +78,18 @@ public class ThreadPoolTest {
         }
 
         assertThat(0, is(threadPool.getQueuePool().size()));
-        assertThat(threadPool.getCountProc(), is(threadPool.getThreadGroup().activeCount()));
+        assertThat(threadPool.getCountProc(), is(threadPool.getThreadsList().size()));
         assertThat(countElements, is(threadPool.getSumAllWorks()));
+        threadPool.stopThreadPool();
+        assertThat(0, is(threadPool.getThreadsList().size()));
+
     }
 
     /**
      * Testing thread pool.
      */
     @Test
-    public void whenCreateArrayWorkTwoThenExpectedReslt() {
+    public void whenCreateArrayWorkTwoThenExpectedResult() {
         /**
          * property for count test elements.
          */
@@ -90,13 +100,12 @@ public class ThreadPoolTest {
          */
         final int expectedAmountResult = 50;
 
-        generationTestData();
         for (int i = 0; i < countElements; i++) {
             threadPool.add(this.listWork.get(1));
         }
         assertThat(countElements, is(threadPool.getQueuePool().size()));
-        threadPool.startTreathGroup();
-        assertThat(threadPool.getCountProc(), is(threadPool.getThreadGroup().activeCount()));
+        threadPool.startThreadPool();
+        assertThat(threadPool.getCountProc(), is(threadPool.getThreadsList().size()));
 
         try {
             Thread.sleep(timer);
@@ -105,7 +114,9 @@ public class ThreadPoolTest {
         }
 
         assertThat(0, is(threadPool.getQueuePool().size()));
-        assertThat(threadPool.getCountProc(), is(threadPool.getThreadGroup().activeCount()));
+        assertThat(threadPool.getCountProc(), is(threadPool.getThreadsList().size()));
         assertThat(expectedAmountResult, is(threadPool.getSumAllWorks()));
+        threadPool.stopThreadPool();
+        assertThat(0, is(threadPool.getThreadsList().size()));
     }
 }

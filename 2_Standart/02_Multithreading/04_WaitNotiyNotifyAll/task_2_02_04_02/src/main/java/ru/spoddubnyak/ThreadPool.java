@@ -1,18 +1,20 @@
 package ru.spoddubnyak;
 
+
 import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Queue;
-import java.util.concurrent.Semaphore;
 
 /**
  * Class ThreadPool embody thread pool.
  *
  * @author Sergei Poddubnyak (forvvard09@gmail.com)
- * @version 1.0
- * @since 01.03.2018
+ * @version 2.0
+ * @since 14.03.2018
  */
 @ThreadSafe
 public class ThreadPool implements PoolWork {
@@ -26,24 +28,20 @@ public class ThreadPool implements PoolWork {
     @GuardedBy("itself")
     private final Queue<Work> queuePool;
     /**
-     * property for create ThreadGroup.
+     * property storage for threads.
      */
-    private ThreadGroup threadGroup = new ThreadGroup("ThreadPoolGroups");
+    private List<Thread> threadsList;
     /**
      * property save ressult -amount all works.
      */
     private volatile int sumAllWorks;
-    /**
-     * property for to restrict access to a shared resource queuePool.
-     */
-    private Semaphore semaphore;
 
     /**
      * Constructor it creates a new object ThreadPool with the specified.
      */
     public ThreadPool() {
         this.queuePool = new ArrayDeque<>();
-        this.semaphore = new Semaphore(COUNT_PROC);
+        this.threadsList = new ArrayList(COUNT_PROC);
         this.sumAllWorks = 0;
     }
 
@@ -54,6 +52,15 @@ public class ThreadPool implements PoolWork {
      */
     public Queue<Work> getQueuePool() {
         return this.queuePool;
+    }
+
+    /**
+     * Getter for property threadsList.
+     *
+     * @return link property threadsList
+     */
+    public List<Thread> getThreadsList() {
+        return this.threadsList;
     }
 
     /**
@@ -83,29 +90,11 @@ public class ThreadPool implements PoolWork {
         this.sumAllWorks = sumAllWorks;
     }
 
-    /**
-     * Getter for property threadGroup.
-     *
-     * @return link property threadGroup
-     */
-    public ThreadGroup getThreadGroup() {
-        return this.threadGroup;
-    }
-
     @Override
     public void add(Work work) {
         synchronized (this.queuePool) {
             this.queuePool.offer(work);
-        }
-    }
-
-    /**
-     * Method create and start Threads in ThreadGroup.
-     */
-    public void startTreathGroup() {
-        for (int i = 1; i <= COUNT_PROC; i++) {
-            Thread thread = new Thread(this.threadGroup, new ThreadDoWork(), String.format("nameThread ,%s", i));
-            thread.start();
+            this.queuePool.notify();
         }
     }
 
@@ -123,29 +112,44 @@ public class ThreadPool implements PoolWork {
     }
 
     /**
-     * Inner class ThreadDoWork embody threads fr run work.
+     * Method add new thread to collections and start thread.
+     */
+    public void startThreadPool() {
+        for (int i = 0; i < this.getCountProc(); i++) {
+            this.threadsList.add(new Thread(new ThreadDoWork()));
+            this.threadsList.get(i).start();
+        }
+    }
+
+    /**
+     * Method stop threads and clear threadList.
+     */
+    public void stopThreadPool() {
+        for (Thread thread : this.threadsList) {
+            thread.interrupt();
+        }
+        this.threadsList.clear();
+    }
+
+    /**
+     * Inner class ThreadDoWork embody threadsList fr run work.
      */
     class ThreadDoWork implements Runnable {
         @Override
         public void run() {
-            while (threadGroup.activeCount() > 0) {
+            while (!Thread.currentThread().isInterrupted()) {
                 synchronized (queuePool) {
                     while (queuePool.isEmpty()) {
-                        System.out.printf("%s%s", "Queue is empty. Wait for queue filling.", "System.getProperty(\"line.separator\")");
+                        System.out.printf("%s%s", "Queue is empty. Wait for queue filling.", System.getProperty("line.separator"));
                         try {
                             queuePool.wait();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
+                        } catch (InterruptedException ignore) {
+                            System.out.printf("%s%s", "Thread is stop.", System.getProperty("line.separator"));
+                            return;
                         }
                     }
-                    try {
-                        semaphore.acquire();
-                        Work work = getWorkOutQueue();
-                        setSumAllWorks(getSumAllWorks() + work.doWork());
-                        semaphore.release();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    Work work = getWorkOutQueue();
+                    setSumAllWorks(getSumAllWorks() + work.doWork());
                 }
             }
         }
