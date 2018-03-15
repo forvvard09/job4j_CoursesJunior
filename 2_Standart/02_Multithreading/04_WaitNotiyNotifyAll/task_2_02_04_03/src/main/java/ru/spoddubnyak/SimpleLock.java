@@ -31,7 +31,7 @@ public class SimpleLock implements Lock {
      */
     public SimpleLock() {
         this.semaphore = new Semaphore(1);
-        lock = false;
+        this.lock = false;
     }
 
     /**

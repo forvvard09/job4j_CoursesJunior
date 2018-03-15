@@ -50,7 +50,7 @@ public class SimpleLockTest {
     }
 
     /**
-     * Test for methods newCondition().
+     * Test for method simpleLock.tryLock(long time, TimeUnit unit).
      */
     @Test
     public void whenTryLockTimeThenExpectedStateLock() {
@@ -70,7 +70,7 @@ public class SimpleLockTest {
     }
 
     /**
-     * Test for methods newCondition().
+     * Test for method lock(), when thread is isInterrupted() == ture.
      */
     @Test
     public void whenThen() {
@@ -81,7 +81,7 @@ public class SimpleLockTest {
     }
 
     /**
-     * Test for methods newCondition().
+     * Test for method lockInterruptibly().
      */
     @Test
     public void whenThen2() {
