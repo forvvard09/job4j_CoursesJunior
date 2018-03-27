@@ -2,8 +2,6 @@ package ru.spoddubnyak;
 
 import org.junit.Test;
 
-import java.util.concurrent.TimeUnit;
-
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -11,88 +9,133 @@ import static org.junit.Assert.assertThat;
  * Class SimpleLockTest for testing method's class SimpleLock implements interface Lock.
  *
  * @author Sergei Poddubnyak (forvvard09@gmail.com)
- * @version 1.0
- * @since 12.03.2018
+ * @version 2.0
+ * @since 27.03.2018
  */
 public class SimpleLockTest {
-
     /**
-     * property Semaphore.
+     * property timer for delay 2sec for testing.
      */
-    private static final int TIMER_SLEEP = 5000;
+    private final int timerOne = 2000;
     /**
-     * property Semaphore.
+     * property timer for delay 5sec for testing.
+     */
+    private final int timerTwo = 5000;
+    /**
+     * property object SimpleLock for testing simple lock.
      */
     private SimpleLock simpleLock = new SimpleLock();
 
     /**
-     * Test for methods lock(), tryLock() and unlock().
+     * Test for methods lock() and unlock().
      */
     @Test
     public void whenLockUnlockObjectThenExpectedsStateStateLock() {
-        assertThat(false, is(simpleLock.isLock()));
+        assertThat(false, is(simpleLock.getIsLock()));
         simpleLock.lock();
-        assertThat(true, is(simpleLock.isLock()));
-        assertThat(false, is(simpleLock.tryLock()));
+        assertThat(true, is(simpleLock.getIsLock()));
         simpleLock.unlock();
-        assertThat(false, is(simpleLock.isLock()));
-        assertThat(true, is(simpleLock.tryLock()));
-
+        assertThat(false, is(simpleLock.getIsLock()));
     }
 
-    /**
-     * Test for methods newCondition().
-     */
-    @Test(expected = UnsupportedOperationException.class)
-    public void whenRunMethodThenExpectedError() {
-        simpleLock.lock();
-        simpleLock.newCondition();
-    }
+    ;
 
     /**
-     * Test for method simpleLock.tryLock(long time, TimeUnit unit).
+     * Test for methods lock() and unlock() for two threads.
      */
     @Test
-    public void whenTryLockTimeThenExpectedStateLock() {
+    public void whenTwoThreadsLockUnlockObjectThenExpectedsStateStateLock() {
+        MyThred thredOne = new MyThred();
+        MyThred thredSecond = new MyThred();
+        assertThat(false, is(simpleLock.getIsLock()));
         simpleLock.lock();
+        assertThat(true, is(simpleLock.getIsLock()));
+        thredOne.start();
         try {
-            assertThat(false, is(simpleLock.tryLock(TIMER_SLEEP, TimeUnit.MILLISECONDS)));
+            thredOne.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        simpleLock.unlock();
+        thredSecond.start();
+        try {
+            thredSecond.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        assertThat(false, is(simpleLock.getIsLock()));
+    }
+
+    /**
+     * Test for methods lock() and unlock() for two threads.
+     */
+    @Test
+    public void whenLockAlreadyLockThenExpectedResult() {
+        MyThredWait thredOne = new MyThredWait();
+        assertThat(false, is(simpleLock.getIsLock()));
+        simpleLock.lock();
+        assertThat(true, is(simpleLock.getIsLock()));
+        thredOne.start();
+        try {
+            Thread.sleep(timerTwo);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         simpleLock.unlock();
         try {
-            assertThat(true, is(simpleLock.tryLock(TIMER_SLEEP, TimeUnit.MILLISECONDS)));
-
+            Thread.sleep(timerOne);
+            Thread.sleep(timerOne);
         } catch (InterruptedException e) {
             e.printStackTrace();
+        }
+        assertThat(false, is(simpleLock.getIsLock()));
+    }
+
+    /**
+     * Inner Class MyThred for testing.
+     */
+    class MyThred extends Thread {
+        @Override
+        public void run() {
+            final int predel = 10;
+            int i = 0;
+            while (i < predel) {
+                simpleLock.unlock();
+                if (simpleLock.getIsLock()) {
+                    System.out.printf("%s:%s %s.%s", "Thred id", Thread.currentThread().getId(), "SimpleLock is busy other thread", System.getProperty("line.separator"));
+                } else {
+                    System.out.printf("%s:%s %s.%s", "Thred id", Thread.currentThread().getId(), "SimpleLock is free", System.getProperty("line.separator"));
+                    simpleLock.lock();
+                    System.out.printf("%s. %s:%s.%s", "SimpleLock is bysy", "Thred id", Thread.currentThread().getId(), System.getProperty("line.separator"));
+                    break;
+                }
+                i++;
+            }
+            simpleLock.unlock();
         }
     }
 
     /**
-     * Test for method lock(), when thread is isInterrupted() == ture.
+     * Inner Class MyThredWait for testing.
      */
-    @Test
-    public void whenThen() {
-        assertThat(false, is(simpleLock.isLock()));
-        Thread.currentThread().interrupt();
-        simpleLock.lock();
-        assertThat(false, is(simpleLock.isLock()));
-    }
-
-    /**
-     * Test for method lockInterruptibly().
-     */
-    @Test
-    public void whenThen2() {
-        simpleLock.lock();
-        simpleLock.unlock();
-        try {
-            simpleLock.lockInterruptibly();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+    class MyThredWait extends Thread {
+        @Override
+        public void run() {
+            if (simpleLock.getIsLock()) {
+                simpleLock.lock();
+                System.out.printf("%s. %s:%s.%s", "SimpleLock successfully locked", "Thread id", Thread.currentThread().getId(), System.getProperty("line.separator"));
+                try {
+                    Thread.sleep(timerOne);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            simpleLock.unlock();
+            if (!simpleLock.getIsLock()) {
+                System.out.printf("%s. %s:%s. %s", "SimpleLock successfully unlocked", "Thread id", Thread.currentThread().getId(), System.getProperty("line.separator"));
+            }
         }
-        assertThat(true, is(simpleLock.isLock()));
-        assertThat(false, is(simpleLock.tryLock()));
+
+        ;
     }
 }
