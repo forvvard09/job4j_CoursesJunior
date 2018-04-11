@@ -21,11 +21,11 @@ public class ParallelSearchManyThreadsTest {
      */
     @Test
     public void whenSearchFilesThenExpectedResult() {
-        final int expectedResult = 5;
+        final int expectedResult = 1;
         List<String> ext = new ArrayList<>();
         ext.add("txt");
         ext.add("csv");
-        ParallelSearchManyThreads search = new ParallelSearchManyThreads("D:\\searchFile", "testing", ext);
+        ParallelSearchManyThreads search = new ParallelSearchManyThreads("C:\\", "testing", ext);
         search.init();
         final int delay = 999;
         try {

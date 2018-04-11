@@ -16,6 +16,8 @@
         <module>02_JMM</module>
         <module>03_MonitoreSynchronize</module>
         <module>04_WaitNotiyNotifyAll</module>
+        <module>05_NonBlockingAlgoritm</module>
+        <module>06_TestTasksMultithreading</module>
 
     </modules>
 

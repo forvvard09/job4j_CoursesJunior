@@ -51,6 +51,7 @@ public class ParallelSearchManyThreads {
     /**
      * property paths - for save result.
      */
+    @GuardedBy("itself")
     private final List<String> paths = new ArrayList<>();
     /**
      * property threads - for run threads search and read.
@@ -113,7 +114,11 @@ public class ParallelSearchManyThreads {
      * @return property paths
      */
     public List<String> getPaths() {
-        return this.paths;
+        List<String> result;
+        synchronized (this.paths) {
+            result = this.paths;
+        }
+        return result;
     }
 
     /**

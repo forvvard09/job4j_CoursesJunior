@@ -1,0 +1,100 @@
+1. Нужно осуществлять обход файловой системы и поиск заданного текста в файловой системе.
+
+public class ParallerSearch(String root, String text, List<String> exts) {
+}
+
+,где
+root - путь до папки откуда надо осуществлять поиск.
+text - заданных текст.
+exts - расширения файлов в которых нужно делать поиск.
+
+Приложения должно искать текст в файлах (в том числе и в подкаталогах) и сохранять адрес файла.
+
+List<String> result(); - возвращает список всех файлов.
+
+По желанию можно использовать потокобезопасные коллекции JDK.
+
+Логика приложения.
+
+1. Запустить код.
+2. Внутри запустить несколько потоков. Объяснить для чего нужно делать потоки.
+3. Дождаться завершения поиска.
+4. Вывести на консоль результат.
+
+Давайте рассмотрим структуру класса.
+
+package ru.job4j.multithreads;
+
+import net.jcip.annotations.GuardedBy;
+import net.jcip.annotations.ThreadSafe;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+
+@ThreadSafe
+public class ParallelSearch {
+    private final String root;
+    private final String text;
+    private final List<String> exts;
+
+    @GuardedBy("this")
+    private final Queue<String> files = new LinkedList<>();
+
+    @GuardedBy("this")
+    private final List<String> paths = new ArrayList<>();
+
+
+    public ParallelSearch(String root, String text, List<String> exts) {
+        this.root = root;
+        this.text = text;
+        this.exts = exts;
+    }
+
+    public void init() {
+        Thread search = new Thread() {
+            @Override
+            public void run() {
+                super.run();
+            }
+        };
+        Thread read = new Thread() {
+            @Override
+            public void run() {
+                super.run();
+            }
+        };
+    }
+
+    synchronized Queue<String>  result() {
+        return this.paths;
+    }
+}
+
+
+Нить
+Thread search = new Thread() {
+            @Override
+            public void run() {
+                super.run();
+            }
+        };
+должна пробегать по файловой системы используя FileVisitor. https://docs.oracle.com/javase/tutorial/essential/io/walk.html
+Если файл соответствует расширению List<Srting> exts, то путь этого файла нужно добавить в очередь files.
+
+Нить
+
+        Thread read = new Thread() {
+            @Override
+            public void run() {
+                super.run();
+            }
+        };
+должна брать данные из List<String> paths и считывать данные их них. Если в файле добавлен текст, то нужно добавить это файл в список paths.
+
+Важный момент, нить reader должна завершить свою работу, после нити search.
+
+Для этого сделайте поле
+
+volataile boolean finish = false;
+
+проставляйте его в ните search. а в ните read - проверять ее. и если она выставлена выходить из метод run.

@@ -15,6 +15,8 @@ public class SimpleLock {
      */
     private static final String NAME_LOCK_THREAD = "thredIsLock";
 
+    private Thread thread;
+
     /**
      * property lock - object free flag.
      */
@@ -49,7 +51,7 @@ public class SimpleLock {
                 }
             }
             this.isLock = true;
-            Thread.currentThread().setName(NAME_LOCK_THREAD);
+            this.thread = Thread.currentThread();
         }
     }
 
@@ -58,10 +60,12 @@ public class SimpleLock {
      */
     public void unlock() {
         synchronized (this) {
-            if (this.isLock && Thread.currentThread().getName().equals(this.NAME_LOCK_THREAD)) {
+            if (this.isLock && Thread.currentThread() == this.thread) {
                 this.isLock = false;
                 this.notifyAll();
+                this.thread = null;
             }
+
         }
     }
 }

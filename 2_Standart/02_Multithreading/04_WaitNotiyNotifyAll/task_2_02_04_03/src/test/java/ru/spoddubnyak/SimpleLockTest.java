@@ -36,9 +36,7 @@ public class SimpleLockTest {
         assertThat(true, is(simpleLock.getIsLock()));
         simpleLock.unlock();
         assertThat(false, is(simpleLock.getIsLock()));
-    }
-
-    ;
+    };
 
     /**
      * Test for methods lock() and unlock() for two threads.
@@ -134,8 +132,6 @@ public class SimpleLockTest {
             if (!simpleLock.getIsLock()) {
                 System.out.printf("%s. %s:%s. %s", "SimpleLock successfully unlocked", "Thread id", Thread.currentThread().getId(), System.getProperty("line.separator"));
             }
-        }
-
-        ;
+        };
     }
 }
