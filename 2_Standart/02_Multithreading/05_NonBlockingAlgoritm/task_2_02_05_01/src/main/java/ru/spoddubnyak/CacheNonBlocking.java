@@ -65,7 +65,6 @@ public class CacheNonBlocking<K> {
      * @return result update, tru if result is done, false is not done
      */
     public boolean update(K key, String newFieldForModel) throws OplimisticException {
-        if (this.cacheMap.containsKey(key)) {
             Model currentModel = this.cacheMap.get(key);
             this.cacheMap.computeIfPresent(key, new BiFunction<K, Model, Model>() {
                 @Override
@@ -87,7 +86,6 @@ public class CacheNonBlocking<K> {
                     return currentModel;
                 }
             });
-        }
         return result;
     }
 

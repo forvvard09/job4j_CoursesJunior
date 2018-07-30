@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>ru.spoddubnyak.job4j_CoursesJunior</groupId>
+        <artifactId>03_SQL_JDBC</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <groupId>ru.spoddubnyak.job4j_CoursesJunior</groupId>
+    <artifactId>01_Create_Update_Insert</artifactId>
+    <version>1.0.0</version>
+
+    <modules>
+        <module>task_2_03_01</module>
+
+
+    </modules>
+
+    
+</project>

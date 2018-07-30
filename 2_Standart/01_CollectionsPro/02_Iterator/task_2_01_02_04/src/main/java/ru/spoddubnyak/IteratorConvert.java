@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- * Class .
+ * Class сonverter o traverse iterator iterators .
  *
  * @author Sergei Poddubnyak (forvvard09@gmail.com)
  * @version 1.0
