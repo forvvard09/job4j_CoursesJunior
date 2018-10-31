@@ -15,3 +15,7 @@ notifications:
       - forvvard09@gmail.com
     on_success: never # default: change
     on_failure: always # default: always
+
+env:
+  global:
+    - CODECOV_TOKEN="d33ecf29-e67b-48b8-bc47-c71257d7de7f"

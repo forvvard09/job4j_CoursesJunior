@@ -15,6 +15,7 @@
         <module>01_BasicSintax</module>
         <module>02_OOP</module>
         <module>03_CollectionsLite</module>
+        <module>04_FP_Lambda_StreamAPI</module>
     </modules>
 
 </project>

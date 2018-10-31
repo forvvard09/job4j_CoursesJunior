@@ -1,0 +1,15 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>ru.spoddubnyak.job4j_CoursesJunior.1_Trainee.04_FP_Lambda_StreamAPI.01_Lambda</groupId>
+    <artifactId>task_1_04_01_01</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.0</version>
+
+    <parent>
+        <groupId>ru.spoddubnyak.job4j_CoursesJunior.1_Trainee.04_FP_Lambda_StreamAPI</groupId>
+        <artifactId>01_Lambda</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+
+</project>

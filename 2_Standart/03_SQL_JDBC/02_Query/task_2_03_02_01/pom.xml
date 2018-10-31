@@ -3,23 +3,15 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <packaging>pom</packaging>
-
 
     <parent>
         <groupId>ru.spoddubnyak.job4j_CoursesJunior</groupId>
-        <artifactId>2_Standart</artifactId>
+        <artifactId>02_Query</artifactId>
         <version>1.0.0</version>
     </parent>
 
     <groupId>ru.spoddubnyak.job4j_CoursesJunior</groupId>
-    <artifactId>03_SQL_JDBC</artifactId>
+    <artifactId>task_2_03_02_01</artifactId>
     <version>1.0.0</version>
 
-    <modules>
-        <module>01_Create_Update_Insert</module>
-        <module>02_Query</module>
-    </modules>
-
-    
 </project>
