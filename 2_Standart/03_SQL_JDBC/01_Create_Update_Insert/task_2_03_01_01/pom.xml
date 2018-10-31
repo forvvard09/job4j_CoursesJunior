@@ -11,7 +11,7 @@
     </parent>
 
     <groupId>ru.spoddubnyak.job4j_CoursesJunior</groupId>
-    <artifactId>task_2_03_01</artifactId>
+    <artifactId>task_2_03_01_01</artifactId>
     <version>1.0.0</version>
 
 </project>
