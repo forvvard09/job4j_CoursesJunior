@@ -1,7 +1,7 @@
 <project>
     <modelVersion>4.0.0</modelVersion>
     <groupId>ru.spoddubnyak.job4j_CoursesJunior.2_Standart.03_SQL_JDBC</groupId>
-    <artifactId>02_Query</artifactId>
+    <artifactId>03_Outer_Join</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0</version>
 
@@ -12,7 +12,7 @@
     </parent>
 
     <modules>
-        <module>task_2_03_02_01</module>
+        <module>task_2_03_03_01</module>
     </modules>
 
 </project>

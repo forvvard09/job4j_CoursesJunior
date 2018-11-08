@@ -1,17 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project>
     <modelVersion>4.0.0</modelVersion>
+    <groupId>ru.spoddubnyak.job4j_CoursesJunior.2_Standart.03_SQL_JDBC.02_Query</groupId>
+    <artifactId>task_2_03_02_01</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.0</version>
 
     <parent>
-        <groupId>ru.spoddubnyak.job4j_CoursesJunior</groupId>
+        <groupId>ru.spoddubnyak.job4j_CoursesJunior.2_Standart.03_SQL_JDBC</groupId>
         <artifactId>02_Query</artifactId>
         <version>1.0.0</version>
     </parent>
 
-    <groupId>ru.spoddubnyak.job4j_CoursesJunior</groupId>
-    <artifactId>task_2_03_02_01</artifactId>
-    <version>1.0.0</version>
 
 </project>
