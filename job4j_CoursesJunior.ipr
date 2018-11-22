@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+<project version="4" relativePaths="false"> 
+  <component name="ProjectRootManager" version="2" assert-keyword="true" project-jdk-name="1.8" jdk-15="true"/>  
+  <component name="CodeStyleManager"> 
+    <option name="USE_DEFAULT_CODE_STYLE_SCHEME" value="true"/>  
+    <option name="CODE_STYLE_SCHEME" value=""/> 
+  </component>  
+  <component name="libraryTable"/>  
+  <component name="CompilerConfiguration"> 
+    <option name="DEFAULT_COMPILER" value="Javac"/>  
+    <option name="CLEAR_OUTPUT_DIRECTORY" value="false"/>  
+    <!--
+    <wildcardResourcePatterns>
+      <entry name="${wildcardResourcePattern}"/>
+    </wildcardResourcePatterns>
+    -->  
+    <wildcardResourcePatterns>
+      <entry name="!?*.java"/>
+    </wildcardResourcePatterns>
+  </component>  
+  <component name="JavacSettings"> 
+    <option name="DEBUGGING_INFO" value="true"/>  
+    <option name="GENERATE_NO_WARNINGS" value="false"/>  
+    <option name="DEPRECATION" value="true"/>  
+    <option name="ADDITIONAL_OPTIONS_STRING" value=""/>  
+    <option name="MAXIMUM_HEAP_SIZE" value="128"/>  
+    <option name="USE_GENERICS_COMPILER" value="false"/> 
+  </component>  
+  <component name="JikesSettings"> 
+    <option name="DEBUGGING_INFO" value="true"/>  
+    <option name="DEPRECATION" value="true"/>  
+    <option name="GENERATE_NO_WARNINGS" value="false"/>  
+    <option name="GENERATE_MAKE_FILE_DEPENDENCIES" value="false"/>  
+    <option name="DO_FULL_DEPENDENCE_CHECK" value="false"/>  
+    <option name="IS_INCREMENTAL_MODE" value="false"/>  
+    <option name="IS_EMACS_ERRORS_MODE" value="true"/>  
+    <option name="ADDITIONAL_OPTIONS_STRING" value=""/>  
+    <option name="MAXIMUM_HEAP_SIZE" value="128"/> 
+  </component>  
+  <component name="AntConfiguration"> 
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false"/>  
+    <option name="FILTER_TARGETS" value="false"/> 
+  </component>  
+  <component name="JavadocGenerationManager"> 
+    <option name="OUTPUT_DIRECTORY"/>  
+    <option name="OPTION_SCOPE" value="protected"/>  
+    <option name="OPTION_HIERARCHY" value="false"/>  
+    <option name="OPTION_NAVIGATOR" value="false"/>  
+    <option name="OPTION_INDEX" value="false"/>  
+    <option name="OPTION_SEPARATE_INDEX" value="false"/>  
+    <option name="OPTION_USE_1_1" value="false"/>  
+    <option name="OPTION_DOCUMENT_TAG_USE" value="false"/>  
+    <option name="OPTION_DOCUMENT_TAG_AUTHOR" value="false"/>  
+    <option name="OPTION_DOCUMENT_TAG_VERSION" value="false"/>  
+    <option name="OPTION_DOCUMENT_TAG_DEPRECATED" value="false"/>  
+    <option name="OPTION_DEPRECATED_LIST" value="false"/>  
+    <option name="OTHER_OPTIONS"/>  
+    <option name="HEAP_SIZE"/>  
+    <option name="OPEN_IN_BROWSER" value="false"/> 
+  </component>  
+  <component name="JUnitProjectSettings"> 
+    <option name="TEST_RUNNER" value="UI"/> 
+  </component>  
+  <component name="EntryPointsManager"> 
+    <entry_points/> 
+  </component>  
+  <component name="DataSourceManager"/>  
+  <component name="ExportToHTMLSettings"> 
+    <option name="PRINT_LINE_NUMBERS" value="false"/>  
+    <option name="OPEN_IN_BROWSER" value="false"/>  
+    <option name="OUTPUT_DIRECTORY"/> 
+  </component>  
+  <component name="ImportConfiguration"> 
+    <option name="VENDOR"/>  
+    <option name="RELEASE_TAG"/>  
+    <option name="LOG_MESSAGE"/>  
+    <option name="CHECKOUT_AFTER_IMPORT" value="true"/> 
+  </component>  
+  <component name="ProjectModuleManager"> 
+    <modules> 
+      <!-- module filepath="$$PROJECT_DIR$$/${pom.artifactId}.iml"/ -->  
+      <module filepath="$PROJECT_DIR$/job4j_CoursesJunior.iml"/>
+      <module filepath="$PROJECT_DIR$/1_Trainee/01_BasicSintax/01_DataType/task_1_01_01_01/task_1_01_01_01.iml"/>
+      <module filepath="$PROJECT_DIR$/1_Trainee/01_BasicSintax/01_DataType/01_DataType.iml"/>
+      <module filepath="$PROJECT_DIR$/1_Trainee/01_BasicSintax/02_ConditionalOperator/task_1_01_02_01/task_1_01_02_01.iml"/>
+      <module filepath="$PROJECT_DIR$/1_Trainee/01_BasicSintax/02_ConditionalOperator/task_1_01_02_02/task_1_01_02_02.iml"/>
+      <module filepath="$PROJECT_DIR$/1_Trainee/01_BasicSintax/02_ConditionalOperator/02_ConditionalOperator.iml"/>
+      <module filepath="$PROJECT_DIR$/1_Trainee/01_BasicSintax/03_Cycles/task_1_01_03_01/task_1_01_03_01.iml"/>
+      <module filepath="$PROJECT_DIR$/1_Trainee/01_BasicSintax/03_Cycles/task_1_01_03_02/task_1_01_03_02.iml"/>
+      <module filepath="$PROJECT_DIR$/1_Trainee/01_BasicSintax/03_Cycles/03_Cycles.iml"/>
+      <module filepath="$PROJECT_DIR$/1_Trainee/01_BasicSintax/04_Arrays/task_1_01_04_01/task_1_01_04_01.iml"/>
+      <module filepath="$PROJECT_DIR$/1_Trainee/01_BasicSintax/04_Arrays/task_1_01_04_02/task_1_01_04_02.iml"/>
+      <module filepath="$PROJECT_DIR$/1_Trainee/01_BasicSintax/04_Arrays/task_1_01_04_03/task_1_01_04_03.iml"/>
+      <module filepath="$PROJECT_DIR$/1_Trainee/01_BasicSintax/04_Arrays/04_Arrays.iml"/>
+      <module filepath="$PROJECT_DIR$/1_Trainee/01_BasicSintax/05_ControlTask/task_1_01_05_01/task_1_01_05_01.iml"/>
+      <module filepath="$PROJECT_DIR$/1_Trainee/01_BasicSintax/05_ControlTask/05_ControlTask.iml"/>
+      <module filepath="$PROJECT_DIR$/1_Trainee/01_BasicSintax/01_BasicSintax.iml"/>
+      <module filepath="$PROJECT_DIR$/1_Trainee/02_OOP/01_OOP_Chapter/task_1_02_01_01/task_1_02_01_01.iml"/>
+      <module filepath="$PROJECT_DIR$/1_Trainee/02_OOP/01_OOP_Chapter/01_OOP_Chapter.iml"/>
+      <module filepath="$PROJECT_DIR$/1_Trainee/02_OOP/02_OOP_Chapter/Chess/Chess.iml"/>
+      <module filepath="$PROJECT_DIR$/1_Trainee/02_OOP/02_OOP_Chapter/Tracker/Tracker.iml"/>
+      <module filepath="$PROJECT_DIR$/1_Trainee/02_OOP/02_OOP_Chapter/task_1_02_02_02/task_1_02_02_02.iml"/>
+      <module filepath="$PROJECT_DIR$/1_Trainee/02_OOP/02_OOP_Chapter/02_OOP_Chapter.iml"/>
+      <module filepath="$PROJECT_DIR$/1_Trainee/02_OOP/02_OOP.iml"/>
+      <module filepath="$PROJECT_DIR$/1_Trainee/03_CollectionsLite/01_CollectionsFramework/task_1_03_01_01/task_1_03_01_01.iml"/>
+      <module filepath="$PROJECT_DIR$/1_Trainee/03_CollectionsLite/01_CollectionsFramework/task_1_03_01_02/task_1_03_01_02.iml"/>
+      <module filepath="$PROJECT_DIR$/1_Trainee/03_CollectionsLite/01_CollectionsFramework/task_1_03_01_03/task_1_03_01_03.iml"/>
+      <module filepath="$PROJECT_DIR$/1_Trainee/03_CollectionsLite/01_CollectionsFramework/01_CollectionsFramework.iml"/>
+      <module filepath="$PROJECT_DIR$/1_Trainee/03_CollectionsLite/02_Generics/task_1_03_02_01/task_1_03_02_01.iml"/>
+      <module filepath="$PROJECT_DIR$/1_Trainee/03_CollectionsLite/02_Generics/02_Generics.iml"/>
+      <module filepath="$PROJECT_DIR$/1_Trainee/03_CollectionsLite/03_Sorting/task_1_03_03_01/task_1_03_03_01.iml"/>
+      <module filepath="$PROJECT_DIR$/1_Trainee/03_CollectionsLite/03_Sorting/03_Sorting.iml"/>
+      <module filepath="$PROJECT_DIR$/1_Trainee/03_CollectionsLite/04_TestTaskCollectionsLite/task_1_03_04_01/task_1_03_04_01.iml"/>
+      <module filepath="$PROJECT_DIR$/1_Trainee/03_CollectionsLite/04_TestTaskCollectionsLite/task_1_03_04_02/task_1_03_04_02.iml"/>
+      <module filepath="$PROJECT_DIR$/1_Trainee/03_CollectionsLite/04_TestTaskCollectionsLite/04_TestTaskCollectionsLite.iml"/>
+      <module filepath="$PROJECT_DIR$/1_Trainee/03_CollectionsLite/03_CollectionsLite.iml"/>
+      <module filepath="$PROJECT_DIR$/1_Trainee/04_FP_Lambda_StreamAPI/01_Lambda/task_1_04_01_01/task_1_04_01_01.iml"/>
+      <module filepath="$PROJECT_DIR$/1_Trainee/04_FP_Lambda_StreamAPI/01_Lambda/01_Lambda.iml"/>
+      <module filepath="$PROJECT_DIR$/1_Trainee/04_FP_Lambda_StreamAPI/04_FP_Lambda_StreamAPI.iml"/>
+      <module filepath="$PROJECT_DIR$/1_Trainee/1_Trainee.iml"/>
+      <module filepath="$PROJECT_DIR$/2_Standart/01_CollectionsPro/01_Generic/task_2_01_01_01/task_2_01_01_01.iml"/>
+      <module filepath="$PROJECT_DIR$/2_Standart/01_CollectionsPro/01_Generic/task_2_01_01_02/task_2_01_01_02.iml"/>
+      <module filepath="$PROJECT_DIR$/2_Standart/01_CollectionsPro/01_Generic/01_Generic.iml"/>
+      <module filepath="$PROJECT_DIR$/2_Standart/01_CollectionsPro/02_Iterator/task_2_01_02_01/task_2_01_02_01.iml"/>
+      <module filepath="$PROJECT_DIR$/2_Standart/01_CollectionsPro/02_Iterator/task_2_01_02_02/task_2_01_02_02.iml"/>
+      <module filepath="$PROJECT_DIR$/2_Standart/01_CollectionsPro/02_Iterator/task_2_01_02_03/task_2_01_02_03.iml"/>
+      <module filepath="$PROJECT_DIR$/2_Standart/01_CollectionsPro/02_Iterator/task_2_01_02_04/task_2_01_02_04.iml"/>
+      <module filepath="$PROJECT_DIR$/2_Standart/01_CollectionsPro/02_Iterator/02_Iterator.iml"/>
+      <module filepath="$PROJECT_DIR$/2_Standart/01_CollectionsPro/03_List/task_2_01_03_01/task_2_01_03_01.iml"/>
+      <module filepath="$PROJECT_DIR$/2_Standart/01_CollectionsPro/03_List/03_List.iml"/>
+      <module filepath="$PROJECT_DIR$/2_Standart/01_CollectionsPro/04_Map/task_2_01_04_01/task_2_01_04_01.iml"/>
+      <module filepath="$PROJECT_DIR$/2_Standart/01_CollectionsPro/04_Map/04_Map.iml"/>
+      <module filepath="$PROJECT_DIR$/2_Standart/01_CollectionsPro/05_Set/task_2_01_05_01/task_2_01_05_01.iml"/>
+      <module filepath="$PROJECT_DIR$/2_Standart/01_CollectionsPro/05_Set/05_Set.iml"/>
+      <module filepath="$PROJECT_DIR$/2_Standart/01_CollectionsPro/06_Tree/task_2_01_06_01/task_2_01_06_01.iml"/>
+      <module filepath="$PROJECT_DIR$/2_Standart/01_CollectionsPro/06_Tree/06_Tree.iml"/>
+      <module filepath="$PROJECT_DIR$/2_Standart/01_CollectionsPro/07_TestTaskCollectionsPro/task_2_01_07_01/task_2_01_07_01.iml"/>
+      <module filepath="$PROJECT_DIR$/2_Standart/01_CollectionsPro/07_TestTaskCollectionsPro/07_TestTaskCollectionsPro.iml"/>
+      <module filepath="$PROJECT_DIR$/2_Standart/01_CollectionsPro/01_CollectionsPro.iml"/>
+      <module filepath="$PROJECT_DIR$/2_Standart/02_Multithreading/01_Threads/task_2_02_01_01/task_2_02_01_01.iml"/>
+      <module filepath="$PROJECT_DIR$/2_Standart/02_Multithreading/01_Threads/task_2_02_01_02/task_2_02_01_02.iml"/>
+      <module filepath="$PROJECT_DIR$/2_Standart/02_Multithreading/01_Threads/task_2_02_01_03/task_2_02_01_03.iml"/>
+      <module filepath="$PROJECT_DIR$/2_Standart/02_Multithreading/01_Threads/01_Threads.iml"/>
+      <module filepath="$PROJECT_DIR$/2_Standart/02_Multithreading/02_JMM/task_2_02_02_01/task_2_02_02_01.iml"/>
+      <module filepath="$PROJECT_DIR$/2_Standart/02_Multithreading/02_JMM/02_JMM.iml"/>
+      <module filepath="$PROJECT_DIR$/2_Standart/02_Multithreading/03_MonitoreSynchronize/task_2_02_03_01/task_2_02_03_01.iml"/>
+      <module filepath="$PROJECT_DIR$/2_Standart/02_Multithreading/03_MonitoreSynchronize/task_2_02_03_02/task_2_02_03_02.iml"/>
+      <module filepath="$PROJECT_DIR$/2_Standart/02_Multithreading/03_MonitoreSynchronize/task_2_02_03_03/task_2_02_03_03.iml"/>
+      <module filepath="$PROJECT_DIR$/2_Standart/02_Multithreading/03_MonitoreSynchronize/03_MonitoreSynchronize.iml"/>
+      <module filepath="$PROJECT_DIR$/2_Standart/02_Multithreading/04_WaitNotiyNotifyAll/task_2_02_04_01/task_2_02_04_01.iml"/>
+      <module filepath="$PROJECT_DIR$/2_Standart/02_Multithreading/04_WaitNotiyNotifyAll/task_2_02_04_02/task_2_02_01_02.iml"/>
+      <module filepath="$PROJECT_DIR$/2_Standart/02_Multithreading/04_WaitNotiyNotifyAll/task_2_02_04_03/task_2_02_04_03.iml"/>
+      <module filepath="$PROJECT_DIR$/2_Standart/02_Multithreading/04_WaitNotiyNotifyAll/task_2_02_04_04/task_2_02_04_04.iml"/>
+      <module filepath="$PROJECT_DIR$/2_Standart/02_Multithreading/04_WaitNotiyNotifyAll/04_WaitNotiyNotifyAll.iml"/>
+      <module filepath="$PROJECT_DIR$/2_Standart/02_Multithreading/05_NonBlockingAlgoritm/task_2_02_05_01/task_2_02_05_01.iml"/>
+      <module filepath="$PROJECT_DIR$/2_Standart/02_Multithreading/05_NonBlockingAlgoritm/05_NonBlockingAlgoritm.iml"/>
+      <module filepath="$PROJECT_DIR$/2_Standart/02_Multithreading/06_TestTasksMultithreading/task_2_02_06_01/task_2_02_06_01.iml"/>
+      <module filepath="$PROJECT_DIR$/2_Standart/02_Multithreading/06_TestTasksMultithreading/task_2_02_06_02/task_2_02_06_02.iml"/>
+      <module filepath="$PROJECT_DIR$/2_Standart/02_Multithreading/06_TestTasksMultithreading/06_TestTasksMultithreading.iml"/>
+      <module filepath="$PROJECT_DIR$/2_Standart/02_Multithreading/02_Multithreading.iml"/>
+      <module filepath="$PROJECT_DIR$/2_Standart/03_SQL_JDBC/01_Create_Update_Insert/task_2_03_01_01/task_2_03_01_01.iml"/>
+      <module filepath="$PROJECT_DIR$/2_Standart/03_SQL_JDBC/01_Create_Update_Insert/01_Create_Update_Insert.iml"/>
+      <module filepath="$PROJECT_DIR$/2_Standart/03_SQL_JDBC/02_Query/task_2_03_02_01/task_2_03_02_01.iml"/>
+      <module filepath="$PROJECT_DIR$/2_Standart/03_SQL_JDBC/02_Query/02_Query.iml"/>
+      <module filepath="$PROJECT_DIR$/2_Standart/03_SQL_JDBC/03_Outer_Join/task_2_03_03_01/task_2_03_03_01.iml"/>
+      <module filepath="$PROJECT_DIR$/2_Standart/03_SQL_JDBC/03_Outer_Join/03_Outer_Join.iml"/>
+      <module filepath="$PROJECT_DIR$/2_Standart/03_SQL_JDBC/03_SQL_JDBC.iml"/>
+      <module filepath="$PROJECT_DIR$/2_Standart/2_Standart.iml"/>
+    </modules> 
+  </component>  
+  <UsedPathMacros> 
+    <!--<macro name="cargo"></macro>--> 
+  </UsedPathMacros> 
+</project>
