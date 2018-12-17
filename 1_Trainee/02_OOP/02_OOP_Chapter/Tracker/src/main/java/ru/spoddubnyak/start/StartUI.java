@@ -1,5 +1,7 @@
 package ru.spoddubnyak.start;
 
+import java.util.function.Consumer;
+
 /**
  * Class point of entry into the program, initialization, interaction via the console.
  *
@@ -16,10 +18,16 @@ public class StartUI {
      * property - the user interaction method.
      */
     private Input input;
+
     /**
      * property - the Tracker storage items.
      */
     private Tracker tracker;
+
+    /**
+     * lambda - for print to display.
+     */
+    private Consumer<String> printer = str -> System.out.print(str);
 
     /**
      * Constructor it creates a new object with the specified values.
@@ -65,20 +73,18 @@ public class StartUI {
 
             @Override
             public void showSuccess() {
-                System.out.println("Exit Tracker.");
+                printer.accept("Exit Tracker.");
             }
-
-
         };
 
         menu.addAction(exitTracker);
         int[] range = menu.getActions();
         do {
-            System.out.print(NEWLINE);
+            printer.accept(NEWLINE);
             menu.showMenu();
             System.out.print(NEWLINE);
             menu.select(this.input.ask("Select a menu item :> ", range));
-            System.out.println();
+            printer.accept(NEWLINE);
         } while (!"y".equals(this.input.ask("Exit Tracker? (y)Yes/(n)No :> ")));
     }
 }
